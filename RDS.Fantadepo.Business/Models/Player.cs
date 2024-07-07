@@ -8,5 +8,7 @@ namespace RDS.Fantadepo.Business.Models
 {
     public class Player
     {
+        public string Name { get; set; }
+
     }
 }

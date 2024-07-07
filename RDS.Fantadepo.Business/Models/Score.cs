@@ -13,7 +13,7 @@ namespace RDS.Fantadepo.Business.Models
         public int OwnGoals { get; set; }
         public int YellowCards { get; set; }
         public int RedCards { get; set; }
-        public int ConcededGoals { get; set; }
+        public int ConcededGoals { get; set; } = -1; // distinguish between goalkeeper and others
         public int SavedPenalties { get; set; }
         public int SavedFreeKicks { get; set; }
         public int ScoredPenalties { get; set; }

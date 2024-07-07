@@ -11,19 +11,48 @@ namespace RDS.Fantadepo.Business.Helpers
     {
         public static decimal GetFinalScore(Score score)
         {
-            var final = 0;
-            final += score.Goals * ;
-            final += score.OwnGoals * ;
-            final += score.Assists * ;
-            final += score.YellowCards * ;
-            final += score.RedCards * ;
-            final += score.ConcededGoals * ;
-            final += score.SavedPenalties * ;
-            final += score.SavedFreeKicks * ;
-            final += score.ScoredPenalties * ;
-            final += score.ScoredFreeKicks * ;
-            final += score.FailedPenalties * ;
-            final += score.FailedFreeKicks * ;
+            decimal final = 0;
+            final += score.Goals * 2;
+            final += score.OwnGoals * -1;
+            final += score.Assists * 1;
+            final += (decimal)(score.YellowCards * -0.5);
+            final += (decimal)(score.RedCards * -1.5);
+            final += score.SavedPenalties * 2;
+            final += score.SavedFreeKicks * 1;
+            final += score.ScoredPenalties * 1;
+            final += score.ScoredFreeKicks * 2;
+            final += (decimal)(score.FailedPenalties * -1.5);
+            final += (decimal)(score.FailedFreeKicks * -0.5);
+
+            var concededGoalsScore = score.ConcededGoals switch
+            {
+                -1 => 0,
+                0 => 10,
+                1 => 8,
+                2 => 6,
+                3 => 4,
+                4 => 2,
+                5 => 1,
+                6 => -1,
+                7 => -2,
+                8 => -3,
+                9 => -4,
+                10 => -5,
+                _ => 0
+            };
+
+            if(score.ConcededGoals > 10)
+            {
+                concededGoalsScore = -5;
+            }
+
+            final += concededGoalsScore;
+
+            if(final < (decimal)0.5)
+            {
+                final = (decimal)0.5;
+            }
+
             return final;
         }
     }

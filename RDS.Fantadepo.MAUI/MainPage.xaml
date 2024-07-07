@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RDS.Fantadepo.MAUI.MainPage">
+
+    <ScrollView BackgroundColor="#19501c">
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Image
+                Source="logo_depo.jpg"
+                HeightRequest="185"
+                Aspect="AspectFit" />
+
+            <Button
+                x:Name="TeamsBtn"
+                Text="Squadre" 
+                Clicked="OnTeamsBtnClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                x:Name="PlannedBtn"
+                Text="Calendario" 
+                Clicked="OnTeamsBtnClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                x:Name="PlayerBtn"
+                Text="Giocatori" 
+                Clicked="OnTeamsBtnClicked"
+                HorizontalOptions="Fill" />
+            
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
