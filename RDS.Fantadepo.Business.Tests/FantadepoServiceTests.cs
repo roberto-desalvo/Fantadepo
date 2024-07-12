@@ -45,8 +45,7 @@ namespace RDS.Fantadepo.Business.Tests
 
 
         [Theory]
-        //[MemberData(nameof(GetRandomCount))]
-        [InlineData(8)]
+        [MemberData(nameof(GetRandomCount))]
         public void GetTurns_WhenCalled_ShouldReturnAllMatches(int count)
         {
             var teams = GetTeams(count).ToList();
@@ -58,8 +57,7 @@ namespace RDS.Fantadepo.Business.Tests
         }
 
         [Theory]
-        //[MemberData(nameof(GetRandomCount))]
-        [InlineData(8)]
+        [MemberData(nameof(GetRandomCount))]
         public void GetTurns_WhenCalled_ShouldReturnAllMatchesWithNoRepetitions(int count)
         {
             var teams = GetTeams(count).ToList();
@@ -70,24 +68,23 @@ namespace RDS.Fantadepo.Business.Tests
         }
 
         [Theory]
-        //[MemberData(nameof(GetRandomCount))]
-        [InlineData(8)]
-        public void GetTurns_WhenCalled_ShouldReturnAllTeamsPlayingNMinus1Matches(int count)
+        [MemberData(nameof(GetRandomCount))]
+        public void GetTurns_WhenCalled_AllTeamsShouldPlayRightNumberOfMatches(int count)
         {
             var teams = GetTeams(count).ToList();
+            var expectedMatchCount = (count - 1) * 2;
 
             var turns = FantadepoService.GetTurns(teams);
 
             foreach(var team in teams)
             {
                 var matches = turns.SelectMany(x => x.Matches).Where(x => x.Team1.Name == team.Name || x.Team2.Name == team.Name);
-                matches.Should().HaveCount(count - 1);
+                matches.Should().HaveCount(expectedMatchCount);
             }
         }
 
         [Theory]
-        //[MemberData(nameof(GetRandomCount))]
-        [InlineData(8)]
+        [MemberData(nameof(GetRandomCount))]        
         public void GetTurns_WhenCalled_EveryTurnShouldHaveExpectedMatchesNumber(int count)
         {
             var teams = GetTeams(count).ToList();
@@ -102,8 +99,7 @@ namespace RDS.Fantadepo.Business.Tests
         }
 
         [Theory]
-        //[MemberData(nameof(GetRandomCount))]
-        [InlineData(8)]
+        [MemberData(nameof(GetRandomCount))]
         public void GetTurns_WhenCalled_ShouldHaveExpectedTurnsNumber(int count)
         {
             var teams = GetTeams(count).ToList();
