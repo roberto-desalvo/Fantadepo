@@ -8,7 +8,7 @@ namespace RDS.Fantadepo.Business.Models
 {
     public class Turn
     {
-        public IList<Match> Matches { get; set; }
-        public IList<Performance> Performances{ get; set; }
+        public IList<Match> Matches { get; set; } = new List<Match>();
+        public IList<Performance> Performances{ get; set; } = new List<Performance>();
     }
 }

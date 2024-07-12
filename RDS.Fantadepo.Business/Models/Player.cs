@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Business.Models
 {
-    public class Player
+    public class Player : ICloneable
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
+        public object Clone()
+        {
+            return new Player
+            {
+                Name = Name
+            };
+        }
     }
 }

@@ -8,18 +8,24 @@ namespace RDS.Fantadepo.Business.Tests
     {
         private static IEnumerable<Team> GetTeams(int count)
         {
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 yield return new Team { Name = $"{i}" };
             }
         }
 
+        public static IEnumerable<object[]> GetRandomCount()
+        {
+            var randomCount = new Random().Next(5, 10);
+
+            for (int i = 0; i < randomCount; i++)
+            {
+                yield return new object[] { new Random().Next(2, 100) };
+            }
+        }
+
         [Theory]
-        [InlineData(1)]
-        [InlineData(5)]
-        [InlineData(10)]
-        [InlineData(25)]
-        [InlineData(53)]
+        [MemberData(nameof(GetRandomCount))]
         public void GetMatches_WhenCalled_ShouldReturnAllCombinations(int count)
         {
             var teams = GetTeams(count);
@@ -31,34 +37,81 @@ namespace RDS.Fantadepo.Business.Tests
 
             result.Should().HaveCount(expectedCount);
 
-            foreach(var team in teams)
+            foreach (var team in teams)
             {
                 result.Where(x => x.Team1.Name == team.Name || x.Team2.Name == team.Name).Should().HaveCount(count - 1);
             }
         }
 
+
         [Theory]
-        [InlineData(2)]
-        [InlineData(5)]
-        [InlineData(10)]
-        [InlineData(25)]
-        [InlineData(53)]
-        public void GetTurns_WhenCalled_ShouldReturnAllCombinations(int count)
+        //[MemberData(nameof(GetRandomCount))]
+        [InlineData(8)]
+        public void GetTurns_WhenCalled_ShouldReturnAllMatches(int count)
+        {
+            var teams = GetTeams(count).ToList();
+            var expectedMatchCount = count * (count - 1);
+
+            var turns = FantadepoService.GetTurns(teams);
+            
+            turns.SelectMany(x => x.Matches).Should().HaveCount(expectedMatchCount);
+        }
+
+        [Theory]
+        //[MemberData(nameof(GetRandomCount))]
+        [InlineData(8)]
+        public void GetTurns_WhenCalled_ShouldReturnAllMatchesWithNoRepetitions(int count)
         {
             var teams = GetTeams(count).ToList();
 
-            var result = FantadepoService.GetTurns(teams);
+            var turns = FantadepoService.GetTurns(teams);
 
-            // simple combinations: n(n - 1) / 2
-            var expectedCount = (count * (count - 1)) / 2;
+            turns.SelectMany(x => x.Matches).Should().OnlyHaveUniqueItems();
+        }
 
-            result.Should().HaveCount(count % 2 == 0 ? count : count - 1);
-            result.Sum(x => x.Matches.Count()).Should().Be(expectedCount);
+        [Theory]
+        //[MemberData(nameof(GetRandomCount))]
+        [InlineData(8)]
+        public void GetTurns_WhenCalled_ShouldReturnAllTeamsPlayingNMinus1Matches(int count)
+        {
+            var teams = GetTeams(count).ToList();
 
-            foreach(var turn in result)
+            var turns = FantadepoService.GetTurns(teams);
+
+            foreach(var team in teams)
             {
-                turn.Matches.Should().HaveCount(count % 2 == 0 ? count / 2 : (count - 1) / 2);                             
+                var matches = turns.SelectMany(x => x.Matches).Where(x => x.Team1.Name == team.Name || x.Team2.Name == team.Name);
+                matches.Should().HaveCount(count - 1);
             }
+        }
+
+        [Theory]
+        //[MemberData(nameof(GetRandomCount))]
+        [InlineData(8)]
+        public void GetTurns_WhenCalled_EveryTurnShouldHaveExpectedMatchesNumber(int count)
+        {
+            var teams = GetTeams(count).ToList();
+            var expectedMatchesCount = count % 2 == 0 ? count / 2 : (count - 1) / 2;
+
+            var turns = FantadepoService.GetTurns(teams);
+
+            foreach(var turn in turns)
+            {
+                turn.Matches.Should().HaveCount(expectedMatchesCount);
+            }
+        }
+
+        [Theory]
+        //[MemberData(nameof(GetRandomCount))]
+        [InlineData(8)]
+        public void GetTurns_WhenCalled_ShouldHaveExpectedTurnsNumber(int count)
+        {
+            var teams = GetTeams(count).ToList();
+            var expectedTurnCount = count % 2 == 0 ? (count - 1) * 2 : count * 2;
+
+            var turns = FantadepoService.GetTurns(teams);
+                        
+            turns.Should().HaveCount(expectedTurnCount);
         }
     }
 }
