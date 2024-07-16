@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using RDS.Fantadepo.MAUI.Pages;
 using RDS.Fantadepo.MAUI.ViewModels;
 
 namespace RDS.Fantadepo.MAUI
@@ -16,11 +17,20 @@ namespace RDS.Fantadepo.MAUI
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();
-            builder.Services.AddSingleton<CalendarViewModel>();
+
+            builder.Services.AddTransient<CalendarPage>();
+            builder.Services.AddTransient<CalendarViewModel>();
+
+            builder.Services.AddTransient<TeamsPage>();
+            builder.Services.AddTransient<TeamsViewModel>();
+
+            builder.Services.AddTransient<PlayersPage>();
+            builder.Services.AddTransient<PlayersViewModel>();
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

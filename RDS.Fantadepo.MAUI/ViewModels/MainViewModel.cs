@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RDS.Fantadepo.MAUI.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,21 +15,21 @@ namespace RDS.Fantadepo.MAUI.ViewModels
         private string text = "this is a test";
 
         [RelayCommand]
-        public void OpenTeamsPage()
+        public async Task OpenTeamsPage()
         {
-
+            await Shell.Current.GoToAsync(nameof(TeamsPage));
         }
 
         [RelayCommand]
-        public void OpenCalendarPage()
+        public async Task OpenCalendarPage()
         {
-
+            await Shell.Current.GoToAsync(nameof(CalendarPage));
         }
 
         [RelayCommand]
-        public void OpenPlayersPage()
+        public async Task OpenPlayersPage()
         {
-
+            await Shell.Current.GoToAsync(nameof(PlayersPage));
         }
     }
 }
