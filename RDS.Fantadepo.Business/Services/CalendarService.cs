@@ -8,30 +8,46 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Business.Services
 {
-    public class FantadepoService
-    {      
+    public static class CalendarService
+    {
         public static IEnumerable<Turn> GetTurns(IList<Team> teams)
         {
             var list = Helper.DeepCopyList(teams).ToList();
             var turns = new List<Turn>();
 
-            if (list.Count % 2 != 0)
+            switch (list.Count)
             {
-                var fakeTeam = new Team { Name = "Fake" };
-                list.Add(fakeTeam);
-                var temp = DoubleRoundRobinEven(list);
-                foreach (var turn in temp)
-                {
-                    if (turn.Matches.Any(m => IsSameTeam(m.Team1, fakeTeam) || IsSameTeam(m.Team2, fakeTeam)))
+                case 1:
+                    return [];
+
+                case 2:
+                    return
+                [
+                    new() { Matches = [ new() { Team1 = list.First(), Team2 = list.Last() }]},
+                    new() { Matches = [ new() { Team2 = list.First(), Team1 = list.Last() }]},
+                ];
+
+                default:
+                    if (list.Count % 2 != 0)
                     {
-                        turn.Matches.Remove(turn.Matches.First(m => IsSameTeam(m.Team1, fakeTeam) || IsSameTeam(m.Team2, fakeTeam)));
-                        turns.Add(turn);
+                        var fakeTeam = new Team { Name = "Fake" };
+                        list.Add(fakeTeam);
+                        var temp = DoubleRoundRobinEven(list);
+                        foreach (var turn in temp)
+                        {
+                            if (turn.Matches.Any(m => IsSameTeam(m.Team1, fakeTeam) || IsSameTeam(m.Team2, fakeTeam)))
+                            {
+                                turn.Matches.Remove(turn.Matches.First(m => IsSameTeam(m.Team1, fakeTeam) || IsSameTeam(m.Team2, fakeTeam)));
+                                turns.Add(turn);
+                            }
+                        }
                     }
-                }
-            }
-            else
-            {
-                turns = DoubleRoundRobinEven(list).ToList();
+                    else
+                    {
+                        turns = DoubleRoundRobinEven(list).ToList();
+                    }
+                    break;
+
             }
 
             return turns;
@@ -80,7 +96,7 @@ namespace RDS.Fantadepo.Business.Services
                     {
                         newList1.Add(list1.ElementAt(i));
                     }
-                    else if(i == 1)
+                    else if (i == 1)
                     {
                         newList1.Add(list2.ElementAt(i - 1));
                     }
@@ -100,25 +116,7 @@ namespace RDS.Fantadepo.Business.Services
                 yield return turn2;
 
             } while (!IsSameTeam(list1.ElementAt(1), originalSecondItem));
-        }
-
-        public static decimal GetTeamScore(Team team, IEnumerable<Performance> performances)
-        {
-            decimal finalScore = 0;
-
-            foreach (var player in team.Players)
-            {
-                foreach (var performance in performances)
-                {
-                    if (performance.Player.Name == player.Name)
-                    {
-                        finalScore += performance.DecimalScore;
-                    }
-                }
-            }
-
-            return finalScore;
-        }
+        }        
 
         private static bool IsSameTeam(Team team1, Team team2)
         {

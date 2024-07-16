@@ -26,32 +26,12 @@ namespace RDS.Fantadepo.Business.Tests
 
         [Theory]
         [MemberData(nameof(GetRandomCount))]
-        public void GetMatches_WhenCalled_ShouldReturnAllCombinations(int count)
-        {
-            var teams = GetTeams(count);
-
-            var result = FantadepoService.GetAllMatches(teams);
-
-            // simple combinations: n(n - 1) / 2
-            var expectedCount = (count * (count - 1)) / 2;
-
-            result.Should().HaveCount(expectedCount);
-
-            foreach (var team in teams)
-            {
-                result.Where(x => x.Team1.Name == team.Name || x.Team2.Name == team.Name).Should().HaveCount(count - 1);
-            }
-        }
-
-
-        [Theory]
-        [MemberData(nameof(GetRandomCount))]
         public void GetTurns_WhenCalled_ShouldReturnAllMatches(int count)
         {
             var teams = GetTeams(count).ToList();
             var expectedMatchCount = count * (count - 1);
 
-            var turns = FantadepoService.GetTurns(teams);
+            var turns = CalendarService.GetTurns(teams);
             
             turns.SelectMany(x => x.Matches).Should().HaveCount(expectedMatchCount);
         }
@@ -62,7 +42,7 @@ namespace RDS.Fantadepo.Business.Tests
         {
             var teams = GetTeams(count).ToList();
 
-            var turns = FantadepoService.GetTurns(teams);
+            var turns = CalendarService.GetTurns(teams);
 
             turns.SelectMany(x => x.Matches).Should().OnlyHaveUniqueItems();
         }
@@ -74,7 +54,7 @@ namespace RDS.Fantadepo.Business.Tests
             var teams = GetTeams(count).ToList();
             var expectedMatchCount = (count - 1) * 2;
 
-            var turns = FantadepoService.GetTurns(teams);
+            var turns = CalendarService.GetTurns(teams);
 
             foreach(var team in teams)
             {
@@ -90,7 +70,7 @@ namespace RDS.Fantadepo.Business.Tests
             var teams = GetTeams(count).ToList();
             var expectedMatchesCount = count % 2 == 0 ? count / 2 : (count - 1) / 2;
 
-            var turns = FantadepoService.GetTurns(teams);
+            var turns = CalendarService.GetTurns(teams);
 
             foreach(var turn in turns)
             {
@@ -105,7 +85,7 @@ namespace RDS.Fantadepo.Business.Tests
             var teams = GetTeams(count).ToList();
             var expectedTurnCount = count % 2 == 0 ? (count - 1) * 2 : count * 2;
 
-            var turns = FantadepoService.GetTurns(teams);
+            var turns = CalendarService.GetTurns(teams);
                         
             turns.Should().HaveCount(expectedTurnCount);
         }

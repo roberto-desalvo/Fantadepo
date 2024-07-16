@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using RDS.Fantadepo.MAUI.ViewModels;
 
 namespace RDS.Fantadepo.MAUI
 {
@@ -14,6 +15,9 @@ namespace RDS.Fantadepo.MAUI
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<CalendarViewModel>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

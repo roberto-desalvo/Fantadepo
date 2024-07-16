@@ -7,42 +7,87 @@ using RDS.Fantadepo.Business.Models;
 
 namespace RDS.Fantadepo.Business.Services
 {
-    public class MatchResultCalculator
+    public static class MatchResultCalculator
     {
-        private readonly Match _match;
-        private readonly IList<Performance> _performances;
-        
-        public MatchResultCalculator(Match match, IList<Performance> performances)
+        public static bool IsDraw(Match match, IList<Performance> performances)
         {
-            _match = match ?? throw new ArgumentNullException(nameof(match));
-            _performances = performances?? throw new ArgumentNullException(nameof(performances));
+            return GetWinner(match, performances) == null;
         }
 
-        public bool IsDraw()
+        public static Team? GetWinner(Match match, IList<Performance> performances)
         {
-            var score1 = FantadepoService.GetTeamScore(_match.Team1, _performances);
-            var score2 = FantadepoService.GetTeamScore(_match.Team2, _performances);
+            var score1 = GetTeamScore(match.Team1, performances);
+            var score2 = GetTeamScore(match.Team2, performances);
 
-            return score1 == score2;
+            return score1 == score2 ? null : score1 > score2 ? match.Team1 : match.Team2;
         }
 
-        public Team? GetWinner()
+        public static decimal GetTeamScore(Team team, IEnumerable<Performance> performances)
         {
-            var score1 = FantadepoService.GetTeamScore(_match.Team1, _performances);
-            var score2 = FantadepoService.GetTeamScore(_match.Team2, _performances);
+            decimal finalScore = 0;
 
-            if(score1 > score2)
+            foreach (var player in team.Players)
             {
-                return _match.Team1;
+                foreach (var performance in performances)
+                {
+                    if (performance.Player.Name == player.Name)
+                    {
+                        finalScore += GetScoreAsDecimal(performance.Score);
+                    }
+                }
             }
-            else if(score1 < score2)
+
+            return finalScore;
+        }
+
+        public static decimal GetScoreAsDecimal(Score score)
+        {
+            decimal final = 0;
+            final += score.Goals * 2;
+            final += score.OwnGoals * -1;
+            final += score.Assists * 1;
+            final += (decimal)(score.YellowCards * -0.5);
+            final += (decimal)(score.RedCards * -1.5);
+            final += score.ScoredPenalties * 1;
+            final += score.ScoredFreeKicks * 2;
+            final += (decimal)(score.FailedPenalties * -1.5);
+            final += (decimal)(score.FailedFreeKicks * -0.5);
+
+            if (score.IsGoalKeeper)
             {
-                return _match.Team2;
+                final += score.SavedPenalties * 2;
+                final += score.SavedFreeKicks * 1;
+
+                var concededGoalsScore = score.ConcededGoals switch
+                {
+                    0 => 10,
+                    1 => 8,
+                    2 => 6,
+                    3 => 4,
+                    4 => 2,
+                    5 => 1,
+                    6 => -1,
+                    7 => -2,
+                    8 => -3,
+                    9 => -4,
+                    10 => -5,
+                    _ => 0
+                };
+
+                if (score.ConcededGoals > 10)
+                {
+                    concededGoalsScore = -5;
+                }
+
+                final += concededGoalsScore;
             }
-            else
+
+            if (final < (decimal)0.5)
             {
-                return null;
+                final = (decimal)0.5;
             }
+
+            return final;
         }
     }
 }

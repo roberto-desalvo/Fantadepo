@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.Business.Models
+namespace RDS.Fantadepo.MAUI
 {
-    public class Turn
+    public partial class TeamsPage
     {
-        public IList<Match> Matches { get; set; } = [];
     }
 }

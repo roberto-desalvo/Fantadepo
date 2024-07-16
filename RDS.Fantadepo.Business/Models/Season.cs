@@ -8,7 +8,7 @@ namespace RDS.Fantadepo.Business.Models
 {
     public class Season
     {
-        public IList<Team> Teams { get; set; }
-        public IList<Turn> Turns { get; set; }
+        public IList<Team> Teams { get; set; } = [];
+        public IList<Turn> Turns { get; set; } = [];
     }
 }

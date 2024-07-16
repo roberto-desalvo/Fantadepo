@@ -1,16 +1,12 @@
-﻿namespace RDS.Fantadepo.MAUI
+﻿using RDS.Fantadepo.MAUI.ViewModels;
+
+namespace RDS.Fantadepo.MAUI
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public MainPage(MainViewModel viewModel)
         {
             InitializeComponent();
-        }
-
-        private void OnTeamsBtnClicked(object sender, EventArgs e)
-        {
-
-        }
+        }        
     }
-
 }

@@ -15,8 +15,8 @@ namespace RDS.Fantadepo.Business.Models
         {
             return new Match
             {
-                Team1 = Team1.Clone() as Team,
-                Team2 = Team2.Clone() as Team
+                Team1 = (Team1.Clone() as Team)!,
+                Team2 = (Team2.Clone() as Team)!
             };
         }
     }
