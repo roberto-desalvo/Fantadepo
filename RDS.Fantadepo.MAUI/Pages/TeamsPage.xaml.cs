@@ -1,4 +1,5 @@
-﻿using RDS.Fantadepo.MAUI.ViewModels;
+﻿using RDS.Fantadepo.MAUI.Models;
+using RDS.Fantadepo.MAUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,22 @@ namespace RDS.Fantadepo.MAUI.Pages
         {
             InitializeComponent();
             BindingContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+        }
+
+        private void OnTeamEntryFocused(object sender, FocusEventArgs e)
+        {
+            if(sender is UITeam)
+            {
+                (this.BindingContext as TeamsViewModel)!.OnTeamEntryFocused((UITeam)sender);
+            }
+        }
+
+        private void OnTeamEntryUnfocused(object sender, FocusEventArgs e)
+        {
+            if (sender is UITeam)
+            {
+                (this.BindingContext as TeamsViewModel)!.OnTeamEntryUnfocused((UITeam)sender);
+            }
         }
     }
 }
