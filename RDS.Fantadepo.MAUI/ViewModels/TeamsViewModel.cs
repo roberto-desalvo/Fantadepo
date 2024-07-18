@@ -14,32 +14,19 @@ namespace RDS.Fantadepo.MAUI.ViewModels
     public partial class TeamsViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<UITeam> teams = [];
+        private ObservableCollection<Team> teams = [];
 
         [RelayCommand]
         public void AddTeam()
         {
-            Teams.Add(new UITeam { Team = new() { Name = $"Insert team name here" }, IsReadOnly = true });
+            Teams.Add(new Team { Name = $"Insert team name here" });
         }
 
-        public void OnTeamEntryFocused(UITeam uiTeam)
+        public void OnModifyTeamName(Team team)
         {
-            uiTeam.IsReadOnly = false;
-
-            uiTeam.TempName = uiTeam.Team.Name;
-            uiTeam.Team.Name = string.Empty;
+            team.Name = string.Empty;
         }
 
-        public void OnTeamEntryUnfocused(UITeam uiTeam)
-        {
-            uiTeam.IsReadOnly = true;
-
-            if (uiTeam.Team.Name == string.Empty && uiTeam.TempName != string.Empty)
-            {
-                uiTeam.Team.Name = uiTeam.TempName;
-                uiTeam.TempName = string.Empty;
-            }
-        }
     }
 }
 

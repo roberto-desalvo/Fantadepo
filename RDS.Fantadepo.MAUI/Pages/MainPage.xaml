@@ -13,8 +13,6 @@
                 Source="logo_depo.jpg"
                 HeightRequest="185"
                 Aspect="AspectFit" />
-
-            <Entry Placeholder="TEST" Text="{Binding Text}"/>
             
             <Button
                 x:Name="TeamsBtn"

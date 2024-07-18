@@ -18,6 +18,6 @@ namespace RDS.Fantadepo.Business.Helpers
             }
 
             return clones;
-        }
+        }        
     }
 }

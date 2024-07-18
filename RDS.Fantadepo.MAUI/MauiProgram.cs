@@ -29,6 +29,9 @@ namespace RDS.Fantadepo.MAUI
             builder.Services.AddTransient<PlayersPage>();
             builder.Services.AddTransient<PlayersViewModel>();
 
+            builder.Services.AddTransient<ModifyPlayerPage>();
+            builder.Services.AddTransient<ModifyPlayerViewModel>();
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

@@ -1,4 +1,5 @@
-﻿using RDS.Fantadepo.MAUI.Models;
+﻿using RDS.Fantadepo.Business.Models;
+using RDS.Fantadepo.MAUI.Models;
 using RDS.Fantadepo.MAUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,19 +17,16 @@ namespace RDS.Fantadepo.MAUI.Pages
             BindingContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        private void OnTeamEntryFocused(object sender, FocusEventArgs e)
+        private void OnTapGestureRecognizerDoubleTapped(object sender, FocusEventArgs e)
         {
-            if (((Entry)sender).BindingContext is UITeam)
+            if(sender is Frame frame)
             {
-                (this.BindingContext as TeamsViewModel)!.OnTeamEntryFocused((UITeam)((Entry)sender).BindingContext);
-            }
-        }
+                var entry = frame.Children.FirstOrDefault(x => x is Entry) ?? new Entry();
 
-        private void OnTeamEntryUnfocused(object sender, FocusEventArgs e)
-        {
-            if (((Entry)sender).BindingContext is UITeam)
-            {
-                (this.BindingContext as TeamsViewModel)!.OnTeamEntryUnfocused((UITeam)((Entry)sender).BindingContext);
+                if(entry.BindingContext is Team team)
+                {
+                    (this.BindingContext as TeamsViewModel)!.OnModifyTeamName(team);
+                }
             }
         }
     }

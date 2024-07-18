@@ -3,30 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="RDS.Fantadepo.MAUI.Pages.TeamsPage"
-             xmlns:models="clr-namespace:RDS.Fantadepo.MAUI.Models"
+             Title="Teams"
+             xmlns:models="clr-namespace:RDS.Fantadepo.Business.Models;assembly=RDS.Fantadepo.Business"
              xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.ViewModels"
              x:DataType="viewmodel:TeamsViewModel"
              x:Name="Page"
              BackgroundColor="#19501c">
 
-    <ContentPage.BindingContext>
-        <viewmodel:TeamsViewModel/>
-    </ContentPage.BindingContext>
-    
-    <Grid Margin="20" RowDefinitions="*,9*" ColumnDefinitions="*, 6*, *" >
+
+    <Grid Margin="20" RowDefinitions="*,11*" ColumnDefinitions="*, 4*, *" >
         <Button Grid.Row="0" Grid.Column="1" Text="Add new team" Command="{Binding AddTeamCommand}"/>
 
         <CollectionView Margin="10" Grid.Row="1" Grid.ColumnSpan="123" ItemsSource="{Binding Teams}">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:UITeam">
+                <DataTemplate x:DataType="models:Team">
                     <Grid Padding="0,5">
                         <Frame >
-                            <Entry Text="{Binding Team.Name, Mode=TwoWay}"
+                            <Entry Text="{Binding Name, Mode=TwoWay}"
                                    FontSize="24"
-                                   IsReadOnly="{Binding IsReadOnly, Mode=TwoWay}"
-                                   Focused="OnTeamEntryFocused"
-                                   Unfocused="OnTeamEntryUnfocused">
-                            </Entry>
+                                   />
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTapGestureRecognizerDoubleTapped"
+                              NumberOfTapsRequired="2" />
+                            </Frame.GestureRecognizers>
                         </Frame>
                     </Grid>
                 </DataTemplate>
