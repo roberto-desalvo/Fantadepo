@@ -6,13 +6,14 @@
              xmlns:models="clr-namespace:RDS.Fantadepo.MAUI.Models"
              xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.ViewModels"
              x:DataType="viewmodel:TeamsViewModel"
-             x:Name="Page">
+             x:Name="Page"
+             BackgroundColor="#19501c">
 
     <ContentPage.BindingContext>
         <viewmodel:TeamsViewModel/>
     </ContentPage.BindingContext>
     
-    <Grid Margin="20" RowDefinitions="*,9*" ColumnDefinitions="*, 6*, *">
+    <Grid Margin="20" RowDefinitions="*,9*" ColumnDefinitions="*, 6*, *" >
         <Button Grid.Row="0" Grid.Column="1" Text="Add new team" Command="{Binding AddTeamCommand}"/>
 
         <CollectionView Margin="10" Grid.Row="1" Grid.ColumnSpan="123" ItemsSource="{Binding Teams}">
@@ -20,9 +21,9 @@
                 <DataTemplate x:DataType="models:UITeam">
                     <Grid Padding="0,5">
                         <Frame >
-                            <Entry Text="{Binding Team.Name}"
+                            <Entry Text="{Binding Team.Name, Mode=TwoWay}"
                                    FontSize="24"
-                                   IsReadOnly="{Binding IsReadOnly}"
+                                   IsReadOnly="{Binding IsReadOnly, Mode=TwoWay}"
                                    Focused="OnTeamEntryFocused"
                                    Unfocused="OnTeamEntryUnfocused">
                             </Entry>

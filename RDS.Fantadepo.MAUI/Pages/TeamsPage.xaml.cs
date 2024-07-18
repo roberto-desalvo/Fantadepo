@@ -18,17 +18,17 @@ namespace RDS.Fantadepo.MAUI.Pages
 
         private void OnTeamEntryFocused(object sender, FocusEventArgs e)
         {
-            if(sender is UITeam)
+            if (((Entry)sender).BindingContext is UITeam)
             {
-                (this.BindingContext as TeamsViewModel)!.OnTeamEntryFocused((UITeam)sender);
+                (this.BindingContext as TeamsViewModel)!.OnTeamEntryFocused((UITeam)((Entry)sender).BindingContext);
             }
         }
 
         private void OnTeamEntryUnfocused(object sender, FocusEventArgs e)
         {
-            if (sender is UITeam)
+            if (((Entry)sender).BindingContext is UITeam)
             {
-                (this.BindingContext as TeamsViewModel)!.OnTeamEntryUnfocused((UITeam)sender);
+                (this.BindingContext as TeamsViewModel)!.OnTeamEntryUnfocused((UITeam)((Entry)sender).BindingContext);
             }
         }
     }

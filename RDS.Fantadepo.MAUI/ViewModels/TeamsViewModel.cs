@@ -19,7 +19,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
         [RelayCommand]
         public void AddTeam()
         {
-            Teams.Add(new UITeam { Team = new() { Name = $"Please insert team name here" }, IsReadOnly = true });
+            Teams.Add(new UITeam { Team = new() { Name = $"Insert team name here" }, IsReadOnly = true });
         }
 
         public void OnTeamEntryFocused(UITeam uiTeam)
@@ -31,7 +31,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
         }
 
         public void OnTeamEntryUnfocused(UITeam uiTeam)
-        {            
+        {
             uiTeam.IsReadOnly = true;
 
             if (uiTeam.Team.Name == string.Empty && uiTeam.TempName != string.Empty)
