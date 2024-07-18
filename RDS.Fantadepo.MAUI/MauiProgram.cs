@@ -26,6 +26,9 @@ namespace RDS.Fantadepo.MAUI
             builder.Services.AddTransient<TeamListPage>();
             builder.Services.AddTransient<TeamListViewModel>();
 
+            builder.Services.AddTransient<TeamPage>();
+            builder.Services.AddTransient<TeamViewModel>();
+
             builder.Services.AddTransient<PlayerListPage>();
             builder.Services.AddTransient<PlayerListViewModel>();
 
