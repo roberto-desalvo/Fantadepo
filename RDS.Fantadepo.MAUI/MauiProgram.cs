@@ -23,14 +23,14 @@ namespace RDS.Fantadepo.MAUI
             builder.Services.AddTransient<CalendarPage>();
             builder.Services.AddTransient<CalendarViewModel>();
 
-            builder.Services.AddTransient<TeamsPage>();
-            builder.Services.AddTransient<TeamsViewModel>();
+            builder.Services.AddTransient<TeamListPage>();
+            builder.Services.AddTransient<TeamListViewModel>();
 
-            builder.Services.AddTransient<PlayersPage>();
-            builder.Services.AddTransient<PlayersViewModel>();
+            builder.Services.AddTransient<PlayerListPage>();
+            builder.Services.AddTransient<PlayerListViewModel>();
 
-            builder.Services.AddTransient<ModifyPlayerPage>();
-            builder.Services.AddTransient<ModifyPlayerViewModel>();
+            builder.Services.AddTransient<PlayerPage>();
+            builder.Services.AddTransient<PlayerViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();

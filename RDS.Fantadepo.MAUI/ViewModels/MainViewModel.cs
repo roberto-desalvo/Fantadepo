@@ -17,7 +17,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
         [RelayCommand]
         public async Task OpenTeamsPage()
         {
-            await Shell.Current.GoToAsync(nameof(TeamsPage));
+            await Shell.Current.GoToAsync(nameof(TeamListPage));
         }
 
         [RelayCommand]
@@ -29,7 +29,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
         [RelayCommand]
         public async Task OpenPlayersPage()
         {
-            await Shell.Current.GoToAsync(nameof(PlayersPage));
+            await Shell.Current.GoToAsync(nameof(PlayerListPage));
         }
     }
 }

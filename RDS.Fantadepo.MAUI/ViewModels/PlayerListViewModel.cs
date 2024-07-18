@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.MAUI.ViewModels
 {
-    public partial class PlayersViewModel : ObservableObject
+    public partial class PlayerListViewModel : ObservableObject
     {
         [ObservableProperty]
         private ObservableCollection<Player> players = [];
@@ -24,7 +24,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
             {
                 var player = new Player { Name = "Insert player name" };
                 var data = new Dictionary<string, object> { { nameof(Player), player } };
-                await Shell.Current.GoToAsync(nameof(ModifyPlayerPage), data);
+                await Shell.Current.GoToAsync(nameof(PlayerPage), data);
                 Players.Add(player);
             });
         }
@@ -34,7 +34,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
             UIHelper.SafeCall(async () =>
             {
                 var data = new Dictionary<string, object> { { nameof(Player), player } };
-                await Shell.Current.GoToAsync(nameof(ModifyPlayerPage), data);
+                await Shell.Current.GoToAsync(nameof(PlayerPage), data);
             });            
         }
     }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.MAUI.Pages
 {
-    public partial class TeamsPage : ContentPage
+    public partial class TeamListPage : ContentPage
     {
-        public TeamsPage(TeamsViewModel viewModel)
+        public TeamListPage(TeamListViewModel viewModel)
         {
             InitializeComponent();
             BindingContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
@@ -25,7 +25,7 @@ namespace RDS.Fantadepo.MAUI.Pages
 
                 if(entry.BindingContext is Team team)
                 {
-                    (this.BindingContext as TeamsViewModel)!.OnModifyTeamName(team);
+                    (this.BindingContext as TeamListViewModel)!.OnModifyTeamName(team);
                 }
             }
         }

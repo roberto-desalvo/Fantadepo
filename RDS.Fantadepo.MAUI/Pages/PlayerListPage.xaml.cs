@@ -3,9 +3,9 @@ using RDS.Fantadepo.MAUI.ViewModels;
 
 namespace RDS.Fantadepo.MAUI.Pages;
 
-public partial class PlayersPage : ContentPage
+public partial class PlayerListPage : ContentPage
 {
-    public PlayersPage(PlayersViewModel viewModel)
+    public PlayerListPage(PlayerListViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
@@ -17,7 +17,7 @@ public partial class PlayersPage : ContentPage
         {
             var entry = frame.Children.OfType<Entry>().FirstOrDefault() ?? new Entry();
 
-            if ((entry.BindingContext is Player player) && (this.BindingContext is PlayersViewModel model))
+            if ((entry.BindingContext is Player player) && (this.BindingContext is PlayerListViewModel model))
             {
                 model.OnModifyPlayer(player);
             }

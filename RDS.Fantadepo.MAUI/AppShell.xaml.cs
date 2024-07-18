@@ -9,9 +9,9 @@ namespace RDS.Fantadepo.MAUI
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(CalendarPage), typeof(CalendarPage));
-            Routing.RegisterRoute(nameof(TeamsPage), typeof(TeamsPage));
-            Routing.RegisterRoute(nameof(PlayersPage), typeof(PlayersPage));
-            Routing.RegisterRoute(nameof(ModifyPlayerPage), typeof(ModifyPlayerPage));
+            Routing.RegisterRoute(nameof(TeamListPage), typeof(TeamListPage));
+            Routing.RegisterRoute(nameof(PlayerListPage), typeof(PlayerListPage));
+            Routing.RegisterRoute(nameof(PlayerPage), typeof(PlayerPage));
         }
     }
 }
