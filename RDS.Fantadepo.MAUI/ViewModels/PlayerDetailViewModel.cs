@@ -11,7 +11,32 @@ namespace RDS.Fantadepo.MAUI.ViewModels
     public partial class PlayerDetailViewModel : ObservableObject
     {
         [ObservableProperty]
-        private Player player = new();
+        private string _firstname = string.Empty;
         
+        [ObservableProperty]
+        private string _lastname = string.Empty;
+        
+        [ObservableProperty]
+        private string _nickname = string.Empty;
+
+        [ObservableProperty]
+        private string _firstRole = string.Empty;
+
+        [ObservableProperty]
+        private string _secondaryRole = string.Empty;
+
+        public PlayerDetailViewModel()
+        {
+            
+        }
+
+        public PlayerDetailViewModel(Player player)
+        {
+            _firstname = player.Firstname;
+            _lastname = player.Lastname;
+            _nickname = player.Nickname;
+            _firstRole = player.FirstRole.ToString();
+            _secondaryRole = player.SecondaryRole.ToString();
+        }
     }
 }

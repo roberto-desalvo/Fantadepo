@@ -15,7 +15,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
     public partial class TeamListViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<Team> teams = [];
+        private ObservableCollection<TeamDetailViewModel> teams = [];
 
         [RelayCommand]
         public void AddTeam()

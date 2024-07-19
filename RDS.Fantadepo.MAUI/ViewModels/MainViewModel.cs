@@ -11,17 +11,7 @@ using System.Threading.Tasks;
 namespace RDS.Fantadepo.MAUI.ViewModels
 {
     public partial class MainViewModel : ObservableObject
-    {
-        private readonly FantadepoContext _context;
-
-        [ObservableProperty]
-        private string text = "this is a test";
-
-        public MainViewModel(FantadepoContext context)
-        {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-        }
-
+    {       
         [RelayCommand]
         public async Task OpenTeamsPage()
         {
