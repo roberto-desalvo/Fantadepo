@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Business.Models
 {
-    public class Team
+    public class Team : ICloneable
     {
-        public IList<Player> Players { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public IList<Player> Players { get; set; } = [];
+
+        public object Clone()
+        {
+            return new Team
+            {
+                Name = Name,
+                Players = (Players.Select(x => x.Clone() as Player).ToList())!
+            };
+        }
     }
 }

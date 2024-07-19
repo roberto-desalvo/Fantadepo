@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RDS.Fantadepo.MAUI.Pages.CalendarPage"
+             xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.ViewModels"
+             x:DataType="viewmodel:CalendarViewModel">
+
+    <ScrollView BackgroundColor="#19501c">
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

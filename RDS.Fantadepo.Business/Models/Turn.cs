@@ -8,7 +8,6 @@ namespace RDS.Fantadepo.Business.Models
 {
     public class Turn
     {
-        public IList<Match> Matches { get; set; }
-        public Dictionary<Player, Score> Scores { get; set; }
+        public IList<Match> Matches { get; set; } = [];
     }
 }
