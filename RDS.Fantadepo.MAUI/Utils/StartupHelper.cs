@@ -19,9 +19,9 @@ namespace RDS.Fantadepo.MAUI.Utils
                 var secretClient = new SecretClient(kvUri, credentials);
 
                 var secret = secretClient.GetSecret("fantadepo-admin-connstring");
-                return secret.Value?.ToString() ?? string.Empty;
+                return secret?.Value?.Value ?? string.Empty;
             }
-            catch(Exception ex) 
+            catch
             { 
                 return string.Empty;
             }            
