@@ -1,4 +1,3 @@
-using AndroidX.Lifecycle;
 using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.MAUI.ViewModels;
 
