@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.MAUI.ViewModels
 {
-    public partial class PlayerViewModel : ObservableObject
+    public partial class TeamDetailViewModel : ObservableObject
     {
         [ObservableProperty]
-        private Player player = new();
-        
+        private Team team = new();
     }
 }

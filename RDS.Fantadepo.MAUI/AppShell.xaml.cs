@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.DataAccess;
-using RDS.Fantadepo.MAUI.Pages;
+using RDS.Fantadepo.MAUI.Views;
 
 namespace RDS.Fantadepo.MAUI
 {
@@ -21,8 +21,8 @@ namespace RDS.Fantadepo.MAUI
             Routing.RegisterRoute(nameof(CalendarPage), typeof(CalendarPage));
             Routing.RegisterRoute(nameof(TeamListPage), typeof(TeamListPage));
             Routing.RegisterRoute(nameof(PlayerListPage), typeof(PlayerListPage));
-            Routing.RegisterRoute(nameof(PlayerPage), typeof(PlayerPage));
-            Routing.RegisterRoute(nameof(TeamPage), typeof(TeamPage));
+            Routing.RegisterRoute(nameof(PlayerDetailPage), typeof(PlayerDetailPage));
+            Routing.RegisterRoute(nameof(TeamDetailPage), typeof(TeamDetailPage));
         }
     }
 }

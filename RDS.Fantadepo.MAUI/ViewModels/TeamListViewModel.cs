@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.MAUI.Models;
-using RDS.Fantadepo.MAUI.Pages;
+using RDS.Fantadepo.MAUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +24,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
             {
                 var team = new Team { Name = "Insert team name" };
                 var data = new Dictionary<string, object> { { nameof(Team), team } };
-                await Shell.Current.GoToAsync(nameof(TeamPage), data);
+                await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
                 Teams.Add(team);
             });
         }
@@ -34,7 +34,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
             UIHelper.SafeCall(async () =>
             {
                 var data = new Dictionary<string, object> { { nameof(Player), team } };
-                await Shell.Current.GoToAsync(nameof(TeamPage), data);
+                await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
             });
         }
 

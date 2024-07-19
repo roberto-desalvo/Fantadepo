@@ -4,7 +4,7 @@ using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.Business.Services;
 using RDS.Fantadepo.DataAccess;
 using RDS.Fantadepo.MAUI.Models;
-using RDS.Fantadepo.MAUI.Pages;
+using RDS.Fantadepo.MAUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,7 +34,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
             {
                 var player = new Player { Name = "Insert player name" };
                 var data = new Dictionary<string, object> { { nameof(Player), player } };
-                await Shell.Current.GoToAsync(nameof(PlayerPage), data);
+                await Shell.Current.GoToAsync(nameof(PlayerDetailPage), data);
                 Players.Add(player);
             });
         }
@@ -44,7 +44,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
             UIHelper.SafeCall(async () =>
             {
                 var data = new Dictionary<string, object> { { nameof(Player), player } };
-                await Shell.Current.GoToAsync(nameof(PlayerPage), data);
+                await Shell.Current.GoToAsync(nameof(PlayerDetailPage), data);
             });            
         }
     }

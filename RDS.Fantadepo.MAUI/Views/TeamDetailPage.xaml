@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RDS.Fantadepo.MAUI.Pages.TeamPage"
+             x:Class="RDS.Fantadepo.MAUI.Views.TeamDetailPage"
              Title="TeamPage"
              xmlns:models="clr-namespace:RDS.Fantadepo.Business.Models;assembly=RDS.Fantadepo.Business"
              xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.ViewModels"
-             x:DataType="viewmodel:TeamViewModel">
+             x:DataType="viewmodel:TeamDetailViewModel">
     <ScrollView BackgroundColor="#315C2B">
         <VerticalStackLayout
             Padding="30,0"

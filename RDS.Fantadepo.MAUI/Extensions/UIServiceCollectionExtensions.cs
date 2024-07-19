@@ -1,4 +1,4 @@
-﻿using RDS.Fantadepo.MAUI.Pages;
+﻿using RDS.Fantadepo.MAUI.Views;
 using RDS.Fantadepo.MAUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -21,14 +21,14 @@ namespace RDS.Fantadepo.MAUI.Extensions
             services.AddTransient<TeamListPage>();
             services.AddTransient<TeamListViewModel>();
 
-            services.AddTransient<TeamPage>();
-            services.AddTransient<TeamViewModel>();
+            services.AddTransient<TeamDetailPage>();
+            services.AddTransient<TeamDetailViewModel>();
 
             services.AddTransient<PlayerListPage>();
             services.AddTransient<PlayerListViewModel>();
 
-            services.AddTransient<PlayerPage>();
-            services.AddTransient<PlayerViewModel>();
+            services.AddTransient<PlayerDetailPage>();
+            services.AddTransient<PlayerDetailViewModel>();
 
             return services;
         }

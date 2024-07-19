@@ -81,34 +81,37 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\CalendarPage.xaml.cs">
+	  <Compile Update="Views\CalendarPage.xaml.cs">
 	    <DependentUpon>CalendarPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\PlayerPage.xaml.cs">
+	  <Compile Update="Views\PlayerPage.xaml.cs">
 	    <DependentUpon>PlayerPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\PlayerListPage.xaml.cs">
+	  <Compile Update="Views\PlayerListPage.xaml.cs">
 	    <DependentUpon>PlayerListPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\TeamListPage.xaml.cs">
+	  <Compile Update="Views\TeamListPage.xaml.cs">
 	    <DependentUpon>TeamListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\TeamDetailPage.xaml.cs">
+	    <DependentUpon>TeamDetailPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\CalendarPage.xaml">
+	  <MauiXaml Update="Views\CalendarPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\PlayerPage.xaml">
+	  <MauiXaml Update="Views\PlayerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\PlayerListPage.xaml">
+	  <MauiXaml Update="Views\PlayerListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\TeamListPage.xaml">
+	  <MauiXaml Update="Views\TeamListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\TeamPage.xaml">
+	  <MauiXaml Update="Views\TeamDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

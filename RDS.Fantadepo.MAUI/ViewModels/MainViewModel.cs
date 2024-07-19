@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RDS.Fantadepo.DataAccess;
-using RDS.Fantadepo.MAUI.Pages;
+using RDS.Fantadepo.MAUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
