@@ -20,10 +20,10 @@
                TextColor="White"/>
     </Shell.FlyoutFooter>
 
-    <!--<ShellContent
+    <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />-->
+        Route="MainPage" />
     
     <FlyoutItem Title="Home" FlyoutDisplayOptions="AsMultipleItems">    
         <ShellContent
