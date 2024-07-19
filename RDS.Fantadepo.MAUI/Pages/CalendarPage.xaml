@@ -3,14 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RDS.Fantadepo.MAUI.Pages.CalendarPage"
              xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.ViewModels"
-             x:DataType="viewmodel:CalendarViewModel">
+             x:DataType="viewmodel:CalendarViewModel"
+             xmlns:models="clr-namespace:RDS.Fantadepo.Business.Models;assembly=RDS.Fantadepo.Business"
+             x:Name="Page"
+             BackgroundColor="#9EA93F">
 
-    <ScrollView BackgroundColor="#19501c">
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
 
-        </VerticalStackLayout>
-    </ScrollView>
+    <Grid Margin="20" RowDefinitions="*,11*" ColumnDefinitions="*, 4*, *" >
+        <CollectionView Margin="10" Grid.Row="1" Grid.ColumnSpan="123" ItemsSource="{Binding Season.Turns}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Turn">
+                    <Grid Padding="0,5">
+                        <Frame >
+                            <Label Text="{Binding Name, Mode=TwoWay}"
+                           FontSize="24"                                   
+                           />
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 
 </ContentPage>

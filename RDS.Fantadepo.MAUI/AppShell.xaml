@@ -4,12 +4,55 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RDS.Fantadepo.MAUI.Pages"
-    Shell.FlyoutBehavior="Disabled"
-    Title="Fantadepo">
+    Shell.FlyoutBehavior="Flyout"
+    Shell.TabBarIsVisible="True">
 
-    <ShellContent
+    
+
+    <Shell.FlyoutHeader>
+        <Image Source="logo_depo.jpg" WidthRequest="150"/>        
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <Label HorizontalTextAlignment="Center" 
+               Text="Powered by Deportivo La Scoccaccio" 
+               BackgroundColor="#3E5641"
+               TextColor="White"/>
+    </Shell.FlyoutFooter>
+
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage" />-->
+    
+    <FlyoutItem Title="Home" FlyoutDisplayOptions="AsMultipleItems">    
+        <ShellContent
+            Title="Calendar"
+            ContentTemplate="{DataTemplate local:CalendarPage}"
+            Route="CalendarPage"/>
+        <ShellContent
+            Title="Players"
+            ContentTemplate="{DataTemplate local:PlayerListPage}"
+            Route="PlayerListPage"/>
+        <ShellContent
+            Title="Teams"
+            ContentTemplate="{DataTemplate local:TeamListPage}"
+            Route="TeamListPage"/>
+    </FlyoutItem>
+
+    <TabBar>
+        <ShellContent
+            Title="Calendar"
+            ContentTemplate="{DataTemplate local:CalendarPage}"
+            Route="CalendarPage"/>
+        <ShellContent
+            Title="Players"
+            ContentTemplate="{DataTemplate local:PlayerListPage}"
+            Route="PlayerListPage"/>
+        <ShellContent
+            Title="Teams"
+            ContentTemplate="{DataTemplate local:TeamListPage}"
+            Route="TeamListPage"/>
+    </TabBar>
 
 </Shell>

@@ -8,7 +8,7 @@
              xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.ViewModels"
              x:DataType="viewmodel:TeamListViewModel"
              x:Name="Page"
-             BackgroundColor="#19501c">
+             BackgroundColor="#315C2B">
 
 
     <Grid Margin="20" RowDefinitions="*,11*" ColumnDefinitions="*, 4*, *" >
