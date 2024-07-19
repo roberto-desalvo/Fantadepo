@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.Business", "R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.MAUI", "RDS.Fantadepo.MAUI\RDS.Fantadepo.MAUI.csproj", "{7BBB079C-F7EF-4C57-A76A-D1ADC75AD179}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDS.Fantadepo.Business.Tests", "RDS.Fantadepo.Business.Tests\RDS.Fantadepo.Business.Tests.csproj", "{9C11D537-BB70-4A13-88BE-EE30B1C160C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.Business.Tests", "RDS.Fantadepo.Business.Tests\RDS.Fantadepo.Business.Tests.csproj", "{9C11D537-BB70-4A13-88BE-EE30B1C160C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDS.Fantadepo.DataAccess", "RDS.Fantadepo.DataAccess\RDS.Fantadepo.DataAccess.csproj", "{75A1B62C-5684-488A-B12E-2656BA79EC2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{9C11D537-BB70-4A13-88BE-EE30B1C160C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C11D537-BB70-4A13-88BE-EE30B1C160C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C11D537-BB70-4A13-88BE-EE30B1C160C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75A1B62C-5684-488A-B12E-2656BA79EC2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75A1B62C-5684-488A-B12E-2656BA79EC2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75A1B62C-5684-488A-B12E-2656BA79EC2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75A1B62C-5684-488A-B12E-2656BA79EC2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
