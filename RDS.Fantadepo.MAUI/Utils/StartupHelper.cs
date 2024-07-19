@@ -10,7 +10,7 @@ namespace RDS.Fantadepo.MAUI.Utils
 {
     public static class StartupHelper
     {
-        public static string GetKeyVaultConnectionString()
+        public static string GetKeyVaultAdminConnectionString()
         {
             try
             {
@@ -25,6 +25,23 @@ namespace RDS.Fantadepo.MAUI.Utils
             { 
                 return string.Empty;
             }            
+        }
+
+        public static string GetKeyVaultConnectionString()
+        {
+            try
+            {
+                var kvUri = new Uri("https://fantadepo-kv.vault.azure.net/");
+                var credentials = new DefaultAzureCredential();
+                var secretClient = new SecretClient(kvUri, credentials);
+
+                var secret = secretClient.GetSecret("fantadepo-entraid-connstring");
+                return secret?.Value?.Value ?? string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
     }
 }

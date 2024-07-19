@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RDS.Fantadepo.DataAccess\RDS.Fantadepo.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

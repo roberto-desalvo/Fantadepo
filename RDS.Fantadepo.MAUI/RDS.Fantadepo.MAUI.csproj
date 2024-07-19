@@ -60,6 +60,16 @@
 		<PackageReference Include="Azure.Identity" Version="1.12.0" />
 		<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.6.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -67,6 +77,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\RDS.Fantadepo.Business\RDS.Fantadepo.Business.csproj" />
+	  <ProjectReference Include="..\RDS.Fantadepo.DataAccess\RDS.Fantadepo.DataAccess.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

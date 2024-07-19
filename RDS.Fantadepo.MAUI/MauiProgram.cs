@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using RDS.Fantadepo.Business.Extensions;
+using RDS.Fantadepo.DataAccess;
 using RDS.Fantadepo.MAUI.Extensions;
 using RDS.Fantadepo.MAUI.Pages;
 using RDS.Fantadepo.MAUI.Utils;
@@ -20,7 +23,12 @@ namespace RDS.Fantadepo.MAUI
                 });
 
             builder.Services.AddUIServices();
-            var connectionString = StartupHelper.GetKeyVaultConnectionString();
+            builder.Services.AddBusinessServices();
+
+            builder.Services.AddDbContext<FantadepoContext>(opt =>
+             {
+                 opt.UseSqlServer(StartupHelper.GetKeyVaultConnectionString());
+             });
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
@@ -28,6 +36,6 @@ namespace RDS.Fantadepo.MAUI
             return builder.Build();
         }
 
-        
+
     }
 }

@@ -19,5 +19,13 @@ namespace RDS.Fantadepo.Business.Models
                 Name = Name
             };
         }
+
+        public enum PlayerRole
+        {
+            GoalKeeper,
+            Pivot,
+            Defender,
+            Winger
+        }
     }
 }
