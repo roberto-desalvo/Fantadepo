@@ -50,6 +50,12 @@ namespace RDS.Fantadepo.Business.Services
 
             }
 
+            for(var i = 0; i < turns.Count; i++)
+            {
+                var turn = turns[i];
+                turn.Name = $"Turn {i}";
+            }
+
             return turns;
         }
 

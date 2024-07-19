@@ -5,7 +5,7 @@
              xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.ViewModels"
              x:DataType="viewmodel:MainViewModel">
 
-    <ScrollView BackgroundColor="#19501c">
+    <ScrollView BackgroundColor="#315C2B">
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">

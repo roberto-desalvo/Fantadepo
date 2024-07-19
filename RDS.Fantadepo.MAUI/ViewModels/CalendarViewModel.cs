@@ -7,5 +7,10 @@ namespace RDS.Fantadepo.MAUI.ViewModels
     {
         [ObservableProperty]
         private Season season = new();
+
+        public void OpenTurn(Turn turn)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

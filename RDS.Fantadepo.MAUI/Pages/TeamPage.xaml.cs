@@ -1,10 +1,9 @@
-using AndroidX.Lifecycle;
 using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.MAUI.ViewModels;
 
 namespace RDS.Fantadepo.MAUI.Pages;
 
-[QueryProperty(nameof(PlayerPage.Player), nameof(Business.Models.Player))]
+[QueryProperty(nameof(TeamPage.Team), nameof(Business.Models.Team))]
 public partial class TeamPage : ContentPage
 {
     public Team Team { set => Load(value); }
