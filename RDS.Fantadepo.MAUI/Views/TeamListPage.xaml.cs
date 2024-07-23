@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.MAUI.Pages
+namespace RDS.Fantadepo.MAUI.Views
 {
     public partial class TeamListPage : ContentPage
     {

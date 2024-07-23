@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using RDS.Fantadepo.Business.Extensions;
 using RDS.Fantadepo.DataAccess;
 using RDS.Fantadepo.MAUI.Extensions;
-using RDS.Fantadepo.MAUI.Pages;
+using RDS.Fantadepo.MAUI.Views;
 using RDS.Fantadepo.MAUI.Utils;
 using RDS.Fantadepo.MAUI.ViewModels;
 
@@ -27,7 +27,7 @@ namespace RDS.Fantadepo.MAUI
 
             builder.Services.AddDbContext<FantadepoContext>(opt =>
              {
-                 opt.UseSqlServer(StartupHelper.GetKeyVaultConnectionString());
+                 opt.UseSqlServer(AzureHelper.GetEntraIdConnectionString());
              });
 #if DEBUG
             builder.Logging.AddDebug();

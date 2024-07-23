@@ -4,7 +4,7 @@ using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.Business.Services;
 using RDS.Fantadepo.DataAccess;
 using RDS.Fantadepo.MAUI.Models;
-using RDS.Fantadepo.MAUI.Pages;
+using RDS.Fantadepo.MAUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,12 +19,14 @@ namespace RDS.Fantadepo.MAUI.ViewModels
         private readonly IPlayerService _playerService;
 
         [ObservableProperty]
-        private ObservableCollection<Player> players = [];
+        private ObservableCollection<PlayerDetailViewModel> players = [];
 
         public PlayerListViewModel(IPlayerService playerService)
         {
-            _playerService = playerService?? throw new ArgumentNullException(nameof(playerService));
-            Players = new(playerService.GetPlayers());
+            _playerService = playerService ?? throw new ArgumentNullException(nameof(playerService));
+
+            var playerList = playerService.GetPlayers().Select(p => new PlayerDetailViewModel(p)).ToList();
+            Players = new(playerList);
         }
 
         [RelayCommand]
@@ -32,10 +34,10 @@ namespace RDS.Fantadepo.MAUI.ViewModels
         {
             UIHelper.SafeCall(async () =>
             {
-                var player = new Player { Name = "Insert player name" };
+                var player = new Player { Nickname = "Insert player name" };
                 var data = new Dictionary<string, object> { { nameof(Player), player } };
-                await Shell.Current.GoToAsync(nameof(PlayerPage), data);
-                Players.Add(player);
+                await Shell.Current.GoToAsync(nameof(PlayerDetailPage), data);
+                Players.Add(new PlayerDetailViewModel(player));
             });
         }
 
@@ -44,8 +46,8 @@ namespace RDS.Fantadepo.MAUI.ViewModels
             UIHelper.SafeCall(async () =>
             {
                 var data = new Dictionary<string, object> { { nameof(Player), player } };
-                await Shell.Current.GoToAsync(nameof(PlayerPage), data);
-            });            
+                await Shell.Current.GoToAsync(nameof(PlayerDetailPage), data);
+            });
         }
     }
 }

@@ -1,14 +1,14 @@
 using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.MAUI.ViewModels;
 
-namespace RDS.Fantadepo.MAUI.Pages;
+namespace RDS.Fantadepo.MAUI.Views;
 
-[QueryProperty(nameof(TeamPage.Team), nameof(Business.Models.Team))]
-public partial class TeamPage : ContentPage
+[QueryProperty(nameof(TeamDetailPage.Team), nameof(Business.Models.Team))]
+public partial class TeamDetailPage : ContentPage
 {
     public Team Team { set => Load(value); }
 
-    public TeamPage(TeamViewModel viewModel)
+    public TeamDetailPage(TeamDetailViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
@@ -16,9 +16,6 @@ public partial class TeamPage : ContentPage
 
     private void Load(Team value)
     {
-        if (this.BindingContext is TeamViewModel model)
-        {
-            model.Team = value;
-        }
+        this.BindingContext = new TeamDetailViewModel(value);
     }
 }

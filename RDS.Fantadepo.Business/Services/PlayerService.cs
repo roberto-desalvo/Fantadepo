@@ -26,7 +26,7 @@ namespace RDS.Fantadepo.Business.Services
                 yield return new Player
                 {
                     Id = p.Id,
-                    Name = p.Nickname
+                    Nickname = p.Nickname
                 };
             }
         }
