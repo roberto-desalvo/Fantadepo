@@ -27,7 +27,7 @@ namespace RDS.Fantadepo.MAUI
 
             builder.Services.AddDbContext<FantadepoContext>(opt =>
              {
-                 opt.UseSqlServer(StartupHelper.GetKeyVaultConnectionString());
+                 opt.UseSqlServer(AzureHelper.GetEntraIdConnectionString());
              });
 #if DEBUG
             builder.Logging.AddDebug();

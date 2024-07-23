@@ -10,7 +10,7 @@
 
 
     <Grid Margin="20" RowDefinitions="*,11*" ColumnDefinitions="*, 4*, *" >
-        <CollectionView Margin="10" Grid.Row="1" Grid.ColumnSpan="123" ItemsSource="{Binding Season.Turns}">
+        <CollectionView Margin="10" Grid.Row="1" Grid.ColumnSpan="123" ItemsSource="{Binding Turns}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Turn">
                     <Grid Padding="0,5">
@@ -18,9 +18,6 @@
                             <Label Text="{Binding Name, Mode=TwoWay}"
                            FontSize="24"                                   
                            />
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
-                            </Frame.GestureRecognizers>
                         </Frame>
                     </Grid>
                 </DataTemplate>

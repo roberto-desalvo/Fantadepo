@@ -22,7 +22,7 @@ namespace RDS.Fantadepo.MAUI.ViewModels
         {
             UIHelper.SafeCall(async () =>
             {
-                var team = new Team { Name = "Insert team name" };
+                var team = new TeamDetailViewModel { Name = "Insert team name" };
                 var data = new Dictionary<string, object> { { nameof(Team), team } };
                 await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
                 Teams.Add(team);

@@ -16,9 +16,6 @@ public partial class TeamDetailPage : ContentPage
 
     private void Load(Team value)
     {
-        if (this.BindingContext is TeamDetailViewModel model)
-        {
-            model.Team = value;
-        }
+        this.BindingContext = new TeamDetailViewModel(value);
     }
 }

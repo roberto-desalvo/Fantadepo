@@ -12,7 +12,7 @@
             Spacing="25">
 
             <Label Text="Name"/>
-            <Entry Text="{Binding Team.Name}"/>
+            <Entry Text="{Binding Name}"/>
 
         </VerticalStackLayout>
     </ScrollView>

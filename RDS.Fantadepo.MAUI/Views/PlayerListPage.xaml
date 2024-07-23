@@ -18,7 +18,7 @@
                 <DataTemplate x:DataType="models:Player">
                     <Grid Padding="0,5">
                         <Frame >
-                            <Entry Text="{Binding Name, Mode=TwoWay}"
+                            <Entry Text="{Binding Nickname, Mode=TwoWay}"
                                FontSize="24"
                                />
                             <Frame.GestureRecognizers>

@@ -16,9 +16,6 @@ public partial class PlayerDetailPage : ContentPage
 
     private void Load(Player value)
     {
-        if(this.BindingContext is PlayerDetailViewModel model)
-        {
-            model.Player = value;
-        }
+        this.BindingContext = new PlayerDetailViewModel(value);
     }
 }

@@ -30,7 +30,7 @@ namespace RDS.Fantadepo.Business.Services
             {
                 foreach (var performance in performances)
                 {
-                    if (performance.Player.Name == player.Name)
+                    if (performance.Player.Id == player.Id)
                     {
                         finalScore += GetScoreAsDecimal(performance.Score);
                     }
