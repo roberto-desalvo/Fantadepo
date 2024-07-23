@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Business.Models
 {
-    public class Turn
+    public class SeasonPlayer
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public DateOnly Date { get; set; }
+        public int Id { get; set; }        
+        public int? FirstRole { get; set; }
+        public int? SecondaryRole { get; set; }
         public int SeasonId { get; set; }
+        public int PlayerId { get; set; }
     }
 }

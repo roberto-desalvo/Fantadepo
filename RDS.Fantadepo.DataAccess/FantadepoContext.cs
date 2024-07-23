@@ -19,6 +19,8 @@ namespace RDS.Fantadepo.DataAccess
         public DbSet<Turn> Turns { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<PlayerPerformance> PlayerPerformances { get; set; }
+        public DbSet<MatchTeam> MatchTeams { get; set; }
+        public DbSet<MatchTeamPlayer> MatchTeamPlayers { get; set; }
 
         public FantadepoContext(DbContextOptions<FantadepoContext> opt) : base(opt)
         {
@@ -69,13 +71,13 @@ namespace RDS.Fantadepo.DataAccess
 
             mb.Entity<Team>()
                 .HasMany(x => x.HomeMatches)
-                .WithOne(x => x.HomeTeam)
-                .HasForeignKey(x => x.HomeTeamId);
+                .WithOne(x => x.Team)
+                .HasForeignKey(x => x.TeamId);
 
             mb.Entity<Team>()
                 .HasMany(x => x.AwayMatches)
-                .WithOne(x => x.AwayTeam)
-                .HasForeignKey(x => x.AwayTeamId);
+                .WithOne(x => x.Team)
+                .HasForeignKey(x => x.TeamId);
 
             mb.Entity<SeasonPlayer>()
                 .HasMany(x => x.TeamSeasonPlayers)
@@ -86,6 +88,16 @@ namespace RDS.Fantadepo.DataAccess
                 .HasMany(x => x.Performances)
                 .WithOne(x => x.SeasonPlayer)
                 .HasForeignKey(x => x.SeasonPlayerId);
+
+            mb.Entity<MatchTeam>()
+                .HasMany(x => x.MatchTeamPlayers)
+                .WithOne(x => x.MatchTeam)
+                .HasForeignKey(x => x.MatchTeamId);
+
+            mb.Entity<TeamSeasonPlayer>()
+                .HasMany(x => x.MatchTeamPlayers)
+                .WithOne(x => x.TeamSeasonPlayer)
+                .HasForeignKey(x => x.TeamSeasonPlayerId);
 
             base.OnModelCreating(mb);
         }

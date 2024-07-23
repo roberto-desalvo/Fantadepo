@@ -6,21 +6,13 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.DataAccess.Entities
 {
-    public class TeamSeasonPlayer
+    public class MatchTeam
     {
         public int Id { get; set; }
-
         public int TeamId { get; set; }
         public Team Team { get; set; } = new();
-
-        public int SeasonPlayerId { get; set; }
-        public SeasonPlayer SeasonPlayer { get; set; } = new();
-
-        public int Price { get; set; }
-        public DateOnly AcquisitionDay { get; set; }
-        public DateOnly? SaleDate { get; set; } 
-        public bool IsActive { get; set; }
-
+        public int MatchId { get; set; }
+        public Match Match { get; set; } = new();
         public ICollection<MatchTeamPlayer> MatchTeamPlayers { get; set; } = [];
     }
 }

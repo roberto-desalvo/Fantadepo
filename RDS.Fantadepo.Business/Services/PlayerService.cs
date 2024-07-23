@@ -1,4 +1,6 @@
-﻿using RDS.Fantadepo.Business.Models;
+﻿using AutoMapper;
+using RDS.Fantadepo.Business.Models;
+using RDS.Fantadepo.Business.Services.Abstractions;
 using RDS.Fantadepo.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -8,27 +10,18 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Business.Services
 {
-    public class PlayerService : IPlayerService
+    public class PlayerService(FantadepoContext context, IMapper mapper) : BaseService(context, mapper), IPlayerService
     {
-        private readonly FantadepoContext _context;
-
-        public PlayerService(FantadepoContext context)
+        public Player? GetPlayer(int id)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            var player = _context.Players.Find(id);
+            return _mapper.Map<Player>(player);
         }
 
-        public IEnumerable<Player> GetPlayers()
+        public IEnumerable<Player> GetPlayers(Func<Player, bool>? predicate = null)
         {
-            var entities = _context.Players.ToList();
-
-            foreach (var p in entities)
-            {
-                yield return new Player
-                {
-                    Id = p.Id,
-                    Nickname = p.Nickname
-                };
-            }
+            Func<Player, bool> all = x => true;
+            return _mapper.Map<IEnumerable<Player>>(_context.Players).Where(predicate ?? all);
         }
     }
 }

@@ -11,12 +11,12 @@ namespace RDS.Fantadepo.DataAccess.Entities
         public int Id { get; set; }
         public DateOnly Date { get; set; }
 
-        public int HomeTeamId { get; set; }
-        public Team HomeTeam { get; set; } = new();
+        public int HomeMatchTeamId { get; set; }
+        public MatchTeam HomeMatchTeam { get; set; } = new();
         public decimal? HomeTeamScore { get; set; }
 
-        public int AwayTeamId { get; set; }
-        public Team AwayTeam { get; set; } = new();
+        public int AwayMatchTeamId { get; set; }
+        public MatchTeam AwayMatchTeam { get; set; } = new();
         public decimal? AwayTeamScore { get; set; }
 
         public int TurnId { get; set; }

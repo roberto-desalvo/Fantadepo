@@ -18,7 +18,7 @@ namespace RDS.Fantadepo.DataAccess.Entities
         public Season Season { get; set; } = new();
         
         public ICollection<TeamSeasonPlayer> TeamSeasonPlayers { get; set; } = [];
-        public ICollection<Match> HomeMatches { get; } = [];
-        public ICollection<Match> AwayMatches { get; } = [];
+        public ICollection<MatchTeam> HomeMatches { get; } = [];
+        public ICollection<MatchTeam> AwayMatches { get; } = [];
     }
 }
