@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,17 @@ namespace RDS.Fantadepo.DataAccess.Entities
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
 
-        public ICollection<Team> Teams { get; set; } = [];
+        public Team Team { get; set; } = new();
+    }
+
+    public static class CoachModelCreator
+    {
+        public static void Configure(ModelBuilder mb)
+        {
+            mb.Entity<Coach>()
+                .HasOne(c => c.Team)
+                .WithOne(t => t.Coach)
+                .HasForeignKey<Team>(t => t.CoachId);
+        }
     }
 }

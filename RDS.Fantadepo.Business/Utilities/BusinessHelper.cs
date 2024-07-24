@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Business.Helpers
 {
-    public class Helper
+    public class BusinessHelper
     {
         public static IList<T> DeepCopyList<T>(IList<T> list)
             where T : ICloneable

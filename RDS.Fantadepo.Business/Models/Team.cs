@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Business.Models
 {
-    public class Team : ICloneable
+    public class Team
     {
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public IList<Player> Players { get; set; } = [];
 
-        public object Clone()
-        {
-            return new Team
-            {
-                Name = Name,
-                Players = (Players.Select(x => x.Clone() as Player).ToList())!
-            };
-        }
+        public int CoachId { get; set; }
+        public Coach Coach { get; set; } = new();      
+        
+        public ICollection<TeamSeason> TeamSeasons { get; set; } = [];
     }
 }

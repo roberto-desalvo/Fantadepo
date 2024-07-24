@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.Business.Services
+namespace RDS.Fantadepo.Business.Services.Abstractions
 {
     public interface IPlayerService
     {
-        public IEnumerable<Player> GetPlayers();
+        Player? GetPlayer(int id);
+        IEnumerable<Player> GetPlayers(Func<Player, bool>? predicate = null);
     }
 }

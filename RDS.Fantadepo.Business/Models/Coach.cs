@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Business.Models
 {
-    public class Season
+    public class Coach
     {
         public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
 
-        public ICollection<Turn> Turns { get; set; } = [];
-        public ICollection<TeamSeason> TeamSeasons { get; set; } = [];
+        public Team Team { get; set; } = new();
     }
+
 }
