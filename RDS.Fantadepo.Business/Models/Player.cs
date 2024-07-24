@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,9 @@ namespace RDS.Fantadepo.Business.Models
         public string Firstname { get; set; } = string.Empty;
         public string Lastname { get; set; } = string.Empty;
         public string Nickname { get; set; } = string.Empty;
+
+        public ICollection<TeamPlayer> TeamPlayers { get; set; } = [];
+        public ICollection<PlayerPerformance> PlayerPerformances { get; set; } = [];
     }
+
 }

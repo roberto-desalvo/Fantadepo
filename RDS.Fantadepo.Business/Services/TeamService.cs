@@ -23,5 +23,12 @@ namespace RDS.Fantadepo.Business.Services
             Func<Team, bool> all = x => true;
             return _mapper.Map<IEnumerable<Team>>(_context.Teams).Where(predicate ?? all);
         }
+
+        public IEnumerable<Team> GetTeamsBySeason(int seasonId)
+        {
+            return _context.TeamSeasons
+                .Where(x => x.SeasonId == seasonId)
+                .Select(x => _mapper.Map<Team>(x.Team));
+        }
     }
 }

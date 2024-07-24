@@ -14,7 +14,7 @@ namespace RDS.Fantadepo.Business.Services
     {
         public static decimal CalculatePerformance(PlayerPerformance performance)
         {
-            decimal final = 0;
+            decimal final = performance.Vote;
             final += performance.Goals * 2;
             final += performance.OwnGoals * -1;
             final += performance.Assists * 1;

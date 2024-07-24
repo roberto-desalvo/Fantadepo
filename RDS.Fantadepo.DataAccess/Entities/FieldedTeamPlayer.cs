@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.DataAccess.Entities
 {
-    public class MatchTeam
+    public class FieldedTeamPlayer
     {
         public int Id { get; set; }
-        public int TeamId { get; set; }
-        public Team Team { get; set; } = new();
+        public int TeamPlayerId { get; set; }
+        public TeamPlayer TeamPlayer { get; set; } = new();
         public int MatchId { get; set; }
         public Match Match { get; set; } = new();
-        public ICollection<MatchTeamPlayer> MatchTeamPlayers { get; set; } = [];
     }
 }

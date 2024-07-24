@@ -21,7 +21,7 @@ namespace RDS.Fantadepo.Business.Services
                 var score = PerformanceService.CalculatePerformance(_mapper.Map<PlayerPerformance>(p));
                 if(score == 0)
                 {
-                    throw new Exception($"Cannot calculate performance for player {p.SeasonPlayer.Player.Nickname} in turn {turn.Date}");
+                    throw new Exception($"Cannot calculate performance for player {p.Player.Player.Nickname} in turn {turn.Date}");
                 }
 
                 p.Sum = score;

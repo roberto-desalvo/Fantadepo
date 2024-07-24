@@ -25,7 +25,11 @@ namespace RDS.Fantadepo.Business.Models
         public bool IsGoalKeeper { get; set; }
         public decimal Vote {  get; set; }
         public decimal Sum { get; set; }
-        public int SeasonPlayerId { get; set; }
+
+        public int PlayerId { get; set; }
+        public Player Player { get; set; } = new();
+
         public int TurnId { get; set; }
+        public Turn Turn { get; set; } = new();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,21 @@ namespace RDS.Fantadepo.DataAccess.Entities
 
         public ICollection<Match> Matches { get; set; } = [];
         public ICollection<PlayerPerformance> PlayerPerformances { get; set; } = [];
+    }
+
+    public static class TurnModelCreator
+    {
+        public static void Configure(ModelBuilder mb)
+        {
+            mb.Entity<Turn>()
+                .HasMany(t => t.Matches)
+                .WithOne(m => m.Turn)
+                .HasForeignKey(m => m.TurnId);
+
+            mb.Entity<Turn>()
+                .HasMany(t => t.PlayerPerformances)
+                .WithOne(pp => pp.Turn)
+                .HasForeignKey(pp => pp.TurnId);
+        }
     }
 }
