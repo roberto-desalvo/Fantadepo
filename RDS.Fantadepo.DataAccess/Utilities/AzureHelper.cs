@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.MAUI.Utils
+namespace RDS.Fantadepo.DataAccess.Utilities
 {
-    public static class AzureHelper
+    public class AzureHelper
     {
         public static string GetAdminConnectionString()
         {

@@ -27,9 +27,14 @@ namespace RDS.Fantadepo.Business.Services
 
         public IEnumerable<Team> GetTeamsBySeason(int seasonId)
         {
-            return _context.TeamSeasons
+            return _context.Teams
                 .Where(x => x.SeasonId == seasonId)
-                .Select(x => _mapper.Map<Team>(x.Team));
+                .Select(_mapper.Map<Team>);
+        }
+
+        public IEnumerable<Team> GetTeamsWithCoaches()
+        {
+            return _mapper.Map<IEnumerable<Team>>(_context.Teams.Include(x => x.Coach));
         }
 
         public Team? GetTeamWithCoach(int id)

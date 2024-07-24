@@ -13,7 +13,7 @@ namespace RDS.Fantadepo.DataAccess.Entities
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
 
-        public Team Team { get; set; } = new();
+        public Team? Team { get; set; }
     }
 
     public static class CoachModelCreator

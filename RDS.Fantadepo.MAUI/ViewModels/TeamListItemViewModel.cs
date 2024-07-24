@@ -30,6 +30,13 @@ namespace RDS.Fantadepo.MAUI.ViewModels
             Load();
         }
 
+        public TeamListItemViewModel(Team team)
+        {
+            this.TeamName = team.Name;
+            this.CoachFirstName = team.Coach.FirstName;
+            this.CoachLastName = team.Coach.LastName;
+        }
+
         private void Load()
         {
             if (id != 0)

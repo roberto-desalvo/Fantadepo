@@ -1,16 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RDS.Fantadepo.Business.Models;
-using RDS.Fantadepo.Business.Services;
-using RDS.Fantadepo.DataAccess;
-using RDS.Fantadepo.MAUI.Models;
+using RDS.Fantadepo.Business.Services.Abstractions;
+using RDS.Fantadepo.MAUI.Utilities;
 using RDS.Fantadepo.MAUI.Views;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.MAUI.ViewModels
 {

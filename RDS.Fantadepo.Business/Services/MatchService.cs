@@ -20,20 +20,20 @@ namespace RDS.Fantadepo.Business.Services
 
         public Match CalculateMatch(Match match, IList<PlayerPerformance> performances)
         {
-            match.HomeTeamScore = GetTeamScore(match.HomeTeamSeasonId, performances);
-            match.AwayTeamScore = GetTeamScore(match.AwayTeamSeasonId, performances);
+            //match.HomeTeamScore = GetTeamScore(match.HomeTeamSeasonId, performances);
+            //match.AwayTeamScore = GetTeamScore(match.AwayTeamSeasonId, performances);
 
             return match;
         }
 
         public decimal GetTeamScore(int teamSeasonId, IEnumerable<PlayerPerformance> performances)
         {            
-            var team = _context.TeamSeasons.Find(teamSeasonId);
+            //var team = _context.TeamSeasons.Find(teamSeasonId);
 
-            if(team == null)
-            {
-                return 0; 
-            }
+            //if(team == null)
+            //{
+            //    return 0; 
+            //}
 
             return 0;
             //return performances

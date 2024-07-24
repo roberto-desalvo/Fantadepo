@@ -11,9 +11,11 @@ namespace RDS.Fantadepo.DataAccess.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public DateOnly StartDate { get; set; }
+        public DateOnly EndDate { get; set; }
 
         public ICollection<Turn> Turns { get; set; } = [];
-        public ICollection<TeamSeason> TeamSeasons { get; set; } = [];
+        public ICollection<Team> Teams { get; set; } = [];
     }
 
     public static class SeasonModelCreator
@@ -26,7 +28,7 @@ namespace RDS.Fantadepo.DataAccess.Entities
                 .HasForeignKey(s => s.SeasonId);
 
             mb.Entity<Season>()
-                .HasMany(s => s.TeamSeasons)
+                .HasMany(s => s.Teams)
                 .WithOne(ts => ts.Season)
                 .HasForeignKey(ts => ts.SeasonId);
         }

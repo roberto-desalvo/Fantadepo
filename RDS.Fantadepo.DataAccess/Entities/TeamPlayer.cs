@@ -13,8 +13,8 @@ namespace RDS.Fantadepo.DataAccess.Entities
         public bool IsFielded { get; set; }
         public int BenchPosition { get; set; }
 
-        public int TeamSeasonId { get; set; }
-        public TeamSeason TeamSeason { get; set; } = new();
+        public int TeamId { get; set; }
+        public Team Team { get; set; } = new();
 
         public int PlayerId { get; set; }
         public Player Player { get; set; } = new();
@@ -33,7 +33,8 @@ namespace RDS.Fantadepo.DataAccess.Entities
             mb.Entity<TeamPlayer>()
                 .HasMany(tp => tp.FieldedPlayers)
                 .WithOne(ft => ft.TeamPlayer)
-                .HasForeignKey(ft => ft.TeamPlayerId);
+                .HasForeignKey(ft => ft.TeamPlayerId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             mb.Entity<TeamPlayer>()
                 .HasOne(tp => tp.Acquisition)

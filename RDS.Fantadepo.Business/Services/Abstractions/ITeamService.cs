@@ -11,6 +11,7 @@ namespace RDS.Fantadepo.Business.Services.Abstractions
     {
         Team? GetTeam(int id);
         IEnumerable<Team> GetTeams(Func<Team, bool>? predicate = null);
+        IEnumerable<Team> GetTeamsWithCoaches();
         Team? GetTeamWithCoach(int id);
     }
 }

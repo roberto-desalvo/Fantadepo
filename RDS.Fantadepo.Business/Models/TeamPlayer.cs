@@ -13,8 +13,8 @@ namespace RDS.Fantadepo.Business.Models
         public bool IsFielded { get; set; }
         public int BenchPosition { get; set; }
 
-        public int TeamSeasonId { get; set; }
-        public TeamSeason TeamSeason { get; set; } = new();
+        public int TeamId { get; set; }
+        public Team Team { get; set; } = new();
 
         public int PlayerId { get; set; }
         public Player Player { get; set; } = new();

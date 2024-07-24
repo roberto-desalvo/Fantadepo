@@ -12,12 +12,12 @@ namespace RDS.Fantadepo.Business.Models
         public int Id { get; set; }
         public DateOnly Date { get; set; }
 
-        public int HomeTeamSeasonId { get; set; }
-        public TeamSeason HomeTeamSeason { get; set; } = new();
+        public int HomeTeamId { get; set; }
+        public Team HomeTeam { get; set; } = new();
         public decimal? HomeTeamScore { get; set; }
 
-        public int AwayTeamSeasonId { get; set; }
-        public TeamSeason AwayTeamSeason { get; set; } = new();
+        public int AwayTeamId { get; set; }
+        public Team AwayTeam { get; set; } = new();
         public decimal? AwayTeamScore { get; set; }
 
         public int TurnId { get; set; }
