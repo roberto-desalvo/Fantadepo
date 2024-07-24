@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.Business.Services.Abstractions;
 using RDS.Fantadepo.DataAccess;
@@ -29,6 +30,11 @@ namespace RDS.Fantadepo.Business.Services
             return _context.TeamSeasons
                 .Where(x => x.SeasonId == seasonId)
                 .Select(x => _mapper.Map<Team>(x.Team));
+        }
+
+        public Team? GetTeamWithCoach(int id)
+        {
+            return _mapper.Map<Team>(_context.Teams.Include(x => x.Coach).FirstOrDefault(x => x.Id == id));
         }
     }
 }

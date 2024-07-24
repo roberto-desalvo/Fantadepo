@@ -4,7 +4,6 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="RDS.Fantadepo.MAUI.Views.TeamListPage"
              Title="Teams"
-             xmlns:models="clr-namespace:RDS.Fantadepo.Business.Models;assembly=RDS.Fantadepo.Business"
              xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.ViewModels"
              x:DataType="viewmodel:TeamListViewModel"
              x:Name="Page"
@@ -16,16 +15,16 @@
 
         <CollectionView Margin="10" Grid.Row="1" Grid.ColumnSpan="123" ItemsSource="{Binding Teams}">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Team">
+                <DataTemplate x:DataType="viewmodel:TeamListItemViewModel">
                     <Grid Padding="0,5">
                         <Frame >
-                            <Entry Text="{Binding Name, Mode=TwoWay}"
-                                   FontSize="24"
-                                   />
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnTapGestureRecognizerDoubleTapped"
-                              NumberOfTapsRequired="2" />
-                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="0.25*, 0.75*">
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label Text="{Binding CoachFirstName}"/>
+                                    <Label Text="{Binding CoachLastName}"/>
+                                </VerticalStackLayout>
+                                <Label Grid.Column="1" Text="{Binding TeamName}"/>
+                            </Grid>                            
                         </Frame>
                     </Grid>
                 </DataTemplate>
