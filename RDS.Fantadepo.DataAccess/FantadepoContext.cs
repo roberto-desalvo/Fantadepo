@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RDS.Fantadepo.DataAccess.Entities;
-using RDS.Fantadepo.DataAccess.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,19 +19,12 @@ namespace RDS.Fantadepo.DataAccess
         public DbSet<Turn> Turns { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<PlayerPerformance> PlayerPerformances { get; set; }
-        public DbSet<Acquisition> Acquisitions { get; set; }
-        public DbSet<Cession> Cessions { get; set; }
-
-
-        public FantadepoContext()
-        { }
+        public DbSet<PlayerAcquisition> PlayerAcquisitions { get; set; }
+        public DbSet<PlayerRelease> PlayerReleases { get; set; }
 
         public FantadepoContext(DbContextOptions<FantadepoContext> opt) : base(opt)
-        { }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder builder) 
         {
-            //builder.UseSqlServer(AzureHelper.GetEntraIdConnectionString());
+            
         }
 
         protected override void OnModelCreating(ModelBuilder mb)
@@ -44,9 +36,6 @@ namespace RDS.Fantadepo.DataAccess
             TeamModelCreator.Configure(mb);
             TeamPlayerModelCreator.Configure(mb);
             TurnModelCreator.Configure(mb);
-            PlayerPerformanceModelCreator.Configure(mb);
-
-            Seeding.TeamAndCoachSeedData(mb);
 
             base.OnModelCreating(mb);
         }

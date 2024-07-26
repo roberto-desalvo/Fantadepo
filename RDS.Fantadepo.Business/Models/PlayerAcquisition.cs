@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.DataAccess.Entities
+namespace RDS.Fantadepo.Business.Models
 {
-    public class Acquisition
+    public class PlayerAcquisition
     {
         public int Id { get; set; }
         public DateOnly Date { get; set; }

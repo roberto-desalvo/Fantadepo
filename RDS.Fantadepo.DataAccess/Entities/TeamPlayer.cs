@@ -19,8 +19,8 @@ namespace RDS.Fantadepo.DataAccess.Entities
         public int PlayerId { get; set; }
         public Player Player { get; set; } = new();
 
-        public Acquisition Acquisition { get; set; } = new();
-        public Cession? Cession { get; set; }
+        public PlayerAcquisition PlayerAcquisition { get; set; } = new();
+        public PlayerRelease? PlayerRelease { get; set; }
 
         public ICollection<FieldedTeamPlayer> FieldedPlayers { get; set;} = [];
 
@@ -33,19 +33,18 @@ namespace RDS.Fantadepo.DataAccess.Entities
             mb.Entity<TeamPlayer>()
                 .HasMany(tp => tp.FieldedPlayers)
                 .WithOne(ft => ft.TeamPlayer)
-                .HasForeignKey(ft => ft.TeamPlayerId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(ft => ft.TeamPlayerId);
 
             mb.Entity<TeamPlayer>()
-                .HasOne(tp => tp.Acquisition)
+                .HasOne(tp => tp.PlayerAcquisition)
                 .WithOne(a => a.TeamPlayer)
-                .HasForeignKey<Acquisition>(a => a.TeamPlayerId)
+                .HasForeignKey<PlayerAcquisition>(a => a.TeamPlayerId)
                 .IsRequired();
 
             mb.Entity<TeamPlayer>()
-                .HasOne(tp => tp.Cession)
+                .HasOne(tp => tp.PlayerRelease)
                 .WithOne(c => c.TeamPlayer)
-                .HasForeignKey<Cession>(c => c.TeamPlayerId)
+                .HasForeignKey<PlayerRelease>(c => c.TeamPlayerId)
                 .IsRequired(false);
         }
     }
