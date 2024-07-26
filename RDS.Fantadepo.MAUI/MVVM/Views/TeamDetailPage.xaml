@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RDS.Fantadepo.MAUI.MVVM.Views.TeamDetailPage"
+             Title="TeamPage"
+             xmlns:models="clr-namespace:RDS.Fantadepo.Business.Models;assembly=RDS.Fantadepo.Business"
+             xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.MVVM.ViewModels"
+             xmlns:converters="clr-namespace:RDS.Fantadepo.MAUI.MVVM.Converters"
+             x:DataType="viewmodel:TeamDetailViewModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView BackgroundColor="#315C2B">
+        <Grid 
+            Grid.ColumnDefinitions="0.3*,0.7*" 
+            Grid.RowDefinitions="0.2*, 0.2*, 0.2*, 0.2*, 0.2*" 
+            Padding="30,0">
+
+            <Label Grid.Column="0" Grid.Row="0" Text="Name"/>
+            <Entry Grid.Column="1" Grid.Row="0" Text="{Binding Name}" IsReadOnly="{Binding IsReadonly}"/>
+
+            <Label Grid.Column="0" Grid.Row="1" Text="Coach"/>
+            <Picker 
+                Grid.Column="1" Grid.Row="1" 
+                IsEnabled="{Binding IsReadonly, Converter={StaticResource InverseBooleanConverter}}"
+                ItemsSource="{Binding Coaches}"
+                SelectedItem="{Binding SelectedCoach}"/>
+
+            <Button 
+                Command="{Binding SaveCommand}" 
+                Text="Save"
+                Grid.ColumnSpan="01"
+                Padding="0, 20"/>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

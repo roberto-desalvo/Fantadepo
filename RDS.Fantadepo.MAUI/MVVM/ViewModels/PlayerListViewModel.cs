@@ -3,10 +3,10 @@ using CommunityToolkit.Mvvm.Input;
 using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.Business.Services.Abstractions;
 using RDS.Fantadepo.MAUI.Utilities;
-using RDS.Fantadepo.MAUI.Views;
+using RDS.Fantadepo.MAUI.MVVM.Views;
 using System.Collections.ObjectModel;
 
-namespace RDS.Fantadepo.MAUI.ViewModels
+namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
 {
     public partial class PlayerListViewModel : ObservableObject
     {

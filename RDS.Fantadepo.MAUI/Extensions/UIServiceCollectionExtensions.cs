@@ -1,5 +1,5 @@
-﻿using RDS.Fantadepo.MAUI.Views;
-using RDS.Fantadepo.MAUI.ViewModels;
+﻿using RDS.Fantadepo.MAUI.MVVM.Views;
+using RDS.Fantadepo.MAUI.MVVM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

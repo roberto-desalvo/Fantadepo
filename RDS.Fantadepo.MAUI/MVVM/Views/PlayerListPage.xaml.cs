@@ -1,7 +1,7 @@
 using RDS.Fantadepo.Business.Models;
-using RDS.Fantadepo.MAUI.ViewModels;
+using RDS.Fantadepo.MAUI.MVVM.ViewModels;
 
-namespace RDS.Fantadepo.MAUI.Views;
+namespace RDS.Fantadepo.MAUI.MVVM.Views;
 
 public partial class PlayerListPage : ContentPage
 {

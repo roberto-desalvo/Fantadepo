@@ -5,7 +5,7 @@ using RDS.Fantadepo.Business.Services.Abstractions;
 using RDS.Fantadepo.MAUI.Utilities;
 using System.Collections.ObjectModel;
 
-namespace RDS.Fantadepo.MAUI.ViewModels
+namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
 {
     public partial class TeamListViewModel : ObservableObject
     {

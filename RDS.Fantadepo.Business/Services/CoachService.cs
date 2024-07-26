@@ -16,5 +16,10 @@ namespace RDS.Fantadepo.Business.Services
         {
             return _mapper.Map<Coach>(_context.Coaches.Find(id));
         }
+
+        public IEnumerable<Coach> GetCoaches()
+        {
+            return _context.Coaches.Select(_mapper.Map<Coach>);
+        }
     }
 }

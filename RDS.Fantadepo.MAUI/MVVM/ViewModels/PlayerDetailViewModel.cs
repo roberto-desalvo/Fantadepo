@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.MAUI.ViewModels
+namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
 {
     public partial class PlayerDetailViewModel : ObservableObject
     {
