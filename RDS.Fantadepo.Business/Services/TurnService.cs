@@ -14,20 +14,20 @@ namespace RDS.Fantadepo.Business.Services
     {
         public void CalculatePerformancesForTurn(Turn turn)
         {
-            var performances = _context.PlayerPerformances.Where(x => x.TurnId == turn.Id).ToList();
+            //var performances = _context.PlayerPerformances.Where(x => x.TurnId == turn.Id).ToList();
 
-            foreach(var p in performances)
-            {
-                var score = PerformanceService.CalculatePerformance(_mapper.Map<PlayerPerformance>(p));
-                if(score == 0)
-                {
-                    throw new Exception($"Cannot calculate performance for player {p.Player.Player.Nickname} in turn {turn.Date}");
-                }
+            //foreach(var p in performances)
+            //{
+            //    var score = PerformanceService.CalculatePerformance(_mapper.Map<PlayerPerformance>(p));
+            //    if(score == 0)
+            //    {
+            //        throw new Exception($"Cannot calculate performance for player {p.Player.Player.Nickname} in turn {turn.Date}");
+            //    }
 
-                p.Sum = score;
-            }
+            //    p.Sum = score;
+            //}
 
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
     }
 }

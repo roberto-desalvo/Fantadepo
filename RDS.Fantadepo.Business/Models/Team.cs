@@ -13,8 +13,13 @@ namespace RDS.Fantadepo.Business.Models
         public string Name { get; set; } = string.Empty;
 
         public int CoachId { get; set; }
-        public Coach Coach { get; set; } = new();      
-        
-        public ICollection<TeamSeason> TeamSeasons { get; set; } = [];
+        public Coach Coach { get; set; } = new();
+
+        public int SeasonId { get; set; }
+        public Season Season { get; set; } = new();
+
+        public ICollection<Match> HomeMatches { get; set; } = [];
+        public ICollection<Match> AwayMatches { get; set; } = [];
+        public ICollection<TeamPlayer> TeamPlayers { get; set; } = [];
     }
 }

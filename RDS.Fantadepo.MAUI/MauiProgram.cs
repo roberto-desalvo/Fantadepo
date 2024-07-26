@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Logging;
 using RDS.Fantadepo.DataAccess;
 using RDS.Fantadepo.MAUI.Extensions;
-using RDS.Fantadepo.MAUI.Utils;
 using RDS.Fantadepo.Business.Utilities;
 using RDS.Fantadepo.Business.Utilities.Extensions;
+using RDS.Fantadepo.DataAccess.Utilities;
 
 namespace RDS.Fantadepo.MAUI
 {
@@ -24,6 +24,7 @@ namespace RDS.Fantadepo.MAUI
             builder.Services.AddUIServices();
             builder.Services.AddBusinessServices();
             builder.Services.AddAutoMapper(x => x.AddProfile<BusinessMapperProfile>());
+
 
             builder.Services.AddDbContext<FantadepoContext>(opt =>
              {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.MAUI.Models
+namespace RDS.Fantadepo.MAUI.Utilities
 {
     public static class UIHelper 
     {

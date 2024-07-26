@@ -13,11 +13,11 @@ namespace RDS.Fantadepo.DataAccess.Entities
         public DateOnly Date { get; set; }
 
         public int HomeTeamId { get; set; }
-        public TeamSeason HomeTeam { get; set; } = new();
+        public Team HomeTeam { get; set; } = new();
         public decimal? HomeTeamScore { get; set; }
 
         public int AwayTeamId { get; set; }
-        public TeamSeason AwayTeam { get; set; } = new();
+        public Team AwayTeam { get; set; } = new();
         public decimal? AwayTeamScore { get; set; }
 
         public int TurnId { get; set; }
@@ -34,6 +34,14 @@ namespace RDS.Fantadepo.DataAccess.Entities
                 .HasMany(m => m.FieldedTeamPlayers)
                 .WithOne(ftp => ftp.Match)
                 .HasForeignKey(ftp => ftp.MatchId);
+
+            mb.Entity<Match>()
+                .Property(p => p.AwayTeamScore)
+                .HasColumnType("decimal(18,2)");
+
+            mb.Entity<Match>()
+                .Property(p => p.HomeTeamScore)
+                .HasColumnType("decimal(18,2)");
         }
     }
 }

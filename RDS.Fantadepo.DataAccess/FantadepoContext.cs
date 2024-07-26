@@ -14,14 +14,13 @@ namespace RDS.Fantadepo.DataAccess
         public DbSet<Coach> Coaches { get; set; }
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<TeamSeason> TeamSeasons { get; set; }
         public DbSet<TeamPlayer> TeamPlayers { get; set; }
         public DbSet<FieldedTeamPlayer> FieldedTeamPlayers { get; set; }
         public DbSet<Turn> Turns { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<PlayerPerformance> PlayerPerformances { get; set; }
-        public DbSet<Acquisition> Acquisitions { get; set; }
-        public DbSet<Cession> Cessions { get; set; }
+        public DbSet<PlayerAcquisition> PlayerAcquisitions { get; set; }
+        public DbSet<PlayerRelease> PlayerReleases { get; set; }
 
         public FantadepoContext(DbContextOptions<FantadepoContext> opt) : base(opt)
         {
@@ -36,7 +35,6 @@ namespace RDS.Fantadepo.DataAccess
             SeasonModelCreator.Configure(mb);
             TeamModelCreator.Configure(mb);
             TeamPlayerModelCreator.Configure(mb);
-            TeamSeasonModelCreator.Configure(mb);
             TurnModelCreator.Configure(mb);
 
             base.OnModelCreating(mb);

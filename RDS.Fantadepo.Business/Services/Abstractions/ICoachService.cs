@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Business.Services.Abstractions
 {
-    public interface ITeamService
+    public interface ICoachService
     {
-        Team? GetTeam(int id);
-        IEnumerable<Team> GetTeams(Func<Team, bool>? predicate = null);
-        IEnumerable<Team> GetTeamsWithCoaches();
-        Team? GetTeamWithCoach(int id);
+        public Coach? GetCoach(int id);
     }
 }

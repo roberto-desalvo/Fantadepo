@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,5 +32,19 @@ namespace RDS.Fantadepo.DataAccess.Entities
 
         public int TurnId { get; set; }
         public Turn Turn { get; set; } = new();
+    }
+
+    public static class PlayerPerformanceModelCreator
+    {
+        public static void Configure(ModelBuilder mb)
+        {            
+            mb.Entity<PlayerPerformance>()
+                .Property(p => p.Sum)
+                .HasColumnType("decimal(18,2)");
+
+            mb.Entity<PlayerPerformance>()
+                .Property(p => p.Vote)
+                .HasColumnType("decimal(18,2)");
+        }
     }
 }

@@ -35,8 +35,6 @@ namespace RDS.Fantadepo.MAUI.ViewModels
             _firstname = player.Firstname;
             _lastname = player.Lastname;
             _nickname = player.Nickname;
-            _firstRole = player.FirstRole.ToString();
-            _secondaryRole = player.SecondaryRole.ToString();
         }
     }
 }
