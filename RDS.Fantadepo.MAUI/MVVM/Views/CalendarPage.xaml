@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RDS.Fantadepo.MAUI.Views.CalendarPage"
-             xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.ViewModels"
+             x:Class="RDS.Fantadepo.MAUI.MVVM.Views.CalendarPage"
+             xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.MVVM.ViewModels"
              x:DataType="viewmodel:CalendarViewModel"
              xmlns:models="clr-namespace:RDS.Fantadepo.Business.Models;assembly=RDS.Fantadepo.Business"
              x:Name="Page"

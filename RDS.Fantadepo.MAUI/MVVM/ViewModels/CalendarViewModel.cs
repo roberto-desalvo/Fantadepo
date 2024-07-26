@@ -2,7 +2,7 @@
 using RDS.Fantadepo.Business.Models;
 using System.Collections.ObjectModel;
 
-namespace RDS.Fantadepo.MAUI.ViewModels
+namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
 {
     public partial class CalendarViewModel : ObservableObject
     {

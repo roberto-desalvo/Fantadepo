@@ -10,5 +10,6 @@ namespace RDS.Fantadepo.Business.Services.Abstractions
     public interface ICoachService
     {
         public Coach? GetCoach(int id);
+        public IEnumerable<Coach> GetCoaches();
     }
 }

@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 
-namespace RDS.Fantadepo.MAUI.ViewModels
+namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
 {
     public partial class TurnListItemViewModel : ObservableObject
     {

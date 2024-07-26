@@ -14,8 +14,8 @@ namespace RDS.Fantadepo.Business.Utilities
             CreateMap<Entities.Player, Player>();
             CreateMap<Entities.PlayerPerformance, PlayerPerformance>();
             CreateMap<Entities.Season, Season>();
-            CreateMap<Entities.Acquisition, Acquisition>();
-            CreateMap<Entities.Cession, Cession>();
+            CreateMap<Entities.PlayerAcquisition, PlayerAcquisition>();
+            CreateMap<Entities.PlayerRelease, PlayerRelease>();
             CreateMap<Entities.Team, Team>();
             CreateMap<Entities.TeamPlayer, TeamPlayer>();
             CreateMap<Entities.FieldedTeamPlayer, FieldedTeamPlayer>();
@@ -27,8 +27,8 @@ namespace RDS.Fantadepo.Business.Utilities
             CreateMap<Player, Entities.Player>();
             CreateMap<PlayerPerformance, Entities.PlayerPerformance>();
             CreateMap<Season, Entities.Season>();
-            CreateMap<Acquisition, Entities.Acquisition>();
-            CreateMap<Cession, Entities.Cession>();
+            CreateMap<PlayerAcquisition, Entities.PlayerAcquisition>();
+            CreateMap<PlayerRelease, Entities.PlayerRelease>();
             CreateMap<Team, Entities.Team>();
             CreateMap<TeamPlayer, Entities.TeamPlayer>();
             CreateMap<FieldedTeamPlayer, Entities.FieldedTeamPlayer>();

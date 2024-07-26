@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="RDS.Fantadepo.MAUI.Views.TeamListPage"
+             x:Class="RDS.Fantadepo.MAUI.MVVM.Views.TeamListPage"
              Title="Teams"
-             xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.ViewModels"
+             xmlns:viewmodel="clr-namespace:RDS.Fantadepo.MAUI.MVVM.ViewModels"
              x:DataType="viewmodel:TeamListViewModel"
              x:Name="Page"
              BackgroundColor="#315C2B">
