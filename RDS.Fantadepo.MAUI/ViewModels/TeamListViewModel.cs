@@ -22,12 +22,11 @@ namespace RDS.Fantadepo.MAUI.ViewModels
 
         private void LoadData()
         {
-            Teams = new();
-            var teams = _teamService.GetTeamsWithCoaches();
-            foreach (var team in teams)
+            var teams = _teamService.GetTeamsWithCoaches().Select(t => new TeamListItemViewModel(t));
+
+            foreach(var t in teams)
             {
-                var model = new TeamListItemViewModel(team);
-                Teams.Add(model);
+                Teams.Add(t);
             }
         }
 
