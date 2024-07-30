@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using RDS.Fantadepo.DataAccess;
+using RDS.Fantadepo.WebApi.DataAccess;
 using RDS.Fantadepo.MAUI.Extensions;
 using RDS.Fantadepo.Business.Utilities;
 using RDS.Fantadepo.Business.Utilities.Extensions;
-using RDS.Fantadepo.DataAccess.Utilities;
+using RDS.Fantadepo.WebApi.DataAccess.Utilities;
 
 namespace RDS.Fantadepo.MAUI
 {

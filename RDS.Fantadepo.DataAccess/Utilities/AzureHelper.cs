@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.DataAccess.Utilities
+namespace RDS.Fantadepo.WebApi.DataAccess.Utilities
 {
     public class AzureHelper
     {

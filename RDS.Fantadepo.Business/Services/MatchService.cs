@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using RDS.Fantadepo.WebApi.Business.Models;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
-using RDS.Fantadepo.DataAccess;
-using Entities = RDS.Fantadepo.DataAccess.Entities;
+using RDS.Fantadepo.WebApi.DataAccess;
+using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
 using RDS.Fantadepo.WebApi.Business.Models.DTO;
 
 namespace RDS.Fantadepo.WebApi.Business.Services

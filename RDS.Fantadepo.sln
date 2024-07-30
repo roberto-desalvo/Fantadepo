@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.WebApi.Busine
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.MAUI", "RDS.Fantadepo.MAUI\RDS.Fantadepo.MAUI.csproj", "{7BBB079C-F7EF-4C57-A76A-D1ADC75AD179}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.Business.Tests", "RDS.Fantadepo.Business.Tests\RDS.Fantadepo.Business.Tests.csproj", "{9C11D537-BB70-4A13-88BE-EE30B1C160C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.WebApi.Business.Tests", "RDS.Fantadepo.Business.Tests\RDS.Fantadepo.WebApi.Business.Tests.csproj", "{9C11D537-BB70-4A13-88BE-EE30B1C160C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.DataAccess", "RDS.Fantadepo.DataAccess\RDS.Fantadepo.DataAccess.csproj", "{75A1B62C-5684-488A-B12E-2656BA79EC2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.WebApi.DataAccess", "RDS.Fantadepo.DataAccess\RDS.Fantadepo.WebApi.DataAccess.csproj", "{75A1B62C-5684-488A-B12E-2656BA79EC2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDS.Fantadepo.WebApi", "RDS.Fantadepo.WebApi\RDS.Fantadepo.WebApi.csproj", "{98B3A10F-81E1-4B4A-8792-25BB96933E4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.WebApi", "RDS.Fantadepo.WebApi\RDS.Fantadepo.WebApi.csproj", "{98B3A10F-81E1-4B4A-8792-25BB96933E4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDS.Fantadepo.WebApi.Business.Models", "RDS.Fantadepo.DTOs\RDS.Fantadepo.WebApi.Business.Models.csproj", "{71AD1A89-2D79-448F-9B4B-5CCD53569129}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.Models", "RDS.Fantadepo.DTOs\RDS.Fantadepo.Models.csproj", "{71AD1A89-2D79-448F-9B4B-5CCD53569129}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

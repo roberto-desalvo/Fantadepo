@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.WebApi.Business.Models.DTO
+namespace RDS.Fantadepo.Models.Models
 {
-    public class PlayerPerformanceDto
+    public class PlayerPerformance
     {
         public int Id { get; set; }
         public int Goals { get; set; }
@@ -26,9 +26,9 @@ namespace RDS.Fantadepo.WebApi.Business.Models.DTO
         public decimal Sum { get; set; }
 
         public int PlayerId { get; set; }
-        public PlayerDto Player { get; set; }
+        public Player Player { get; set; }
 
         public int TurnId { get; set; }
-        public TurnDto Turn { get; set; }
+        public Turn Turn { get; set; }
     }
 }

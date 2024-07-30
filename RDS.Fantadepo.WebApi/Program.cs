@@ -1,8 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
 using RDS.Fantadepo.WebApi.Business.Utilities;
-using RDS.Fantadepo.DataAccess;
-using RDS.Fantadepo.DataAccess.Utilities;
+using RDS.Fantadepo.WebApi.DataAccess;
+using RDS.Fantadepo.WebApi.DataAccess.Utilities;
 using RDS.Fantadepo.WebApi.Business.Utilities.Extensions;
 using RDS.Fantadepo.WebApi.Business.Models.Mappings;
 

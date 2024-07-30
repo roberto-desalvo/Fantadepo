@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RDS.Fantadepo.DataAccess\RDS.Fantadepo.DataAccess.csproj" />
+    <ProjectReference Include="..\RDS.Fantadepo.DataAccess\RDS.Fantadepo.WebApi.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

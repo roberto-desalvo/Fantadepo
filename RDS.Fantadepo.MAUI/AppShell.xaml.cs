@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RDS.Fantadepo.Business.Models;
-using RDS.Fantadepo.DataAccess;
+using RDS.Fantadepo.WebApi.DataAccess;
 using RDS.Fantadepo.MAUI.MVVM.Views;
 
 namespace RDS.Fantadepo.MAUI

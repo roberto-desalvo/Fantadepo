@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.DataAccess.Entities
+namespace RDS.Fantadepo.WebApi.DataAccess.Entities
 {
     public class Match
     {

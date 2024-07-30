@@ -1,6 +1,6 @@
 using FluentAssertions;
 
-namespace RDS.Fantadepo.Business.Tests
+namespace RDS.Fantadepo.WebApi.Business.Tests
 {
     public class FantadepoServiceTests
     {

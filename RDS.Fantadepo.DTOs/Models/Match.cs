@@ -5,25 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.WebApi.Business.Models.DTO
+namespace RDS.Fantadepo.Models.Models
 {
-    public class MatchDto
+    public class Match
     {
         public int Id { get; set; }
         public DateOnly Date { get; set; }
 
         public int HomeTeamId { get; set; }
-        public TeamDto HomeTeam { get; set; }
+        public Team HomeTeam { get; set; }
         public decimal? HomeTeamScore { get; set; }
 
         public int AwayTeamId { get; set; }
-        public TeamDto AwayTeam { get; set; }
+        public Team AwayTeam { get; set; }
         public decimal? AwayTeamScore { get; set; }
 
         public int TurnId { get; set; }
-        public TurnDto Turn { get; set; }
+        public Turn Turn { get; set; }
 
-        public ICollection<FieldedTeamPlayerDto> FieldedTeamPlayers { get; set; }
+        public ICollection<FieldedTeamPlayer> FieldedTeamPlayers { get; set; }
     }
 
 }

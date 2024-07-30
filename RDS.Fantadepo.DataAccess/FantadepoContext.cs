@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RDS.Fantadepo.DataAccess.Entities;
-using RDS.Fantadepo.DataAccess.Utilities;
+using RDS.Fantadepo.WebApi.DataAccess.Entities;
+using RDS.Fantadepo.WebApi.DataAccess.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.DataAccess
+namespace RDS.Fantadepo.WebApi.DataAccess
 {
     public class FantadepoContext : DbContext
     {
