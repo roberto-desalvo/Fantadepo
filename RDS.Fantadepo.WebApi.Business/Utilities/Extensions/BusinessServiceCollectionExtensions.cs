@@ -16,6 +16,7 @@ namespace RDS.Fantadepo.WebApi.Business.Utilities.Extensions
             services.AddTransient<ITurnService, TurnService>();
             services.AddTransient<IPerformanceService, PerformanceService>();
             services.AddTransient<ITeamService, TeamService>();
+            services.AddTransient<ICoachService, CoachService>();
 
             services.AddDbContext<FantadepoContext>(opt =>
             {

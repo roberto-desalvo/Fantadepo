@@ -16,7 +16,8 @@ namespace RDS.Fantadepo.WebApi.Business.Mappings
             CreateMap<Season, BusinessModels.Season>();
             CreateMap<PlayerAcquisition, BusinessModels.PlayerAcquisition>();
             CreateMap<PlayerRelease, BusinessModels.PlayerRelease>();
-            CreateMap<Team, BusinessModels.Team>();
+            CreateMap<Team, BusinessModels.Team>()
+                .ForMember(x => x.Coach, opt => opt.MapFrom(x => x.Coach));
             CreateMap<TeamPlayer, BusinessModels.TeamPlayer>();
             CreateMap<FieldedTeamPlayer, BusinessModels.FieldedTeamPlayer>();
             CreateMap<Turn, BusinessModels.Turn>();

@@ -19,8 +19,6 @@ namespace RDS.Fantadepo.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Coach>>> GetCoaches()
         {
-            //var entities = await _context.Coaches.ToListAsync();
-            //return Ok(entities.Select(_mapper.Map<IEnumerable<Coach>>));
             return Ok(await _coachService.GetCoaches());
         }
 
@@ -29,15 +27,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
         public async Task<ActionResult<Coach>> GetCoach(int id)
         {
             var coach = await  _coachService.GetCoach(id);
-            return coach == null ? NotFound() : Ok(coach);
-            //var coach = await _context.Coaches.FindAsync(id);
-
-            //if (coach == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return Ok(_mapper.Map<Coach>(coach));
+            return coach != null ? Ok(coach) : NotFound();
         }
 
         // PUT: api/Coaches/5
@@ -45,34 +35,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCoach(int id, Coach coach)
         {
-            if (id != coach.Id)
-            {
-                return BadRequest();
-            }
-
-            var updated = await _coachService.UpdateCoach(id, coach);
-            return Ok(updated);
-            //var entity = _mapper.Map<DataAccess.Entities.Coach>(coach);
-
-            //_context.Entry(entity).State = EntityState.Modified;
-
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!CoachExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-
-            //return NoContent();
+            return await _coachService.UpdateCoach(id, coach) ? Ok() : BadRequest();
         }
 
         // POST: api/Coaches
@@ -80,11 +43,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Coach>> PostCoach(Coach coach)
         {
-            var newId = await _coachService.CreateCoach(coach);
-            //var entity = _mapper.Map<DataAccess.Entities.Coach>(coach);
-            //_context.Coaches.Add(entity);
-            //await _context.SaveChangesAsync();
-
+            var newId = await _coachService.CreateCoach(coach);      
             return CreatedAtAction("GetCoach", new { id = newId }, coach);
         }
 
@@ -92,22 +51,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCoach(int id)
         {
-            return await _coachService.DeleteCoach(id) ? NoContent() : NotFound();
-            //var coach = await _context.Coaches.FindAsync(id);
-            //if (coach == null)
-            //{
-            //    return NotFound();
-            //}
-            //var entity = _mapper.Map<DataAccess.Entities.Coach>(coach);
-            //_context.Coaches.Remove(entity);
-            //await _context.SaveChangesAsync();
-
-            //return NoContent();
+            return await _coachService.DeleteCoach(id) ? NoContent() : NotFound();            
         }
-
-        //private bool CoachExists(int id)
-        //{
-        //    return _context.Coaches.Any(e => e.Id == id);
-        //}
     }
 }

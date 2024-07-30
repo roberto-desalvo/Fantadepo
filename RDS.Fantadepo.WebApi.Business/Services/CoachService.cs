@@ -2,44 +2,67 @@
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess;
 using RDS.Fantadepo.Models.Models;
+using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
     public class CoachService(FantadepoContext context, IMapper mapper) : BaseService(context, mapper), ICoachService
     {
-        public Task<int> CreateCoach(Coach coach)
+        public async Task<int> CreateCoach(Coach coach)
         {
-            throw new NotImplementedException();
+            var entity = _mapper.Map<Entities.Coach>(coach);
+            _context.Coaches.Add(entity);
+            await _context.SaveChangesAsync();
+            return entity.Id;
         }
 
-        public Task<bool> DeleteCoach(int id)
+        public async Task<bool> DeleteCoach(int id)
         {
-            throw new NotImplementedException();
+            var coach = await _context.Coaches.FindAsync(id);
+            if (coach == null)
+            {
+                return false;
+            }
+
+            var entity = _mapper.Map<Entities.Coach>(coach);
+            _context.Coaches.Remove(entity);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
 
-        public Coach? GetCoach(int id)
+        public async Task<Coach?> GetCoach(int id)
         {
-            return _mapper.Map<Coach>(_context.Coaches.Find(id));
+            return _mapper.Map<Coach>(await _context.Coaches.FindAsync(id));
         }
 
-        public IEnumerable<Coach> GetCoaches()
+        public async Task<IEnumerable<Coach>> GetCoaches()
         {
-            return _context.Coaches.Select(_mapper.Map<Coach>);
+            return _mapper.Map<IEnumerable<Coach>>(await _context.Coaches.FindAsync());
         }
 
-        public Task<bool> UpdateCoach(int id, Coach coach)
+        public async Task<bool> UpdateCoach(int id, Coach coach)
         {
-            throw new NotImplementedException();
+            if (id != coach.Id)
+            {
+                return false;
+            }
+
+            if(!CoachExists(id))
+            {
+                return false;
+            }
+
+            var entity = _mapper.Map<Entities.Coach>(coach);
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return true;
         }
 
-        Task<Coach?> ICoachService.GetCoach(int id)
+        private bool CoachExists(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        Task<IEnumerable<Coach>> ICoachService.GetCoaches()
-        {
-            throw new NotImplementedException();
+            return _context.Coaches.Any(e => e.Id == id);
         }
     }
 }
