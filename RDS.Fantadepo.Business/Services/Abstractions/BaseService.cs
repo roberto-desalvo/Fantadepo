@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.Business.Services.Abstractions
+namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
 {
     public abstract class BaseService
     {

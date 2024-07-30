@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.Business.Models
+namespace RDS.Fantadepo.WebApi.Business.Models.DTO
 {
-    public class PlayerAcquisition
+    public class PlayerReleaseDto
     {
         public int Id { get; set; }
         public DateOnly Date { get; set; }
         public int Price { get; set; }
         public int TeamPlayerId { get; set; }
-        public TeamPlayer TeamPlayer { get; set; } = new();
+        public TeamPlayerDto TeamPlayer { get; set; }
     }
 }

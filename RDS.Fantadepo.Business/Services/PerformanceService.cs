@@ -1,18 +1,19 @@
 ﻿using AutoMapper;
-using RDS.Fantadepo.Business.Models;
-using RDS.Fantadepo.Business.Services.Abstractions;
+using RDS.Fantadepo.WebApi.Business.Models;
+using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RDS.Fantadepo.WebApi.Business.Models.DTO;
 
-namespace RDS.Fantadepo.Business.Services
+namespace RDS.Fantadepo.WebApi.Business.Services
 {
     public class PerformanceService(FantadepoContext context, IMapper mapper) : BaseService(context, mapper), IPerformanceService
     {
-        public static decimal CalculatePerformance(PlayerPerformance performance)
+        public static decimal CalculatePerformance(PlayerPerformanceDto performance)
         {
             decimal final = performance.Vote;
             final += performance.Goals * 2;

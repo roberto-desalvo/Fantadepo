@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.Business.Helpers
+namespace RDS.Fantadepo.WebApi.Business.Helpers
 {
     public class BusinessHelper
     {

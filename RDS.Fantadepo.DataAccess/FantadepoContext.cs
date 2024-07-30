@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RDS.Fantadepo.DataAccess.Entities;
+using RDS.Fantadepo.DataAccess.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,20 @@ namespace RDS.Fantadepo.DataAccess
         public DbSet<PlayerAcquisition> PlayerAcquisitions { get; set; }
         public DbSet<PlayerRelease> PlayerReleases { get; set; }
 
+        public FantadepoContext()
+        {
+            
+        }
+
         public FantadepoContext(DbContextOptions<FantadepoContext> opt) : base(opt)
         {
             
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(AzureHelper.GetAdminConnectionString());
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder mb)

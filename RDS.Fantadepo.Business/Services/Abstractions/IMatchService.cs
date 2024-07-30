@@ -1,4 +1,4 @@
-﻿namespace RDS.Fantadepo.Business.Services.Abstractions
+﻿namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
 {
     public interface IMatchService
     {

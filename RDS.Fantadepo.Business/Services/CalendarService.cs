@@ -1,12 +1,11 @@
-﻿using RDS.Fantadepo.Business.Helpers;
-using RDS.Fantadepo.Business.Models;
+﻿using RDS.Fantadepo.WebApi.Business.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.Business.Services
+namespace RDS.Fantadepo.WebApi.Business.Services
 {
     public static class CalendarService
     {

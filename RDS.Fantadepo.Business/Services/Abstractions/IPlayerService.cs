@@ -1,15 +1,16 @@
-﻿using RDS.Fantadepo.Business.Models;
+﻿using RDS.Fantadepo.WebApi.Business.Models;
+using RDS.Fantadepo.WebApi.Business.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.Business.Services.Abstractions
+namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
 {
     public interface IPlayerService
     {
-        Player? GetPlayer(int id);
-        IEnumerable<Player> GetPlayers(Func<Player, bool>? predicate = null);
+        PlayerDto? GetPlayer(int id);
+        IEnumerable<PlayerDto> GetPlayers(Func<PlayerDto, bool>? predicate = null);
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RDS.Fantadepo.Business.Services;
-using RDS.Fantadepo.Business.Services.Abstractions;
+using RDS.Fantadepo.WebApi.Business.Services;
+using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 
-namespace RDS.Fantadepo.Business.Utilities.Extensions
+namespace RDS.Fantadepo.WebApi.Business.Utilities.Extensions
 {
     public static class BusinessServiceCollectionExtensions
     {

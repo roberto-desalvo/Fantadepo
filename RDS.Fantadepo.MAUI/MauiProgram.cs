@@ -22,14 +22,6 @@ namespace RDS.Fantadepo.MAUI
                 });
 
             builder.Services.AddUIServices();
-            builder.Services.AddBusinessServices();
-            builder.Services.AddAutoMapper(x => x.AddProfile<BusinessMapperProfile>());
-
-
-            builder.Services.AddDbContext<FantadepoContext>(opt =>
-             {
-                 opt.UseSqlServer(AzureHelper.GetEntraIdConnectionString());
-             });
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

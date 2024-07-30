@@ -1,15 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.Business.Models
+namespace RDS.Fantadepo.WebApi.Business.Models.DTO
 {
-    public class PlayerPerformance
+    public class PlayerPerformanceDto
     {
-        public int Id { get; set; }        
+        public int Id { get; set; }
         public int Goals { get; set; }
         public int Assists { get; set; }
         public int OwnGoals { get; set; }
@@ -23,13 +22,13 @@ namespace RDS.Fantadepo.Business.Models
         public int FailedPenalties { get; set; }
         public int FailedFreeKicks { get; set; }
         public bool IsGoalKeeper { get; set; }
-        public decimal Vote {  get; set; }
+        public decimal Vote { get; set; }
         public decimal Sum { get; set; }
 
         public int PlayerId { get; set; }
-        public Player Player { get; set; } = new();
+        public PlayerDto Player { get; set; }
 
         public int TurnId { get; set; }
-        public Turn Turn { get; set; } = new();
+        public TurnDto Turn { get; set; }
     }
 }
