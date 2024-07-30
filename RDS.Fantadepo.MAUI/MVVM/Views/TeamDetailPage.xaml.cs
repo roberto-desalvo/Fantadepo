@@ -1,4 +1,3 @@
-using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.MAUI.MVVM.ViewModels;
 
 namespace RDS.Fantadepo.MAUI.MVVM.Views;

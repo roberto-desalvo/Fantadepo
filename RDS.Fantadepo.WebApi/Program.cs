@@ -1,10 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
-using RDS.Fantadepo.WebApi.Business.Utilities;
-using RDS.Fantadepo.WebApi.DataAccess;
-using RDS.Fantadepo.WebApi.DataAccess.Utilities;
+using RDS.Fantadepo.WebApi.Business.Mappings;
 using RDS.Fantadepo.WebApi.Business.Utilities.Extensions;
-using RDS.Fantadepo.WebApi.Business.Models.Mappings;
 
 namespace RDS.Fantadepo.WebApi
 {
@@ -24,12 +21,6 @@ namespace RDS.Fantadepo.WebApi
 
             builder.Services.AddBusinessServices();
             builder.Services.AddAutoMapper(x => x.AddProfile<WebApiBusinessProfile>());
-
-
-            builder.Services.AddDbContext<FantadepoContext>(opt =>
-            {
-                opt.UseSqlServer(AzureHelper.GetEntraIdConnectionString());
-            });
 
             var app = builder.Build();
 

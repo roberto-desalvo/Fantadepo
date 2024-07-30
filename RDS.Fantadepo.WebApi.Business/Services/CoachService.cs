@@ -1,18 +1,13 @@
 ﻿using AutoMapper;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RDS.Fantadepo.WebApi.Business.Models.DTO;
+using RDS.Fantadepo.Models.Models;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
     public class CoachService(FantadepoContext context, IMapper mapper) : BaseService(context, mapper), ICoachService
     {
-        public Task<int> CreateCoach(CoachDto coach)
+        public Task<int> CreateCoach(Coach coach)
         {
             throw new NotImplementedException();
         }
@@ -22,27 +17,27 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             throw new NotImplementedException();
         }
 
-        public CoachDto? GetCoach(int id)
+        public Coach? GetCoach(int id)
         {
-            return _mapper.Map<CoachDto>(_context.Coaches.Find(id));
+            return _mapper.Map<Coach>(_context.Coaches.Find(id));
         }
 
-        public IEnumerable<CoachDto> GetCoaches()
+        public IEnumerable<Coach> GetCoaches()
         {
-            return _context.Coaches.Select(_mapper.Map<CoachDto>);
+            return _context.Coaches.Select(_mapper.Map<Coach>);
         }
 
-        public Task<bool> UpdateCoach(int id, CoachDto coach)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<CoachDto?> ICoachService.GetCoach(int id)
+        public Task<bool> UpdateCoach(int id, Coach coach)
         {
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<CoachDto>> ICoachService.GetCoaches()
+        Task<Coach?> ICoachService.GetCoach(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<Coach>> ICoachService.GetCoaches()
         {
             throw new NotImplementedException();
         }

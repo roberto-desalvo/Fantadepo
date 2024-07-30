@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RDS.Fantadepo.WebApi.Business.Services;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
+using RDS.Fantadepo.WebApi.DataAccess.Utilities;
+using RDS.Fantadepo.WebApi.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace RDS.Fantadepo.WebApi.Business.Utilities.Extensions
 {
@@ -13,7 +16,12 @@ namespace RDS.Fantadepo.WebApi.Business.Utilities.Extensions
             services.AddTransient<ITurnService, TurnService>();
             services.AddTransient<IPerformanceService, PerformanceService>();
             services.AddTransient<ITeamService, TeamService>();
-            
+
+            services.AddDbContext<FantadepoContext>(opt =>
+            {
+                opt.UseSqlServer(AzureHelper.GetEntraIdConnectionString());
+            });
+
             return services;
         }
     }

@@ -1,14 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RDS.Fantadepo.Business.Models;
-using RDS.Fantadepo.Business.Services.Abstractions;
 using RDS.Fantadepo.MAUI.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
 {
@@ -29,15 +22,15 @@ namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
         private CoachListItemViewModel selectedCoach = new(null);
 
 
-        private readonly ITeamService _teamService;
-        private readonly ICoachService _coachService;
+        //private readonly ITeamService _teamService;
+        //private readonly ICoachService _coachService;
 
-        public TeamDetailViewModel(ITeamService teamService, ICoachService coachService)
-        {
-            _teamService = teamService ?? throw new ArgumentNullException(nameof(teamService));
-            _coachService = coachService ?? throw new ArgumentNullException(nameof(coachService));
-            LoadData();
-        }
+        //public TeamDetailViewModel(ITeamService teamService, ICoachService coachService)
+        //{
+        //    _teamService = teamService ?? throw new ArgumentNullException(nameof(teamService));
+        //    _coachService = coachService ?? throw new ArgumentNullException(nameof(coachService));
+        //    LoadData();
+        //}
 
         [RelayCommand]
         public void Save()
@@ -45,24 +38,24 @@ namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
             // TODO
         }
 
-        private void LoadData()
-        {            
+        //private void LoadData()
+        //{            
 
-            var team = _teamService.GetTeamWithCoach(id);
-            var coaches = _coachService.GetCoaches();
-            FillModel(team, coaches);
-        }
+        //    var team = _teamService.GetTeamWithCoach(id);
+        //    var coaches = _coachService.GetCoaches();
+        //    FillModel(team, coaches);
+        //}
 
-        private void FillModel(Team? team, IEnumerable<Coach> coaches)
-        {
-            Name = team?.Name ?? string.Empty;
-            Coaches = new(coaches.Select(c => new CoachListItemViewModel(c)));
+        //private void FillModel(Team? team, IEnumerable<Coach> coaches)
+        //{
+        //    Name = team?.Name ?? string.Empty;
+        //    Coaches = new(coaches.Select(c => new CoachListItemViewModel(c)));
 
-            if(coaches.Any(x => x.Id == team?.Coach?.Id)) 
-            {
-                SelectedCoach = new(team?.Coach);
-            }
-        }
+        //    if(coaches.Any(x => x.Id == team?.Coach?.Id)) 
+        //    {
+        //        SelectedCoach = new(team?.Coach);
+        //    }
+        //}
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {

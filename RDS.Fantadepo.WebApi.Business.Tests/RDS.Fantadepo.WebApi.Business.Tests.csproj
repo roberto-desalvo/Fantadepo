@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RDS.Fantadepo.Business\RDS.Fantadepo.WebApi.Business.csproj" />
+    <ProjectReference Include="..\RDS.Fantadepo.WebApi.Business\RDS.Fantadepo.WebApi.Business.csproj" />
   </ItemGroup>
 
   <ItemGroup>

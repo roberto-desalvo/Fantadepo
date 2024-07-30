@@ -1,27 +1,26 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RDS.Fantadepo.Business.Models;
-using RDS.Fantadepo.Business.Services.Abstractions;
 using RDS.Fantadepo.MAUI.Utilities;
 using RDS.Fantadepo.MAUI.MVVM.Views;
 using System.Collections.ObjectModel;
+using RDS.Fantadepo.Models.Models;
 
 namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
 {
     public partial class PlayerListViewModel : ObservableObject
     {
-        private readonly IPlayerService _playerService;
+        //private readonly IPlayerService _playerService;
 
         [ObservableProperty]
         private ObservableCollection<PlayerDetailViewModel> players = [];
 
-        public PlayerListViewModel(IPlayerService playerService)
-        {
-            _playerService = playerService ?? throw new ArgumentNullException(nameof(playerService));
+        //public PlayerListViewModel(IPlayerService playerService)
+        //{
+        //    _playerService = playerService ?? throw new ArgumentNullException(nameof(playerService));
 
-            var playerList = playerService.GetPlayers().Select(p => new PlayerDetailViewModel(p)).ToList();
-            Players = new(playerList);
-        }
+        //    var playerList = playerService.GetPlayers().Select(p => new PlayerDetailViewModel(p)).ToList();
+        //    Players = new(playerList);
+        //}
 
         [RelayCommand]
         private void AddPlayer()

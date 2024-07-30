@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using RDS.Fantadepo.WebApi.Business.Models;
+﻿
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess;
-using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
-using RDS.Fantadepo.WebApi.Business.Models.DTO;
+using RDS.Fantadepo.Models.Models;
+using AutoMapper;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
     public class MatchService(FantadepoContext context, IMapper mapper) : BaseService(context, mapper), IMatchService
     {
-        public bool IsDraw(MatchDto match, IList<PlayerPerformanceDto> performances)
+        public bool IsDraw(Match match, IList<PlayerPerformance> performances)
         {
             return CalculateMatch(match, performances) == null;
         }
 
-        public MatchDto CalculateMatch(MatchDto match, IList<PlayerPerformanceDto> performances)
+        public Match CalculateMatch(Match match, IList<PlayerPerformance> performances)
         {
             //match.HomeTeamScore = GetTeamScore(match.HomeTeamSeasonId, performances);
             //match.AwayTeamScore = GetTeamScore(match.AwayTeamSeasonId, performances);
@@ -27,7 +21,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             return match;
         }
 
-        public decimal GetTeamScore(int teamSeasonId, IEnumerable<PlayerPerformanceDto> performances)
+        public decimal GetTeamScore(int teamSeasonId, IEnumerable<PlayerPerformance> performances)
         {            
             //var team = _context.TeamSeasons.Find(teamSeasonId);
 

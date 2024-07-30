@@ -1,5 +1,5 @@
-using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.MAUI.MVVM.ViewModels;
+using RDS.Fantadepo.Models.Models;
 
 namespace RDS.Fantadepo.MAUI.MVVM.Views;
 
@@ -19,7 +19,7 @@ public partial class PlayerListPage : ContentPage
 
             if ((entry.BindingContext is Player player) && (this.BindingContext is PlayerListViewModel model))
             {
-                model.OnModifyPlayer(player);
+                //model.OnModifyPlayer(player);
             }
         }
     }

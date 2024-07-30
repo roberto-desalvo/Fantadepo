@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RDS.Fantadepo.WebApi.Business.Models.DTO;
+using RDS.Fantadepo.Models.Models;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 
 namespace RDS.Fantadepo.WebApi.Controllers
@@ -17,16 +17,16 @@ namespace RDS.Fantadepo.WebApi.Controllers
 
         // GET: api/Coaches
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CoachDto>>> GetCoaches()
+        public async Task<ActionResult<IEnumerable<Coach>>> GetCoaches()
         {
             //var entities = await _context.Coaches.ToListAsync();
-            //return Ok(entities.Select(_mapper.Map<IEnumerable<CoachDto>>));
+            //return Ok(entities.Select(_mapper.Map<IEnumerable<Coach>>));
             return Ok(await _coachService.GetCoaches());
         }
 
         // GET: api/Coaches/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CoachDto>> GetCoach(int id)
+        public async Task<ActionResult<Coach>> GetCoach(int id)
         {
             var coach = await  _coachService.GetCoach(id);
             return coach == null ? NotFound() : Ok(coach);
@@ -37,13 +37,13 @@ namespace RDS.Fantadepo.WebApi.Controllers
             //    return NotFound();
             //}
 
-            //return Ok(_mapper.Map<CoachDto>(coach));
+            //return Ok(_mapper.Map<Coach>(coach));
         }
 
         // PUT: api/Coaches/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCoach(int id, CoachDto coach)
+        public async Task<IActionResult> PutCoach(int id, Coach coach)
         {
             if (id != coach.Id)
             {
@@ -78,7 +78,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
         // POST: api/Coaches
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CoachDto>> PostCoach(CoachDto coach)
+        public async Task<ActionResult<Coach>> PostCoach(Coach coach)
         {
             var newId = await _coachService.CreateCoach(coach);
             //var entity = _mapper.Map<DataAccess.Entities.Coach>(coach);
