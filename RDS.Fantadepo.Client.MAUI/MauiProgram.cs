@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using RDA.Fantadepo.Client.MAUI.Extensions;
+using RDS.Fantadepo.Client.MAUI.Extensions;
 using RDS.Fantadepo.Client.Business.Extensions;
 
-namespace RDA.Fantadepo.Client.MAUI
+namespace RDS.Fantadepo.Client.MAUI
 {
     public static class MauiProgram
     {

@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace RDA.Fantadepo.Client.MAUI
+namespace RDS.Fantadepo.Client.MAUI
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

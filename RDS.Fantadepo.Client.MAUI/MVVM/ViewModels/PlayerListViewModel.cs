@@ -1,44 +1,57 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RDA.Fantadepo.Client.MAUI.Utilities;
-using RDA.Fantadepo.Client.MAUI.MVVM.Views;
+using RDS.Fantadepo.Client.MAUI.Utilities;
+using RDS.Fantadepo.Client.MAUI.MVVM.Views;
 using System.Collections.ObjectModel;
 using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Client.Business.Services.Abstractions;
 
-namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
+namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
     public partial class PlayerListViewModel : ObservableObject
     {
-        //private readonly IPlayerService _playerService;
 
         [ObservableProperty]
-        private ObservableCollection<PlayerDetailViewModel> players = [];
+        private ObservableCollection<PlayerListItemViewModel> players = [];
 
-        //public PlayerListViewModel(IPlayerService playerService)
-        //{
-        //    _playerService = playerService ?? throw new ArgumentNullException(nameof(playerService));
+        private readonly IPlayerService _playerService;
 
-        //    var playerList = playerService.GetPlayers().Select(p => new PlayerDetailViewModel(p)).ToList();
-        //    Players = new(playerList);
-        //}
+        public PlayerListViewModel(IPlayerService playerService)
+        {
+            _playerService = playerService ?? throw new ArgumentNullException(nameof(playerService));
+            Task.Factory.StartNew(async () => { await LoadData(); });
+        }
+
+        private async Task LoadData()
+        {
+            var teams = await _playerService.GetPlayers();
+
+            foreach (var t in teams.Select(t => new PlayerListItemViewModel(t)))
+            {
+                Players.Add(t);
+            }
+        }
 
         [RelayCommand]
         private void AddPlayer()
         {
             UIHelper.SafeCall(async () =>
             {
-                var player = new Player { Nickname = "Insert player name" };
-                var data = new Dictionary<string, object> { { nameof(Player), player } };
+                var data = new Dictionary<string, object> { { QueryAttributes.ISREADONLY, false } };
                 await Shell.Current.GoToAsync(nameof(PlayerDetailPage), data);
-                Players.Add(new PlayerDetailViewModel(player));
             });
         }
 
-        public void OnModifyPlayer(Player player)
+        [RelayCommand]
+        public void ModifyPlayer(Player player)
         {
             UIHelper.SafeCall(async () =>
             {
-                var data = new Dictionary<string, object> { { nameof(Player), player } };
+                var data = new Dictionary<string, object> 
+                {
+                    { QueryAttributes.ISREADONLY, false }, 
+                    { QueryAttributes.PLAYERID, player.Id } 
+                };
                 await Shell.Current.GoToAsync(nameof(PlayerDetailPage), data);
             });
         }

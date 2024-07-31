@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using RDS.Fantadepo.Models.Models;
 
-namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
+namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
     public partial class CoachListItemViewModel : ObservableObject
     {

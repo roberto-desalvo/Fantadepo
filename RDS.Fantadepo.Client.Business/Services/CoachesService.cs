@@ -28,16 +28,9 @@ namespace RDS.Fantadepo.Client.Business.Services
             return await _repo.Get();
         }
 
-        public async Task Save(Coach coach)
+        public async Task<int> Save(Coach coach)
         {
-            if (coach.Id == 0)
-            {
-                await _repo.Create(coach);
-            }
-            else
-            {
-                await _repo.Update(coach.Id, coach);
-            }
+            return await ((coach.Id == 0) ? _repo.Create(coach) : _repo.Update(coach.Id, coach));
         }
     }
 }

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Client.Business.Services.Abstractions
 {
-    public interface ICoachesService
+    public interface IPlayerService
     {
-        Task<Coach?> GetCoach(int id);
-        Task<IEnumerable<Coach>> GetCoaches();
-        Task<int> Save(Coach coach);
+        Task<Player?> GetPlayer(int id);
+        Task<IEnumerable<Player>> GetPlayers();
+        Task<int> Save(Player player);
     }
 }

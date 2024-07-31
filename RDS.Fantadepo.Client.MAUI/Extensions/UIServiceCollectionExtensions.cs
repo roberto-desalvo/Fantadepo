@@ -1,12 +1,12 @@
-﻿using RDA.Fantadepo.Client.MAUI.MVVM.Views;
-using RDA.Fantadepo.Client.MAUI.MVVM.ViewModels;
+﻿using RDS.Fantadepo.Client.MAUI.MVVM.Views;
+using RDS.Fantadepo.Client.MAUI.MVVM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDA.Fantadepo.Client.MAUI.Extensions
+namespace RDS.Fantadepo.Client.MAUI.Extensions
 {
     public static class UIServiceCollectionExtensions
     {

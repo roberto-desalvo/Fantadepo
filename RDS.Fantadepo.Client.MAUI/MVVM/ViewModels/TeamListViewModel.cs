@@ -1,14 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RDA.Fantadepo.Client.MAUI.MVVM.Views;
-using RDA.Fantadepo.Client.MAUI.Utilities;
+using CommunityToolkit.Mvvm.Messaging;
+using RDS.Fantadepo.Client.MAUI.MVVM.Views;
+using RDS.Fantadepo.Client.MAUI.Utilities;
 using RDS.Fantadepo.Client.Business.Services.Abstractions;
+using RDS.Fantadepo.MAUI.Messages;
 using RDS.Fantadepo.Models.Models;
 using System.Collections.ObjectModel;
 
-namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
+namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
-    public partial class TeamListViewModel : ObservableObject
+    public partial class TeamListViewModel : ObservableObject, IRecipient<TeamAddedMessage>
     {
         [ObservableProperty]
         private ObservableCollection<TeamListItemViewModel> teams = [];
@@ -19,6 +21,8 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
         {
             _teamService = teamService ?? throw new ArgumentNullException(nameof(teamService));
             Task.Factory.StartNew(async () => { await LoadData(); });
+
+            WeakReferenceMessenger.Default.Register(this);
         }
 
         private async Task LoadData()
@@ -31,33 +35,45 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
             }
         }
 
+        public void Receive(TeamAddedMessage message)
+        {
+            Team? team = null;
+            if(message.Team != null)
+            {
+                team = message.Team;                
+            }
+            else if (message.Id != 0)
+            {
+                Task.Factory.StartNew(async () => { team = await _teamService.GetTeam(message.Id, true); });
+            }
+
+            if(team != null)
+            {
+                Teams.Add(new TeamListItemViewModel(team));
+            }
+        }
+
         [RelayCommand]
         public void AddTeam()
         {
             UIHelper.SafeCall(async () =>
             {
-                await Task.CompletedTask;
-
                 var data = new Dictionary<string, object> { { QueryAttributes.ISREADONLY, false } };
                 await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
-
-                // TODO aggiungere il nuovo team alla lista solo se l'utente salva
             });
         }
 
-        public void OnModifyTeamName(Team team)
+        [RelayCommand]
+        public void ModifyTeam(Team team)
         {
             UIHelper.SafeCall(async () =>
             {
-                await Task.CompletedTask;
-
-                var data = new Dictionary<string, object> { 
+                var data = new Dictionary<string, object> 
+                { 
                     { QueryAttributes.ISREADONLY, false },
                     { QueryAttributes.TEAMID, team.Id }
                 };
                 await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
-
-                // TODO modificare il team solo se l'utente salva
             });
         }
 

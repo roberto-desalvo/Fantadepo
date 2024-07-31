@@ -1,6 +1,6 @@
-﻿using RDA.Fantadepo.Client.MAUI.MVVM.ViewModels;
+﻿using RDS.Fantadepo.Client.MAUI.MVVM.ViewModels;
 
-namespace RDA.Fantadepo.Client.MAUI.MVVM.Views
+namespace RDS.Fantadepo.Client.MAUI.MVVM.Views
 {
     public partial class MainPage : ContentPage
     {

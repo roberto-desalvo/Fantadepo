@@ -2,7 +2,7 @@
 using RDS.Fantadepo.Models.Models;
 using System.Collections.ObjectModel;
 
-namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
+namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
     public partial class TurnListItemViewModel : ObservableObject
     {

@@ -1,7 +1,7 @@
-﻿using RDA.Fantadepo.Client.MAUI.MVVM.Views;
+﻿using RDS.Fantadepo.Client.MAUI.MVVM.Views;
 using RDS.Fantadepo.Models.Models;
 
-namespace RDA.Fantadepo.Client.MAUI
+namespace RDS.Fantadepo.Client.MAUI
 {
     public partial class AppShell : Shell
     {

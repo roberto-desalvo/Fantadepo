@@ -1,28 +1,31 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using RDS.Fantadepo.Client.Business.Services.Abstractions;
 using RDS.Fantadepo.Models.Models;
 
-namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
+namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
     public partial class TeamListItemViewModel : ObservableObject
     {
+        [ObservableProperty]
         private Team? model;
-        public int Id { get => model?.Id ?? 0; private set => model = new Team { Id = value }; }
+        public int Id { get => Model?.Id ?? 0; private set => Model = new Team { Id = value }; }
 
-        [ObservableProperty]
-        private string coachFirstName = string.Empty;
+        private readonly ITeamsService _teamsService;
 
-        [ObservableProperty]
-        private string coachLastName = string.Empty;
-
-        [ObservableProperty]
-        private string teamName = string.Empty;
+        public TeamListItemViewModel(ITeamsService teamService)
+        {
+            _teamsService = teamService ?? throw new ArgumentNullException(nameof(teamService));
+            Task.Factory.StartNew(async () => await LoadAsync(null));
+        }
 
         public TeamListItemViewModel(Team? team)
         {
-            model = team;
-            this.TeamName = team?.Name ?? string.Empty;
-            this.CoachFirstName = team?.Coach?.FirstName ?? string.Empty;
-            this.CoachLastName = team?.Coach?.LastName ?? string.Empty;
+            Task.Factory.StartNew(async () => await LoadAsync(team));
+        }
+
+        public async Task LoadAsync(Team? team)
+        {            
+            Model = (team is null && Id != 0) ? await _teamsService.GetTeam(Id) : team;
         }
     }
 }
