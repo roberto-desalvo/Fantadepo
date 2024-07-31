@@ -17,33 +17,27 @@ namespace RDS.Fantadepo.WebApi.Controllers
             _teamService = teamService ?? throw new ArgumentNullException(nameof(teamService));
         }
 
-        // GET: api/Teams
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Team>>> GetTeams([FromQuery] int? seasonId, [FromQuery] bool? withCoaches)
+        public async Task<ActionResult<IEnumerable<Team>>> GetTeams([FromQuery] int? seasonId, [FromQuery] bool? includeCoach)
         {
             var filter = seasonId.IsNullOrZero() ? null : TeamFilters.TeamBySeason(seasonId!.Value);
-            var teams = await (withCoaches.IsTrue() ? _teamService.GetTeamsWithCoaches(filter) : _teamService.GetTeams(filter));
+            var teams = await (includeCoach.IsTrue() ? _teamService.GetTeamsWithCoaches(filter) : _teamService.GetTeams(filter));
             return Ok(teams);
         }
 
-        // GET: api/Teams/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Team>> GetTeam(int id, [FromQuery] bool? withCoach)
+        public async Task<ActionResult<Team>> GetTeam(int id, [FromQuery] bool? includeCoach)
         {
-            var team = await (withCoach.IsTrue() ? _teamService.GetTeam(id) : _teamService.GetTeamWithCoach(id));
+            var team = await (includeCoach.IsTrue() ? _teamService.GetTeam(id) : _teamService.GetTeamWithCoach(id));
             return team != null ? Ok(team) : NotFound();
         }
 
-        // PUT: api/Teams/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTeam(int id, Team Team)
         {
             return await _teamService.UpdateTeam(id, Team) ? Ok() : BadRequest();
         }
 
-        // POST: api/Teams
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Team>> PostTeam(Team Team)
         {
@@ -51,7 +45,6 @@ namespace RDS.Fantadepo.WebApi.Controllers
             return CreatedAtAction("GetTeam", new { id = newId }, Team);
         }
 
-        // DELETE: api/Teams/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTeam(int id)
         {

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RDA.Fantadepo.Client.MAUI.MVVM.Views.PlayerListPage"
+             Title="Players"
+             xmlns:models="clr-namespace:RDS.Fantadepo.Models.Models;assembly=RDS.Fantadepo.Models"
+             xmlns:viewmodel="clr-namespace:RDA.Fantadepo.Client.MAUI.MVVM.ViewModels"
+             x:DataType="viewmodel:PlayerListViewModel"
+                      x:Name="Page"
+            BackgroundColor="#315C2B">
+
+
+    <Grid Margin="20" RowDefinitions="*,11*" ColumnDefinitions="*, 4*, *" >
+        <Button Grid.Row="0" Grid.Column="1" Text="Add new player" Command="{Binding AddPlayerCommand}"/>
+
+        <CollectionView Margin="10" Grid.Row="1" Grid.ColumnSpan="123" ItemsSource="{Binding Players}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Player">
+                    <Grid Padding="0,5">
+                        <Frame >
+                            <Entry Text="{Binding Nickname, Mode=TwoWay}"
+                               FontSize="24"
+                               />
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTapGestureRecognizerDoubleTapped"
+                          NumberOfTapsRequired="2" />
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
