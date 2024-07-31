@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.WebApi", "RDS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.Models", "RDS.Fantadepo.Models\RDS.Fantadepo.Models.csproj", "{71AD1A89-2D79-448F-9B4B-5CCD53569129}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDS.Fantedepo.Client.DataAccess", "RDS.Fantedepo.Client\RDS.Fantedepo.Client.DataAccess.csproj", "{6FB98E58-7799-4829-905F-7A6A50A9B8C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{71AD1A89-2D79-448F-9B4B-5CCD53569129}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71AD1A89-2D79-448F-9B4B-5CCD53569129}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71AD1A89-2D79-448F-9B4B-5CCD53569129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FB98E58-7799-4829-905F-7A6A50A9B8C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FB98E58-7799-4829-905F-7A6A50A9B8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FB98E58-7799-4829-905F-7A6A50A9B8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FB98E58-7799-4829-905F-7A6A50A9B8C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
