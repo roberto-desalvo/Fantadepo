@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RDA.Fantadepo.Client.MAUI.MVVM.Views;
 using RDA.Fantadepo.Client.MAUI.Utilities;
+using RDS.Fantadepo.Client.Business.Services.Abstractions;
 using RDS.Fantadepo.Models.Models;
 using System.Collections.ObjectModel;
 
@@ -11,23 +13,23 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
         [ObservableProperty]
         private ObservableCollection<TeamListItemViewModel> teams = [];
 
-        //private readonly ITeamService _teamService;
+        private readonly ITeamsService _teamService;
 
-        //public TeamListViewModel(ITeamService teamService)
-        //{
-        //    _teamService = teamService ?? throw new ArgumentNullException(nameof(teamService));
-        //    LoadData();
-        //}
+        public TeamListViewModel(ITeamsService teamService)
+        {
+            _teamService = teamService ?? throw new ArgumentNullException(nameof(teamService));
+            Task.Factory.StartNew(async () => { await LoadData(); });
+        }
 
-        //private void LoadData()
-        //{
-        //    var teams = _teamService.GetTeamsWithCoaches().Select(t => new TeamListItemViewModel(t));
+        private async Task LoadData()
+        {
+            var teams = await _teamService.GetTeams(AppBusinessContext.CurrentSeason.Id, true);
 
-        //    foreach(var t in teams)
-        //    {
-        //        Teams.Add(t);
-        //    }
-        //}
+            foreach (var t in teams.Select(t => new TeamListItemViewModel(t)))
+            {
+                Teams.Add(t);
+            }
+        }
 
         [RelayCommand]
         public void AddTeam()
@@ -36,10 +38,10 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
             {
                 await Task.CompletedTask;
 
-                //var team = new TeamDetailViewModel { Name = "Insert team name" };
-                //var data = new Dictionary<string, object> { { nameof(Team), team } };
-                //await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
-                //Teams.Add(team);
+                var data = new Dictionary<string, object> { { QueryAttributes.ISREADONLY, false } };
+                await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
+
+                // TODO aggiungere il nuovo team alla lista solo se l'utente salva
             });
         }
 
@@ -49,8 +51,13 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
             {
                 await Task.CompletedTask;
 
-                //var data = new Dictionary<string, object> { { nameof(Player), team } };
-                //await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
+                var data = new Dictionary<string, object> { 
+                    { QueryAttributes.ISREADONLY, false },
+                    { QueryAttributes.TEAMID, team.Id }
+                };
+                await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
+
+                // TODO modificare il team solo se l'utente salva
             });
         }
 

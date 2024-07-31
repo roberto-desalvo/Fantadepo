@@ -5,6 +5,8 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
     public partial class PlayerDetailViewModel : ObservableObject
     {
+        private Player? model;
+        public int Id { get => model?.Id ?? 0; }
         [ObservableProperty]
         private string _firstname = string.Empty;
         
@@ -12,24 +14,14 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
         private string _lastname = string.Empty;
         
         [ObservableProperty]
-        private string _nickname = string.Empty;
+        private string _nickname = string.Empty;       
 
-        [ObservableProperty]
-        private string _firstRole = string.Empty;
-
-        [ObservableProperty]
-        private string _secondaryRole = string.Empty;
-
-        public PlayerDetailViewModel()
+        public PlayerDetailViewModel(Player? player)
         {
-            
-        }
-
-        public PlayerDetailViewModel(Player player)
-        {
-            _firstname = player.Firstname;
-            _lastname = player.Lastname;
-            _nickname = player.Nickname;
+            model = player;
+            _firstname = player?.Firstname ?? string.Empty;
+            _lastname = player?.Lastname ?? string.Empty;
+            _nickname = player?.Nickname ?? string.Empty;
         }
     }
 }

@@ -8,6 +8,6 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
         Task<bool> Delete(int id);
         Task<T?> Get(int id, IQueryParameters parameters = null!);
         Task<IEnumerable<T>> Get(IQueryParameters parameters = null!);
-        Task<bool> Update(int id, T obj);
+        Task<int> Update(int id, T obj);
     }
 }

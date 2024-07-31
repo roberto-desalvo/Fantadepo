@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using RDS.Fantadepo.Models.Models;
 
 namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
@@ -9,5 +10,11 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
 
         [ObservableProperty]
         private string _awayTeamName = string.Empty;
+
+        public MatchListItemViewModel(Match? match)
+        {
+            _homeTeamName = match?.HomeTeam?.Name ?? string.Empty;
+            _awayTeamName = match?.AwayTeam?.Name ?? string.Empty;
+        }
     }
 }

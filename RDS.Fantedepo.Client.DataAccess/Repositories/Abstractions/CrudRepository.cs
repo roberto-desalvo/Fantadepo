@@ -67,7 +67,7 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
             return JsonConvert.DeserializeObject<IEnumerable<T>>(responseString) ?? [];
         }
 
-        protected async Task<bool> DoPut(int id, object obj)
+        protected async Task<int> DoPut(int id, object obj)
         {
             var json = JsonConvert.SerializeObject(obj);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -76,11 +76,11 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
 
             if (!response.IsSuccessStatusCode)
             {
-                return false;
+                return 0;
             }
 
             var responseString = await response.Content.ReadAsStringAsync();
-            return bool.Parse(responseString);
+            return int.Parse(responseString);
         }
 
         public async Task<int> Create(T obj)
@@ -103,7 +103,7 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
             return await DoGetItemList(parameters.GetParameters() ?? []);
         }
 
-        public async Task<bool> Update(int id, T obj)
+        public async Task<int> Update(int id, T obj)
         {
             return await DoPut(id, obj);
         }

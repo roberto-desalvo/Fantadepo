@@ -5,6 +5,9 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
     public partial class CoachListItemViewModel : ObservableObject
     {
+        private Coach? model;
+        public int Id { get => model?.Id ?? 0; }
+
         [ObservableProperty]
         private string coachFirstName = string.Empty;
 
@@ -13,12 +16,9 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
 
         public CoachListItemViewModel(Coach? coach)
         {
-            if(coach is null)
-            {
-                return;
-            }
-            this.CoachFirstName = coach.FirstName;
-            this.CoachLastName = coach.LastName;
+            this.model = coach;
+            this.CoachFirstName = coach?.FirstName ?? string.Empty;
+            this.CoachLastName = coach?.LastName ?? string.Empty;
         }
     }
 }

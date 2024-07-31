@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using RDA.Fantadepo.Client.MAUI.Extensions;
+using RDS.Fantadepo.Client.Business.Extensions;
 
 namespace RDA.Fantadepo.Client.MAUI
 {
@@ -17,6 +18,7 @@ namespace RDA.Fantadepo.Client.MAUI
                 });
 
             builder.Services.AddUIServices();
+            builder.Services.AddBusinessServices();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
