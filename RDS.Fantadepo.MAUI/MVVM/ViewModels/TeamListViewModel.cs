@@ -1,8 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RDS.Fantadepo.Business.Models;
-using RDS.Fantadepo.Business.Services.Abstractions;
 using RDS.Fantadepo.MAUI.Utilities;
+using RDS.Fantadepo.Models.Models;
 using System.Collections.ObjectModel;
 
 namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
@@ -12,23 +11,23 @@ namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
         [ObservableProperty]
         private ObservableCollection<TeamListItemViewModel> teams = [];
 
-        private readonly ITeamService _teamService;
+        //private readonly ITeamService _teamService;
 
-        public TeamListViewModel(ITeamService teamService)
-        {
-            _teamService = teamService ?? throw new ArgumentNullException(nameof(teamService));
-            LoadData();
-        }
+        //public TeamListViewModel(ITeamService teamService)
+        //{
+        //    _teamService = teamService ?? throw new ArgumentNullException(nameof(teamService));
+        //    LoadData();
+        //}
 
-        private void LoadData()
-        {
-            var teams = _teamService.GetTeamsWithCoaches().Select(t => new TeamListItemViewModel(t));
+        //private void LoadData()
+        //{
+        //    var teams = _teamService.GetTeamsWithCoaches().Select(t => new TeamListItemViewModel(t));
 
-            foreach(var t in teams)
-            {
-                Teams.Add(t);
-            }
-        }
+        //    foreach(var t in teams)
+        //    {
+        //        Teams.Add(t);
+        //    }
+        //}
 
         [RelayCommand]
         public void AddTeam()

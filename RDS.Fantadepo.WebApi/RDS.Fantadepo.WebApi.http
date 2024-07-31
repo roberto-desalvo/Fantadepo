@@ -1,0 +1,6 @@
+@RDS.Fantadepo.WebApi_HostAddress = http://localhost:5266
+
+GET {{RDS.Fantadepo.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

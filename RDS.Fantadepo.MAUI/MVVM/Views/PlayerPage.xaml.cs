@@ -1,9 +1,9 @@
-using RDS.Fantadepo.Business.Models;
 using RDS.Fantadepo.MAUI.MVVM.ViewModels;
+using RDS.Fantadepo.Models.Models;
 
 namespace RDS.Fantadepo.MAUI.MVVM.Views;
 
-[QueryProperty(nameof(PlayerDetailPage.Player), nameof(Business.Models.Player))]
+[QueryProperty(nameof(PlayerDetailPage.Player), nameof(Models.Models.Player))]
 public partial class PlayerDetailPage : ContentPage
 {
     public Player Player { set => Load(value); }    

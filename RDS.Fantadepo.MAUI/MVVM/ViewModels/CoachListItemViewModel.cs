@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using RDS.Fantadepo.Business.Models;
+using RDS.Fantadepo.Models.Models;
 
 namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
 {

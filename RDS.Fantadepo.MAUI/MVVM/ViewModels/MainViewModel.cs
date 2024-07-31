@@ -1,12 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RDS.Fantadepo.DataAccess;
 using RDS.Fantadepo.MAUI.MVVM.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.MAUI.MVVM.ViewModels
 {
