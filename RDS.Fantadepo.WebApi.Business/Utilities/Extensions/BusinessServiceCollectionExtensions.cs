@@ -20,7 +20,7 @@ namespace RDS.Fantadepo.WebApi.Business.Utilities.Extensions
 
             services.AddDbContext<FantadepoContext>(opt =>
             {
-                opt.UseSqlServer(AzureHelper.GetAdminConnectionString());
+                opt.UseSqlServer(AzureHelper.GetEntraIdConnectionString());
             });
 
             return services;
