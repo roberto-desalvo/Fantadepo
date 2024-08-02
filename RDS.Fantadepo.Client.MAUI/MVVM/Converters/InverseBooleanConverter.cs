@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDA.Fantadepo.Client.MAUI.MVVM.Converters
+namespace RDS.Fantadepo.Client.MAUI.MVVM.Converters
 {
     public class InverseBooleanConverter : IValueConverter
     {
@@ -13,7 +13,7 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.Converters
         {
             if(value is not bool bValue)
             {
-                throw new InvalidOperationException("Value should be a boolean type");
+                throw new InvalidOperationException("Value should be of type boolean");
             }
             return !bValue;
         }
@@ -22,7 +22,7 @@ namespace RDA.Fantadepo.Client.MAUI.MVVM.Converters
         {
             if (value is not bool bValue)
             {
-                throw new InvalidOperationException("Value should be a boolean type");
+                throw new InvalidOperationException("Value should be of type boolean");
             }
             return !bValue;
         }

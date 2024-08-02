@@ -1,5 +1,5 @@
 ﻿
-namespace RDA.Fantadepo.Client.MAUI.Utilities
+namespace RDS.Fantadepo.Client.MAUI.Utilities
 {
     public static class UIHelper 
     {

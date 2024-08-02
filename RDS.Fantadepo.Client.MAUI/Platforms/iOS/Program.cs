@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace RDA.Fantadepo.Client.MAUI
+namespace RDS.Fantadepo.Client.MAUI
 {
     public class Program
     {

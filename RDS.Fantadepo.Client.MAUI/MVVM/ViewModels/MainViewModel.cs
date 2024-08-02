@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RDA.Fantadepo.Client.MAUI.MVVM.Views;
+using RDS.Fantadepo.Client.MAUI.MVVM.Views;
 
-namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
+namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {       

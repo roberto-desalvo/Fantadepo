@@ -1,35 +1,25 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using RDS.Fantadepo.Client.MAUI.Utilities;
 using RDS.Fantadepo.Models.Models;
 
-namespace RDA.Fantadepo.Client.MAUI.MVVM.ViewModels
+namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
+    [QueryProperty(nameof(Id), QueryAttributes.PLAYERID)]
+    [QueryProperty(nameof(IsReadonly), QueryAttributes.ISREADONLY)]
     public partial class PlayerDetailViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _firstname = string.Empty;
-        
-        [ObservableProperty]
-        private string _lastname = string.Empty;
-        
-        [ObservableProperty]
-        private string _nickname = string.Empty;
+        private Player? model;
+        public int Id { get => model?.Id ?? 0; private set => model = new Player { Id = value }; }
 
         [ObservableProperty]
-        private string _firstRole = string.Empty;
+        private bool _isReadonly = true;
+      
 
-        [ObservableProperty]
-        private string _secondaryRole = string.Empty;
-
-        public PlayerDetailViewModel()
+        public PlayerDetailViewModel(Player? player)
         {
-            
+            model = player;
         }
 
-        public PlayerDetailViewModel(Player player)
-        {
-            _firstname = player.Firstname;
-            _lastname = player.Lastname;
-            _nickname = player.Nickname;
-        }
     }
 }

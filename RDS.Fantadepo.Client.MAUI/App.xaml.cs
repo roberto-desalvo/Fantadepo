@@ -1,5 +1,5 @@
 ﻿
-namespace RDA.Fantadepo.Client.MAUI
+namespace RDS.Fantadepo.Client.MAUI
 {
     public partial class App : Application
     {

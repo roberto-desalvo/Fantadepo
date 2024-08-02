@@ -1,6 +1,6 @@
 ﻿using RDS.Fantadepo.Models.Models;
 
-namespace RDA.Fantadepo.Client.MAUI
+namespace RDS.Fantadepo.Client.MAUI
 {
     public static class AppBusinessContext
     {
