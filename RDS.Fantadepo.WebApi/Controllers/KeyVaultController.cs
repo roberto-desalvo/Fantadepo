@@ -9,7 +9,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
     [Controller]
     public class KeyVaultController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("/entraid")]
         public async Task<IActionResult> GetEntraIdConnString()
         {
             try
@@ -23,7 +23,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("/admin")]
         public async Task<IActionResult> GetAdminConnString()
         {
             try
@@ -37,7 +37,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("/tutorial")]
         public async Task<IActionResult> GetConnString()
         {
             try
