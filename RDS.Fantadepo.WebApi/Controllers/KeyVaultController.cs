@@ -7,10 +7,10 @@ namespace RDS.Fantadepo.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class KVController : ControllerBase
+    public class KeyVaultController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<string>> GetEntraIdConnString()
+        public async Task<IActionResult> GetEntraIdConnString()
         {
             try
             {
@@ -24,11 +24,25 @@ namespace RDS.Fantadepo.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<string>> GetAdminConnString()
+        public async Task<IActionResult> GetAdminConnString()
         {
             try
             {
                 var secret = AzureHelper.GetAdminConnectionString();
+                return Ok(secret);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetConnString()
+        {
+            try
+            {
+                var secret = AzureHelper.GetSecretAsTutorial();
                 return Ok(secret);
             }
             catch (Exception ex)
