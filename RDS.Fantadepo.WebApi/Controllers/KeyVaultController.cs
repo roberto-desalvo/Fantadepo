@@ -6,7 +6,7 @@ using RDS.Fantadepo.WebApi.DataAccess.Utilities;
 namespace RDS.Fantadepo.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [Controller]
     public class KeyVaultController : ControllerBase
     {
         [HttpGet]
