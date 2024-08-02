@@ -1,4 +1,5 @@
-﻿using Azure.Identity;
+﻿using Azure.Core;
+using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,26 @@ namespace RDS.Fantadepo.WebApi.DataAccess.Utilities
             {
                 return string.Empty;
             }
+        }
+
+        public static string GetSecretAsTutorial()
+        {
+            SecretClientOptions options = new SecretClientOptions()
+            {
+                Retry =
+        {
+            Delay= TimeSpan.FromSeconds(2),
+            MaxDelay = TimeSpan.FromSeconds(16),
+            MaxRetries = 5,
+            Mode = RetryMode.Exponential
+         }
+            };
+            var client = new SecretClient(new Uri("https://fantadepo-kv.vault.azure.net/"), new DefaultAzureCredential(), options);
+
+            KeyVaultSecret secret = client.GetSecret("fantadepo-entraid-connstring");
+
+            string secretValue = secret.Value;
+            return secretValue;
         }
     }
 }
