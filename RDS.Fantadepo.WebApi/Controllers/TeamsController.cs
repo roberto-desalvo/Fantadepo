@@ -20,35 +20,70 @@ namespace RDS.Fantadepo.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeams([FromQuery] int? seasonId, [FromQuery] bool? includeCoach)
         {
-            var filter = seasonId.IsNullOrZero() ? null : TeamFilters.TeamBySeason(seasonId!.Value);
-            var teams = await (includeCoach.IsTrue() ? _teamService.GetTeamsWithCoaches(filter) : _teamService.GetTeams(filter));
-            return Ok(teams);
+            try
+            {
+                var filter = seasonId.IsNullOrZero() ? null : TeamFilters.TeamBySeason(seasonId!.Value);
+                var teams = await (includeCoach.IsTrue() ? _teamService.GetTeamsWithCoaches(filter) : _teamService.GetTeams(filter));
+                return Ok(teams);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetTeam(int id, [FromQuery] bool? includeCoach)
         {
-            var team = await (includeCoach.IsTrue() ? _teamService.GetTeam(id) : _teamService.GetTeamWithCoach(id));
-            return team != null ? Ok(team) : NotFound();
+            try
+            {
+                var team = await (includeCoach.IsTrue() ? _teamService.GetTeam(id) : _teamService.GetTeamWithCoach(id));
+                return team != null ? Ok(team) : NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTeam(int id, Team Team)
         {
-            return await _teamService.UpdateTeam(id, Team) ? Ok() : BadRequest();
+            try
+            {
+                return await _teamService.UpdateTeam(id, Team) ? Ok() : BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult<Team>> PostTeam(Team Team)
         {
-            var newId = await _teamService.CreateTeam(Team);
-            return CreatedAtAction("GetTeam", new { id = newId }, Team);
+            try
+            {
+                var newId = await _teamService.CreateTeam(Team);
+                return CreatedAtAction("GetTeam", new { id = newId }, Team);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTeam(int id)
         {
-            return await _teamService.DeleteTeam(id) ? NoContent() : NotFound();
+            try
+            {
+                return await _teamService.DeleteTeam(id) ? NoContent() : NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

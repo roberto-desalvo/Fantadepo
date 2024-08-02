@@ -39,7 +39,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services
 
         public async Task<IEnumerable<Coach>> GetCoaches()
         {
-            return _mapper.Map<IEnumerable<Coach>>(await _context.Coaches.FindAsync());
+            return _mapper.Map<IEnumerable<Coach>>(_context.Coaches);
         }
 
         public async Task<bool> UpdateCoach(int id, Coach coach)

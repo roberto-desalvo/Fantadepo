@@ -32,9 +32,16 @@ namespace RDS.Fantadepo.WebApi.Controllers
         // GET: api/Coaches/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Coach>> GetCoach(int id)
-        {
-            var coach = await  _coachService.GetCoach(id);
-            return coach != null ? Ok(coach) : NotFound();
+        {            
+            try
+            {
+                var coach = await _coachService.GetCoach(id);
+                return coach != null ? Ok(coach) : NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/Coaches/5
@@ -42,7 +49,14 @@ namespace RDS.Fantadepo.WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCoach(int id, Coach coach)
         {
-            return await _coachService.UpdateCoach(id, coach) ? Ok() : BadRequest();
+            try
+            {
+                return await _coachService.UpdateCoach(id, coach) ? Ok() : BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: api/Coaches
@@ -50,15 +64,29 @@ namespace RDS.Fantadepo.WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Coach>> PostCoach(Coach coach)
         {
-            var newId = await _coachService.CreateCoach(coach);      
-            return CreatedAtAction("GetCoach", new { id = newId }, coach);
+            try
+            {
+                var newId = await _coachService.CreateCoach(coach);
+                return CreatedAtAction("GetCoach", new { id = newId }, coach);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }            
         }
 
         // DELETE: api/Coaches/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCoach(int id)
         {
-            return await _coachService.DeleteCoach(id) ? NoContent() : NotFound();            
+            try
+            {
+                return await _coachService.DeleteCoach(id) ? NoContent() : NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }   
         }
     }
 }
