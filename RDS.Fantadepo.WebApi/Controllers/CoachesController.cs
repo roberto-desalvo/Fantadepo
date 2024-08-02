@@ -19,7 +19,14 @@ namespace RDS.Fantadepo.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Coach>>> GetCoaches()
         {
-            return Ok(await _coachService.GetCoaches());
+            try
+            {
+                return Ok(await _coachService.GetCoaches());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Coaches/5
