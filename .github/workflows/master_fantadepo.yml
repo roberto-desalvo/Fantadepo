@@ -22,6 +22,9 @@ jobs:
         with:
           dotnet-version: '8.x'
 
+      - name: Restore dependencies
+        run: dotnet restore ./RDS.Fantadepo.WebApi/RDS.Fantadepo.WebApi.csproj
+
       - name: Build with dotnet
         run: dotnet build --configuration Release ./RDS.Fantadepo.WebApi/RDS.Fantadepo.WebApi.csproj
 
