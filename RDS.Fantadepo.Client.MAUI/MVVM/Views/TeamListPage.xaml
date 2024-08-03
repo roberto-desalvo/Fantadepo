@@ -10,7 +10,7 @@
              BackgroundColor="#315C2B">
 
 
-    <Grid Margin="20" RowDefinitions="*,11*" ColumnDefinitions="*, 4*, *" >
+    <Grid Margin="20" RowDefinitions="11*,*" ColumnDefinitions="*, 4*, *" >
 
         <CollectionView Margin="10" Grid.Row="0" Grid.ColumnSpan="123" ItemsSource="{Binding Teams}">
             <CollectionView.ItemTemplate>

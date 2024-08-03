@@ -27,7 +27,7 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 
         private async Task LoadData()
         {
-            var teams = await _teamService.GetTeams(AppBusinessContext.CurrentSeason.Id, false);
+            var teams = await _teamService.GetTeams(AppBusinessContext.CurrentSeason.Id, true);
 
             foreach (var t in teams.Select(t => new TeamListItemViewModel(t)))
             {
