@@ -42,12 +42,26 @@ namespace RDS.Fantadepo.WebApi.Business.Services
 
         public async Task<IEnumerable<Team>> GetTeams(Func<Team, bool>? predicate = null)
         {
-            return _mapper.Map<IEnumerable<Team>>(await _context.Teams.FindAsync()).Where(predicate ?? noFilter);
+            var t = Task.Factory.StartNew(() =>
+            {
+                var entities = _context.Teams;
+                var teams = _mapper.Map<IEnumerable<Team>>(entities);
+                return teams.Where(predicate ?? noFilter);
+            });
+
+            return await t;
         }
 
         public async Task<IEnumerable<Team>> GetTeamsWithCoaches(Func<Team, bool>? predicate = null)
         {
-            return _mapper.Map<IEnumerable<Team>>(await _context.Teams.Include(x => x.Coach).FirstAsync()).Where(predicate ?? noFilter);
+            var t = Task.Factory.StartNew(() => 
+            {
+                var entities = _context.Teams.Include(x => x.Coach);
+                var teams = _mapper.Map<IEnumerable<Team>>(entities);
+                return teams.Where(predicate ?? noFilter);
+            });
+
+            return await t;
         }
 
         public async Task<Team?> GetTeamWithCoach(int id)

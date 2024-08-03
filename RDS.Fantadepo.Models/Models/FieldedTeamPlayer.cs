@@ -10,8 +10,8 @@ namespace RDS.Fantadepo.Models.Models
     {
         public int Id { get; set; }
         public int TeamPlayerId { get; set; }
-        public TeamPlayer TeamPlayer { get; set; }
+        public TeamPlayer? TeamPlayer { get; set; }
         public int MatchId { get; set; }
-        public Match Match { get; set; }
+        public Match? Match { get; set; }
     }
 }

@@ -15,9 +15,9 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
         [ObservableProperty]
         private ObservableCollection<TeamListItemViewModel> teams = [];
 
-        private readonly ITeamsService _teamService;
+        private readonly ITeamService _teamService;
 
-        public TeamListViewModel(ITeamsService teamService)
+        public TeamListViewModel(ITeamService teamService)
         {
             _teamService = teamService ?? throw new ArgumentNullException(nameof(teamService));
             Task.Factory.StartNew(async () => { await LoadData(); });
@@ -27,7 +27,7 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 
         private async Task LoadData()
         {
-            var teams = await _teamService.GetTeams(AppBusinessContext.CurrentSeason.Id, true);
+            var teams = await _teamService.GetTeams(AppBusinessContext.CurrentSeason.Id, false);
 
             foreach (var t in teams.Select(t => new TeamListItemViewModel(t)))
             {

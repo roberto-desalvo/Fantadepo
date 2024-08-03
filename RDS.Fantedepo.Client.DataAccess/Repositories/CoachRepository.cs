@@ -10,11 +10,10 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantedepo.Client.DataAccess.Repositories
 {
-    public class CoachesRepository : CrudRepository<Coach>, ICoachesRepository
+    public class CoachRepository : CrudRepository<Coach>, ICoachRepository
     {
-        public CoachesRepository(Context context) : base(context)
+        public CoachRepository(Context context) : base(context)
         {
-            customPath = ApiHelper.GetCustomPath();
         }
     }
 }

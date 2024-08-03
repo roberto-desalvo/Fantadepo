@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Client.Business.Services
 {
-    public class CoachesService : ICoachesService
+    public class CoachService : ICoachService
     {
-        private readonly ICoachesRepository _repo;
+        private readonly ICoachRepository _repo;
 
-        public CoachesService(ICoachesRepository repo)
+        public CoachService(ICoachRepository repo)
         {
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }

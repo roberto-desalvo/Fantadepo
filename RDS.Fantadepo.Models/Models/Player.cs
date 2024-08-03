@@ -14,8 +14,8 @@ namespace RDS.Fantadepo.Models.Models
         public string Lastname { get; set; } = string.Empty;
         public string Nickname { get; set; } = string.Empty;
 
-        public ICollection<TeamPlayer> TeamPlayers { get; set; }
-        public ICollection<PlayerPerformance> PlayerPerformances { get; set; }
+        public ICollection<TeamPlayer>? TeamPlayers { get; set; }
+        public ICollection<PlayerPerformance>? PlayerPerformances { get; set; }
     }
 
 }

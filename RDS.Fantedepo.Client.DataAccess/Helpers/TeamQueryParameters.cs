@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantedepo.Client.DataAccess.Helpers
 {
-    public class TeamsQueryParameters : IQueryParameters
+    public class TeamQueryParameters : IQueryParameters
     {
         public int? SeasonId { get; set; }
         public bool? IncludeCoach { get; set; }

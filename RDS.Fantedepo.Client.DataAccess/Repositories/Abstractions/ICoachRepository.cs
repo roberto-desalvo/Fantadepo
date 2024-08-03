@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
 {
-    public interface ICoachesRepository : ICrudRepository<Coach>
+    public interface ICoachRepository : ICrudRepository<Coach>
     {
     }
 }

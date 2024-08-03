@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
 {
-    public interface ITeamsRepository : ICrudRepository<Team>
+    public interface ITeamRepository : ICrudRepository<Team>
     {
         Task<Team?> GetTeam(int id, bool withCoach);
         Task<IEnumerable<Team>> GetTeams(int? seasonId, bool withCoaches);

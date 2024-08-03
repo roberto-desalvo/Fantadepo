@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Client.Business.Services.Abstractions
 {
-    public interface ICoachesService
+    public interface ICoachService
     {
         Task<Coach?> GetCoach(int id);
         Task<IEnumerable<Coach>> GetCoaches();

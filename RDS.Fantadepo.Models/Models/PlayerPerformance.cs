@@ -26,9 +26,9 @@ namespace RDS.Fantadepo.Models.Models
         public decimal Sum { get; set; }
 
         public int PlayerId { get; set; }
-        public Player Player { get; set; }
+        public Player? Player { get; set; }
 
         public int TurnId { get; set; }
-        public Turn Turn { get; set; }
+        public Turn? Turn { get; set; }
     }
 }

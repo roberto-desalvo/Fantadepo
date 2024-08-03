@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RDS.Fantadepo.Models.Models;
 using RDS.Fantedepo.Client.DataAccess.Helpers;
 using RDS.Fantedepo.Client.DataAccess.Settings;
 using System;
@@ -12,7 +13,6 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
     public class CrudRepository<T> : ICrudRepository<T>
         where T : class
     {
-        protected string customPath = string.Empty;
         protected readonly Context _context;
         protected HttpClient client;
 
@@ -22,11 +22,24 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
             client = new HttpClient();
         }
 
+        protected string GetCustomPath()
+        {            
+            if(typeof(T) == typeof(Coach))
+            {
+                return "api/coaches";
+            }
+            if(typeof(T) == typeof(Team))
+            {
+                return "api/teams";
+            }
+            return string.Empty;
+        }
+
         protected async Task<int> DoPost(object obj)
         {
             var json = JsonConvert.SerializeObject(obj);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var uri = _context.GetFormedUri(customPath, []);
+            var uri = _context.GetFormedUri(GetCustomPath(), []);
             var response = await client.PostAsync(uri, content);
 
             if (!response.IsSuccessStatusCode)
@@ -40,7 +53,7 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
 
         protected async Task<bool> DoDelete(int id)
         {
-            var uri = _context.GetFormedUri($"{customPath}/{id}", []);
+            var uri = _context.GetFormedUri($"{GetCustomPath()}/{id}", []);
             var response = await client.DeleteAsync(uri);
 
             if (!response.IsSuccessStatusCode)
@@ -53,7 +66,7 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
 
         protected async Task<T?> DoGetItem(int id, Dictionary<string, string> parameters)
         {
-            var uri = _context.GetFormedUri($"{customPath}/{id}", parameters ?? []);
+            var uri = _context.GetFormedUri($"{GetCustomPath()}/{id}", parameters ?? []);
             var response = await client.GetAsync(uri);
             var responseString = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(responseString);
@@ -61,7 +74,7 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
 
         protected async Task<IEnumerable<T>> DoGetItemList(Dictionary<string, string> parameters)
         {
-            var uri = _context.GetFormedUri($"{customPath}", parameters ?? []);
+            var uri = _context.GetFormedUri($"{GetCustomPath()}", parameters ?? []);
             var response = await client.GetAsync(uri);
             var responseString = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<IEnumerable<T>>(responseString) ?? [];
@@ -71,7 +84,7 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
         {
             var json = JsonConvert.SerializeObject(obj);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var uri = _context.GetFormedUri($"{customPath}/{id}", []);
+            var uri = _context.GetFormedUri($"{GetCustomPath()}/{id}", []);
             var response = await client.PutAsync(uri, content);
 
             if (!response.IsSuccessStatusCode)
