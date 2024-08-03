@@ -10,8 +10,8 @@ namespace RDS.Fantadepo.Client.Business.Extensions
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
             services.AddDataAccessServices();
-            services.AddScoped<ICoachesService, CoachesService>();
-            services.AddScoped<ITeamsService, TeamsService>();
+            services.AddScoped<ICoachService, CoachService>();
+            services.AddScoped<ITeamService, TeamService>();
 
             return services;
         }

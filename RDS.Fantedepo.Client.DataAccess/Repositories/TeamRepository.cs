@@ -10,22 +10,21 @@ using System.Text;
 
 namespace RDS.Fantedepo.Client.DataAccess.Repositories
 {
-    public class TeamsRepository : CrudRepository<Team>, ITeamsRepository
+    public class TeamRepository : CrudRepository<Team>, ITeamRepository
     {
-        public TeamsRepository(Context context) : base(context)
+        public TeamRepository(Context context) : base(context)
         {
-            customPath = ApiHelper.GetCustomPath();
         }
 
         public Task<Team?> GetTeam(int id, bool withCoach)
         {
-            var parameters = new TeamsQueryParameters { IncludeCoach = withCoach };
+            var parameters = new TeamQueryParameters { IncludeCoach = withCoach };
             return base.Get(id, parameters);
         }
 
         public Task<IEnumerable<Team>> GetTeams(int? seasonId, bool withCoaches)
         {
-            var parameters = new TeamsQueryParameters { IncludeCoach = withCoaches, SeasonId = seasonId };
+            var parameters = new TeamQueryParameters { IncludeCoach = withCoaches, SeasonId = seasonId };
             return base.Get(parameters);
         }
     }

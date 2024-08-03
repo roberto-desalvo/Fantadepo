@@ -15,7 +15,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
             _coachService = coachService ?? throw new ArgumentNullException(nameof(coachService));
         }
 
-        // GET: api/Coaches
+        // GET: api/Coach
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Coach>>> GetCoaches()
         {
@@ -29,7 +29,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
             }
         }
 
-        // GET: api/Coaches/5
+        // GET: api/Coach/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Coach>> GetCoach(int id)
         {            
@@ -44,7 +44,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
             }
         }
 
-        // PUT: api/Coaches/5
+        // PUT: api/Coach/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCoach(int id, Coach coach)
@@ -59,7 +59,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
             }
         }
 
-        // POST: api/Coaches
+        // POST: api/Coach
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Coach>> PostCoach(Coach coach)
@@ -75,7 +75,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
             }            
         }
 
-        // DELETE: api/Coaches/5
+        // DELETE: api/Coach/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCoach(int id)
         {

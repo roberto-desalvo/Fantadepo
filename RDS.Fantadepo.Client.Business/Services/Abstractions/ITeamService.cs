@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.Client.Business.Services.Abstractions
 {
-    public interface ITeamsService
+    public interface ITeamService
     {
         Task<Team?> GetTeam(int id, bool includeCoach = false);
         Task<IEnumerable<Team>> GetTeams(int? seasonId = 0, bool includeCoach = false);

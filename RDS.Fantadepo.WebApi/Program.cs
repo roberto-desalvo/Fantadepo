@@ -1,5 +1,5 @@
 
-using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using RDS.Fantadepo.WebApi.Business.Mappings;
 using RDS.Fantadepo.WebApi.Business.Utilities.Extensions;
 
@@ -16,7 +16,11 @@ namespace RDS.Fantadepo.WebApi
             builder.Services.AddAutoMapper(x => x.AddProfile<WebApiBusinessProfile>());
 
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                }); ;
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

@@ -14,7 +14,7 @@ namespace RDS.Fantadepo.Models.Models
         public DateOnly StartDate { get; set; }
         public DateOnly EndDate { get; set; }
 
-        public ICollection<Turn> Turns { get; set; }
-        public ICollection<Team> Teams { get; set; }
+        public ICollection<Turn>? Turns { get; set; }
+        public ICollection<Team>? Teams { get; set; }
     }
 }

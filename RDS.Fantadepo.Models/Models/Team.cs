@@ -13,13 +13,13 @@ namespace RDS.Fantadepo.Models.Models
         public string Name { get; set; } = string.Empty;
 
         public int CoachId { get; set; }
-        public Coach Coach { get; set; }
+        public Coach? Coach { get; set; }
 
         public int SeasonId { get; set; }
-        public Season Season { get; set; }
+        public Season? Season { get; set; }
 
-        public ICollection<Match> HomeMatches { get; set; }
-        public ICollection<Match> AwayMatches { get; set; }
-        public ICollection<TeamPlayer> TeamPlayers { get; set; }
+        public ICollection<Match>? HomeMatches { get; set; }
+        public ICollection<Match>? AwayMatches { get; set; }
+        public ICollection<TeamPlayer>? TeamPlayers { get; set; }
     }
 }

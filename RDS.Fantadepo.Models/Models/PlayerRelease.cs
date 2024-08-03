@@ -12,6 +12,6 @@ namespace RDS.Fantadepo.Models.Models
         public DateOnly Date { get; set; }
         public int Price { get; set; }
         public int TeamPlayerId { get; set; }
-        public TeamPlayer TeamPlayer { get; set; }
+        public TeamPlayer? TeamPlayer { get; set; }
     }
 }

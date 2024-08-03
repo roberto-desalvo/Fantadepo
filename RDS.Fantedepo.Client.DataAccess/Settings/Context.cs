@@ -18,7 +18,7 @@ namespace RDS.Fantedepo.Client.DataAccess.Settings
 
         public Uri GetFormedUri(string customPath, Dictionary<string, string> parameters)
         {         
-            var uriString = $"{_settings.Scheme}://{_settings.Host}:{_settings.Port}/{_settings.BasePath}/{customPath}"; 
+            var uriString = $"{_settings.BaseUrl}/api/{customPath}"; 
 
             if((parameters?.Count ?? 0) != 0) 
             {
@@ -27,7 +27,7 @@ namespace RDS.Fantedepo.Client.DataAccess.Settings
                 {
                     uriString += $"{value.Key}={value.Value}&";
                 }
-                uriString = uriString.Remove(-1, 1);
+                uriString = uriString.Remove(uriString.Length - 1, 1);
             }
 
             return new Uri(uriString);

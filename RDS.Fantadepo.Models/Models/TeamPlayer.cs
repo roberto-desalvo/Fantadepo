@@ -19,10 +19,10 @@ namespace RDS.Fantadepo.Models.Models
         public int PlayerId { get; set; }
         public Player Player { get; set; } = new();
 
-        public PlayerAcquisition PlayerAcquisition { get; set; }
+        public PlayerAcquisition? PlayerAcquisition { get; set; }
         public PlayerRelease? PlayerRelease { get; set; }
 
-        public ICollection<FieldedTeamPlayer> FieldedPlayers { get; set; }
+        public ICollection<FieldedTeamPlayer>? FieldedPlayers { get; set; }
 
     }
 }

@@ -25,10 +25,10 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
         private ObservableCollection<CoachListItemViewModel> coaches = [];
 
 
-        private readonly ITeamsService _teamsService;
-        private readonly ICoachesService _coachesService;
+        private readonly ITeamService _teamsService;
+        private readonly ICoachService _coachesService;
 
-        public TeamDetailViewModel(ITeamsService teamService, ICoachesService coachService)
+        public TeamDetailViewModel(ITeamService teamService, ICoachService coachService)
         {
             _teamsService = teamService ?? throw new ArgumentNullException(nameof(teamService));
             _coachesService = coachService ?? throw new ArgumentNullException(nameof(coachService));

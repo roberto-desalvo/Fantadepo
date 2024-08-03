@@ -4,6 +4,7 @@ using RDS.Fantadepo.WebApi.DataAccess;
 using RDS.Fantadepo.Models.Models;
 using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
@@ -39,7 +40,14 @@ namespace RDS.Fantadepo.WebApi.Business.Services
 
         public async Task<IEnumerable<Coach>> GetCoaches()
         {
-            return _mapper.Map<IEnumerable<Coach>>(_context.Coaches);
+            var t = Task.Factory.StartNew(() =>
+            {
+                var entities = _context.Coaches;
+                var coaches = _mapper.Map<IEnumerable<Coach>>(entities);
+                return coaches;
+            });
+
+            return await t;
         }
 
         public async Task<bool> UpdateCoach(int id, Coach coach)

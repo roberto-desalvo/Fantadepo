@@ -10,9 +10,9 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
         private Team? model;
         public int Id { get => Model?.Id ?? 0; private set => Model = new Team { Id = value }; }
 
-        private readonly ITeamsService _teamsService;
+        private readonly ITeamService _teamsService;
 
-        public TeamListItemViewModel(ITeamsService teamService)
+        public TeamListItemViewModel(ITeamService teamService)
         {
             _teamsService = teamService ?? throw new ArgumentNullException(nameof(teamService));
             Task.Factory.StartNew(async () => await LoadAsync(null));

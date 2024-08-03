@@ -14,7 +14,6 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories
     {
         public PlayerRepository(Context context) : base(context)
         {
-            customPath = ApiHelper.GetCustomPath();
         }
     }
 }
