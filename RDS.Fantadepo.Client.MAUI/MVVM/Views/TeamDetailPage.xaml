@@ -11,7 +11,6 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
-            <converters:CoachToStringConverter x:Key="CoachToStringConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -19,23 +18,35 @@
         <Grid 
             Grid.ColumnDefinitions="0.3*,0.7*" 
             Grid.RowDefinitions="0.2*, 0.2*, 0.2*, 0.2*, 0.2*" 
-            Padding="30,0">
+            Padding="30,10">            
+            
+            <Label Padding="10" MaximumHeightRequest="80" Grid.Column="0" Grid.Row="0" Text="Name" VerticalTextAlignment="Center"/>
+            <Entry Margin="10" MaximumHeightRequest="80" Grid.Column="1" Grid.Row="0" Text="{Binding Model.Name, TargetNullValue=''}" IsReadOnly="{Binding IsReadonly}"/>
 
-            <Label Grid.Column="0" Grid.Row="0" Text="Name"/>
-            <Entry Grid.Column="1" Grid.Row="0" Text="{Binding Model.Name}" IsReadOnly="{Binding IsReadonly}"/>
-
-            <Label Grid.Column="0" Grid.Row="1" Text="Coach"/>
+            <Label Grid.Column="0" Grid.Row="1" Text="Coach" VerticalTextAlignment="Center" Padding="10" MaximumHeightRequest="80"/>
             <Picker 
                 Grid.Column="1" Grid.Row="1" 
-                IsEnabled="{Binding IsReadonly, Converter={StaticResource InverseBooleanConverter}}"
-                ItemsSource="{Binding Coaches, Mode=TwoWay, Converter={StaticResource CoachToStringConverter}}"
-                SelectedItem="{Binding Model.Coach, Mode=TwoWay, Converter={StaticResource CoachToStringConverter}}"/>
+                IsEnabled="{Binding IsReadonly, 
+                    Converter={StaticResource InverseBooleanConverter}, 
+                    TargetNullValue=False}"
+                ItemsSource="{Binding Coaches, 
+                Mode=TwoWay}"
+                ItemDisplayBinding="{Binding Name, TargetNullValue='NULL'}"
+                SelectedItem="{Binding SelectedCoach, Mode=TwoWay}"
+                Margin="10" MaximumHeightRequest="80"/>
+
+
 
             <Button 
                 Command="{Binding SaveCommand}" 
+                IsVisible="{Binding IsReadonly, 
+                Converter={StaticResource InverseBooleanConverter}, 
+                TargetNullValue=False}"
                 Text="Save"
-                Grid.ColumnSpan="01"
-                Padding="0, 20"/>
+                Grid.ColumnSpan="012"
+                Grid.Row="2"
+                MaximumWidthRequest="400"
+                Padding="20, 20"/>
 
         </Grid>
     </ScrollView>

@@ -5,8 +5,10 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
     public partial class CoachListItemViewModel : ObservableObject
     {
+        [ObservableProperty]
         private Coach? model;
-        public int Id { get => model?.Id ?? 0; }
+
+        public int Id { get => Model?.Id ?? 0; }
 
         [ObservableProperty]
         private string coachFirstName = string.Empty;
@@ -14,9 +16,11 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
         [ObservableProperty]
         private string coachLastName = string.Empty;
 
+        public string Name => $"{CoachFirstName} {CoachLastName}";
+
         public CoachListItemViewModel(Coach? coach)
         {
-            this.model = coach;
+            this.Model = coach;
             this.CoachFirstName = coach?.FirstName ?? string.Empty;
             this.CoachLastName = coach?.LastName ?? string.Empty;
         }

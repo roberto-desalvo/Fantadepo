@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using RDS.Fantadepo.Client.Business.Services.Abstractions;
+using CommunityToolkit.Mvvm.Input;
+using RDS.Fantadepo.Client.MAUI.MVVM.Views;
+using RDS.Fantadepo.Client.MAUI.Utilities;
 using RDS.Fantadepo.Models.Models;
 
 namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
@@ -10,22 +12,37 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
         private Team? model;
         public int Id { get => Model?.Id ?? 0; private set => Model = new Team { Id = value }; }
 
-        private readonly ITeamService _teamsService;
-
-        public TeamListItemViewModel(ITeamService teamService)
-        {
-            _teamsService = teamService ?? throw new ArgumentNullException(nameof(teamService));
-            Task.Factory.StartNew(async () => await LoadAsync(null));
-        }
-
         public TeamListItemViewModel(Team? team)
         {
-            Task.Factory.StartNew(async () => await LoadAsync(team));
+            Model = team;
         }
 
-        public async Task LoadAsync(Team? team)
-        {            
-            Model = (team is null && Id != 0) ? await _teamsService.GetTeam(Id) : team;
+        [RelayCommand]
+        public void ModifyTeam()
+        {
+            UIHelper.SafeCall(async () =>
+            {
+                var data = new Dictionary<string, object>
+                {
+                    { QueryAttributes.ISREADONLY, false },
+                    { QueryAttributes.TEAMID, Model?.Id ?? 0 }
+                };
+                await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
+            });
+        }
+
+        [RelayCommand]
+        public void DisplayTeamDetail()
+        {
+            UIHelper.SafeCall(async () =>
+            {
+                var data = new Dictionary<string, object>
+                {
+                    { QueryAttributes.ISREADONLY, true },
+                    { QueryAttributes.TEAMID, Model?.Id ?? 0 }
+                };
+                await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
+            });
         }
     }
 }

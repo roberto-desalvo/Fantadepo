@@ -6,7 +6,15 @@ public partial class TeamDetailPage : ContentPage
 {
     public TeamDetailPage(TeamDetailViewModel viewModel)
     {
-        InitializeComponent();
-        BindingContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+		try
+		{
+			InitializeComponent();
+			BindingContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+		}
+		catch (Exception ex)
+		{
+
+			throw;
+		}
     }
 }

@@ -62,21 +62,6 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
                 await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
             });
         }
-
-        [RelayCommand]
-        public void ModifyTeam(Team team)
-        {
-            UIHelper.SafeCall(async () =>
-            {
-                var data = new Dictionary<string, object> 
-                { 
-                    { QueryAttributes.ISREADONLY, false },
-                    { QueryAttributes.TEAMID, team.Id }
-                };
-                await Shell.Current.GoToAsync(nameof(TeamDetailPage), data);
-            });
-        }
-
     }
 }
 
