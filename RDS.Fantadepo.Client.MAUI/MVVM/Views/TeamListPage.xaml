@@ -7,25 +7,28 @@
              xmlns:viewmodel="clr-namespace:RDS.Fantadepo.Client.MAUI.MVVM.ViewModels"
              x:DataType="viewmodel:TeamListViewModel"
              x:Name="Page"
-             BackgroundColor="#315C2B">
-
+             BackgroundColor="#315C2B">    
 
     <Grid Margin="20" RowDefinitions="11*,*" ColumnDefinitions="*, 4*, *" >
 
         <CollectionView Margin="10" Grid.Row="0" Grid.ColumnSpan="123" ItemsSource="{Binding Teams}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodel:TeamListItemViewModel">
-                    <Grid Padding="0,5">
-                        <Frame >
+                    <SwipeView Padding="0,5">
+                        <Frame HasShadow="True" CornerRadius="10" Padding="5">
                             <Grid ColumnDefinitions="0.25*, 0.75*">
                                 <VerticalStackLayout Grid.Column="0">
                                     <Label Text="{Binding Model.Coach.FirstName, FallbackValue='', TargetNullValue='No coach found'}"/>
                                     <Label Text="{Binding Model.Coach.LastName, FallbackValue='', TargetNullValue='No coach found'}"/>
                                 </VerticalStackLayout>
                                 <Label Grid.Column="1" Text="{Binding Model.Name, FallbackValue='No name found', TargetNullValue='No team found' }"/>
-                            </Grid>                            
-                        </Frame>
-                    </Grid>
+                            </Grid>
+                        </Frame>  
+                        <SwipeView.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding DisplayTeamDetailCommand}" />
+                            <SwipeGestureRecognizer Direction="Left" Command="{Binding ModifyTeamCommand}"/>
+                        </SwipeView.GestureRecognizers>                        
+                    </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

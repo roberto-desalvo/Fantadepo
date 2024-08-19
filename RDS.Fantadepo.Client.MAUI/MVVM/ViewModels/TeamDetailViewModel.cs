@@ -9,12 +9,10 @@ using System.Collections.ObjectModel;
 
 namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
-    [QueryProperty(nameof(Id), QueryAttributes.TEAMID)]
-    [QueryProperty(nameof(IsReadonly), QueryAttributes.ISREADONLY)]
-    public partial class TeamDetailViewModel : ObservableObject
+    public partial class TeamDetailViewModel : ObservableObject, IQueryAttributable
     {
         [ObservableProperty]
-        private Team? model;
+        private Team model = new();
         
         public int Id { get => Model?.Id ?? 0; private set => Model = new Team { Id = value }; }
 
@@ -24,6 +22,9 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
         [ObservableProperty]
         private ObservableCollection<CoachListItemViewModel> coaches = [];
 
+        [ObservableProperty]
+        private CoachListItemViewModel? selectedCoach;
+
 
         private readonly ITeamService _teamsService;
         private readonly ICoachService _coachesService;
@@ -31,8 +32,7 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
         public TeamDetailViewModel(ITeamService teamService, ICoachService coachService)
         {
             _teamsService = teamService ?? throw new ArgumentNullException(nameof(teamService));
-            _coachesService = coachService ?? throw new ArgumentNullException(nameof(coachService));
-            LoadData();
+            _coachesService = coachService ?? throw new ArgumentNullException(nameof(coachService));            
         }
 
         [RelayCommand]
@@ -44,12 +44,22 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 
         private async void LoadData()
         {
-            Model = Id == 0 ? new() : await _teamsService.GetTeam(this.Id, true);
-            if(Model!.Season == null)
-            {
-                Model.Season = AppBusinessContext.CurrentSeason;
-            }
+            Model = Id == 0 ? new() : await _teamsService.GetTeam(this.Id, true) ?? new();                           
             Coaches = new ((await _coachesService.GetCoaches()).Select(c => new CoachListItemViewModel(c)));
+
+            if(Model != null)
+            {
+                Model.Season = Model.Season ?? AppBusinessContext.CurrentSeason;
+                SelectedCoach = Coaches.FirstOrDefault(c => c.Id == Model.CoachId);
+                Model.Coach = SelectedCoach?.Model;
+            }            
+        }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            Id = query.ContainsKey(QueryAttributes.TEAMID) ? (int)query[QueryAttributes.TEAMID] : 0;
+            IsReadonly = query.ContainsKey(QueryAttributes.ISREADONLY) ? (bool)query[QueryAttributes.ISREADONLY] : true;
+            LoadData();
         }
     }
 }
