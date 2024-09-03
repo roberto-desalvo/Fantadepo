@@ -44,13 +44,12 @@ namespace RDS.Fantadepo.WebApi.Business.Tests.Algorithms
 
         public static IEnumerable<object[]> GetRandomCount()
         {
-            //var randomCount = new Random().Next(5, 10);
+            var randomCount = new Random().Next(5, 10);
 
-            //for (int i = 0; i < randomCount; i++)
-            //{
-            //    yield return new object[] { new Random().Next(2, 100) };
-            //}
-            yield return new object[] { 8 };
+            for (int i = 0; i < randomCount; i++)
+            {
+                yield return new object[] { new Random().Next(2, 100) };
+            }
         }
 
         [Theory]
@@ -81,15 +80,17 @@ namespace RDS.Fantadepo.WebApi.Business.Tests.Algorithms
         public void SimpleRoundRobin_WhenCalled_EachItemShouldAppearRightTimes(int count)
         {
             var items = GetItems(count).ToList();
-            var expectedCount = (count - 1) * 2;
+            var expectedCount = count - 1;
 
             var result = RoundRobin<Item>.Instance.SimpleRoundRobin(items);
 
             foreach (var item in items)
             {
-                var actualCount = result.SelectMany(x => x).Where(x =>
-                x.Item1.Equals(item) || x.Item2.Equals(item))
+                var actualCount = result
+                    .SelectMany(x => x)
+                    .Where(x => x.Item1.Item.Equals(item) || x.Item2.Item.Equals(item))
                     .Count();
+
                 actualCount.Should().Be(expectedCount);
             }
         }
@@ -111,13 +112,83 @@ namespace RDS.Fantadepo.WebApi.Business.Tests.Algorithms
 
         [Theory]
         [MemberData(nameof(GetRandomCount))]
-        public void SimpleRoundRobin_WhenCalled_ShouldHaveExpectedInnerListNumber(int count)
+        public void SimpleRoundRobin_WhenCalled_ShouldReturnExpectedListCount(int count)
         {
             var items = GetItems(count).ToList();
             var expectedInnerListCount = count % 2 == 0 ? (count - 1) : count;
 
             var result = RoundRobin<Item>.Instance.SimpleRoundRobin(items);
 
+            result.Should().HaveCount(expectedInnerListCount);
+        }
+
+        [Theory]
+        [MemberData(nameof(GetRandomCount))]
+        public void DoubleRoundRobin_WhenCalled_TotalItemsShouldHaveExpectedCount(int count)
+        {
+            var items = GetItems(count).ToList();
+            var expectedCount = count * (count - 1);
+
+            var result = RoundRobin<Item>.Instance.DoubleRoundRobin(items);
+
+            result.SelectMany(x => x).Count().Should().Be(expectedCount);
+        }
+
+        [Theory]
+        [MemberData(nameof(GetRandomCount))]
+        public void DoubleRoundRobin_WhenCalled_ShouldContainNoRepetitions(int count)
+        {
+            var items = GetItems(count).ToList();
+
+            var result = RoundRobin<Item>.Instance.DoubleRoundRobin(items);
+
+            result.SelectMany(x => x).Should().OnlyHaveUniqueItems();
+        }
+
+        [Theory]
+        [MemberData(nameof(GetRandomCount))]
+        public void DoubleRoundRobin_WhenCalled_EachItemShouldAppearRightTimes(int count)
+        {
+            var items = GetItems(count).ToList();
+            var expectedCount = (count - 1) * 2;
+
+            var result = RoundRobin<Item>.Instance.DoubleRoundRobin(items);
+
+            foreach (var item in items)
+            {
+                var actualCount = result
+                    .SelectMany(x => x)
+                    .Where(x => x.Item1.Item.Equals(item) || x.Item2.Item.Equals(item))
+                    .Count();
+
+                actualCount.Should().Be(expectedCount);
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(GetRandomCount))]
+        public void DoubleRoundRobin_WhenCalled_EachInnerListShouldHaveExpectedCount(int count)
+        {
+            var items = GetItems(count).ToList();
+            var expectedItemsCountInInnerList = count % 2 == 0 ? count / 2 : (count - 1) / 2;
+
+            var result = RoundRobin<Item>.Instance.DoubleRoundRobin(items);
+
+            foreach (var list in result)
+            {
+                list.Should().HaveCount(expectedItemsCountInInnerList);
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(GetRandomCount))]
+        public void DoubleRoundRobin_WhenCalled_ShouldReturnExpectedListCount(int count)
+        {
+            var items = GetItems(count).ToList();
+            var expectedInnerListCount = count % 2 == 0 ? (count - 1) * 2 : count * 2;
+
+            var result = RoundRobin<Item>.Instance.DoubleRoundRobin(items);
+            
             result.Should().HaveCount(expectedInnerListCount);
         }
 

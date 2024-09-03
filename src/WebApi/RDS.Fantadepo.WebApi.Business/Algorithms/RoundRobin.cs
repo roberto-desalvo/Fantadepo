@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace RDS.Fantadepo.WebApi.Business.Algorithms
 {
     public class RoundRobin<T>
-        where T : ICloneable
     {
         public class Element
         {
@@ -22,14 +21,14 @@ namespace RDS.Fantadepo.WebApi.Business.Algorithms
                 }
                 if (obj is Element element)
                 {
-                    if (element.IsFakeItem == this.IsFakeItem && this.IsFakeItem)
+                    if (element.IsFakeItem)
                     {
-                        return true;
+                        return this.IsFakeItem;
                     }
 
-                    if(this.Item == null && element.Item == null) 
+                    if (this.IsFakeItem)
                     {
-                        return true;
+                        return element.IsFakeItem;
                     }
 
                     return element.Item.Equals(this.Item);
@@ -42,7 +41,9 @@ namespace RDS.Fantadepo.WebApi.Business.Algorithms
 
         public List<List<(Element, Element)>> DoubleRoundRobin(List<T> items)
         {
+            var final = new List<List<(Element, Element)>>();
             var list = SimpleRoundRobin(items);
+            final.AddRange(list);
 
             foreach (var innerList in list)
             {
@@ -52,23 +53,58 @@ namespace RDS.Fantadepo.WebApi.Business.Algorithms
                     var reversed = (couple.Item2, couple.Item1);
                     currentList.Add(reversed);
                 }
-                list.Add(currentList);
+                final.Add(currentList);
             }
 
-            return list;
+            return final;
         }
 
         public List<List<(Element, Element)>> SimpleRoundRobin(List<T> items)
         {
             var list = items.Select(item => new Element { Item = item }).ToList();
 
-            if (items.Count % 2 != 0)
+            if (list.Count == 0 || list.Count == 1)
+            {
+                return [];
+            }
+            if (list.Count == 2)
+            {
+                return [[(list[0], list[1])]];
+            }
+
+            var odd = items.Count % 2 != 0;
+            if (odd)
             {
                 var fakeElement = new Element { IsFakeItem = true };
                 list.Add(fakeElement);
             }
 
             var result = SimpleRoundRobin(list);
+
+            if (odd)
+            {
+                result = RemoveFakeItems(result);
+            }
+
+            return result;
+        }
+
+        private List<List<(Element, Element)>> RemoveFakeItems(List<List<(Element, Element)>> list)
+        {
+            var result = new List<List<(Element, Element)>>();
+            foreach (var innerList in list)
+            {
+                var currentList = new List<(Element, Element)>();
+                foreach (var couple in innerList)
+                {
+                    if (couple.Item1.IsFakeItem || couple.Item2.IsFakeItem)
+                    {
+                        continue;
+                    }
+                    currentList.Add(couple);
+                }
+                result.Add(currentList);
+            }
             return result;
         }
 
