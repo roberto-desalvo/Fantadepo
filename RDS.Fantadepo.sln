@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.Models", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantedepo.Client.DataAccess", "src\Client\RDS.Fantedepo.Client.DataAccess\RDS.Fantedepo.Client.DataAccess.csproj", "{6FB98E58-7799-4829-905F-7A6A50A9B8C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDS.Fantadepo.Client.Business", "src\Client\RDS.Fantadepo.Client.Business\RDS.Fantadepo.Client.Business.csproj", "{EFCB8558-680E-45EB-9083-89E577CBC7CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.Client.Business", "src\Client\RDS.Fantadepo.Client.Business\RDS.Fantadepo.Client.Business.csproj", "{EFCB8558-680E-45EB-9083-89E577CBC7CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{DA5AA47E-240F-46AF-811C-175A55C54AA4}"
 EndProject
@@ -25,7 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{3CE9E8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{BDF5388F-46C6-4D96-AD59-F666B6D8DA88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDS.Fantadepo.DataIngestion", "RDS.Fantadepo.DataIngestion\RDS.Fantadepo.DataIngestion.csproj", "{F49190E0-DA84-494C-AD10-D4F07996B7F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.ClassLibraries.DataIngestion", "src\ClassLibraries\RDS.Fantadepo.ClassLibraries.DataIngestion\RDS.Fantadepo.ClassLibraries.DataIngestion.csproj", "{F49190E0-DA84-494C-AD10-D4F07996B7F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClassLibraries", "ClassLibraries", "{42356366-C6AB-4DA8-9192-DB7F2D7DF648}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +86,7 @@ Global
 		{71AD1A89-2D79-448F-9B4B-5CCD53569129} = {BDF5388F-46C6-4D96-AD59-F666B6D8DA88}
 		{6FB98E58-7799-4829-905F-7A6A50A9B8C3} = {DA5AA47E-240F-46AF-811C-175A55C54AA4}
 		{EFCB8558-680E-45EB-9083-89E577CBC7CD} = {DA5AA47E-240F-46AF-811C-175A55C54AA4}
+		{F49190E0-DA84-494C-AD10-D4F07996B7F8} = {42356366-C6AB-4DA8-9192-DB7F2D7DF648}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0EFB981-7FC5-4735-9462-F156957353F0}

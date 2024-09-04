@@ -3,7 +3,7 @@ using RDS.Fantadepo.Models.Models;
 using System.Data;
 using System.Text;
 
-namespace RDS.Fantadepo.DataIngestion
+namespace RDS.Fantadepo.ClassLibraries.DataIngestion.Utils
 {
     public static class RosterExcelFileReader
     {
@@ -13,33 +13,35 @@ namespace RDS.Fantadepo.DataIngestion
             {
                 var team = new Team
                 {
-                    Name = r[0].ToString() ?? string.Empty,
+                    Name = r[CellIndex.TeamSheetTeamNameCellIndex].ToString() ?? string.Empty,
                     TeamPlayers = []
                 };
 
-                AddCoach(r, team);
-                AddPlayers(r, team);
-                
+                AddCoachToTeam(r, team);
+                AddPlayersToTeam(r, team);
+
                 yield return team;
             }
         }
 
-        private static void AddPlayers(DataRow r, Team team)
+        private static void AddPlayersToTeam(DataRow r, Team team)
         {
-            for(var i = 2; i < 10; i++)
+            team.TeamPlayers = [];
+
+            for (var i = CellIndex.TeamSheetPlayerNameStartCellIndex; i < CellIndex.TeamSheetPlayerNameEndCellIndex; i++)
             {
                 var playerName = r[i].ToString()!.Trim();
 
                 if (!string.IsNullOrWhiteSpace(playerName))
                 {
-                    team.TeamPlayers.Add(new TeamPlayer { Player = new Player { Lastname =  playerName } });
+                    team.TeamPlayers.Add(new TeamPlayer { Player = new Player { Lastname = playerName } });
                 }
             }
         }
 
-        private static void AddCoach(DataRow r, Team team)
+        private static void AddCoachToTeam(DataRow r, Team team)
         {
-            var coachName = r[1].ToString()!.Split(" ", StringSplitOptions.TrimEntries);
+            var coachName = r[CellIndex.TeamSheetCoachNameCellIndex].ToString()!.Split(" ", StringSplitOptions.TrimEntries);
 
             if (coachName != null)
             {
@@ -55,7 +57,7 @@ namespace RDS.Fantadepo.DataIngestion
         {
             foreach (var r in dt.Rows.Cast<DataRow>().Skip(1))
             {
-                var playerName = r[0].ToString()!.Split(" ", StringSplitOptions.TrimEntries);
+                var playerName = r[CellIndex.PlayerSheetPlayerNameCellIndex].ToString()!.Split(" ", StringSplitOptions.TrimEntries);
                 yield return new Player
                 {
                     Firstname = playerName[0],
