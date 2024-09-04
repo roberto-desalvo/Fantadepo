@@ -26,7 +26,7 @@ namespace RDS.Fantadepo.WebApi.DataAccess.Entities
         public ICollection<FieldedTeamPlayer> FieldedTeamPlayers { get; set; } = [];
     }
 
-    public static class MatchModelCreator
+    public static class MatchModelConfigurator
     {
         public static void Configure(ModelBuilder mb)
         {

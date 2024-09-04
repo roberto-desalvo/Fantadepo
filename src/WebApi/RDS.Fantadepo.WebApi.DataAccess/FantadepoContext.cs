@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RDS.Fantadepo.WebApi.DataAccess.Entities;
+using RDS.Fantadepo.WebApi.DataAccess.Options;
 using RDS.Fantadepo.WebApi.DataAccess.Utilities;
 using System;
 using System.Collections.Generic;
@@ -33,21 +34,27 @@ namespace RDS.Fantadepo.WebApi.DataAccess
             
         }
 
+        // for rapidly applying migrations; dev purposes only
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    optionsBuilder.UseSqlServer(AzureHelper.GetAdminConnectionString());
+        //    var kvOptions = new KeyVaultOptions
+        //    {
+        //        Address = "https://fantadepo-kv.vault.azure.net/",
+        //        Secrets = new (){ ConnectionStringAdmin = "fantadepo-admin-connstring" }
+        //    };
+        //    optionsBuilder.UseSqlServer(AzureHelper.GetAdminConnectionString(kvOptions));
         //    base.OnConfiguring(optionsBuilder);
         //}
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
-            CoachModelCreator.Configure(mb);
-            MatchModelCreator.Configure(mb);
-            PlayerModelCreator.Configure(mb);
-            SeasonModelCreator.Configure(mb);
-            TeamModelCreator.Configure(mb);
-            TeamPlayerModelCreator.Configure(mb);
-            TurnModelCreator.Configure(mb);
+            CoachModelConfigurator.Configure(mb);
+            MatchModelConfigurator.Configure(mb);
+            PlayerModelConfigurator.Configure(mb);
+            SeasonModelConfigurator.Configure(mb);
+            TeamModelConfigurator.Configure(mb);
+            TeamPlayerModelConfigurator.Configure(mb);
+            TurnModelConfigurator.Configure(mb);
 
             base.OnModelCreating(mb);
         }

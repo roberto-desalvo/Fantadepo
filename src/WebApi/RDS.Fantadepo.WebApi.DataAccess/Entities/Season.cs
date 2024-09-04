@@ -18,7 +18,7 @@ namespace RDS.Fantadepo.WebApi.DataAccess.Entities
         public ICollection<Team> Teams { get; set; } = [];
     }
 
-    public static class SeasonModelCreator
+    public static class SeasonModelConfigurator
     {
         public static void Configure(ModelBuilder mb)
         {

@@ -18,7 +18,7 @@ namespace RDS.Fantadepo.WebApi.DataAccess.Entities
         public ICollection<PlayerPerformance> PlayerPerformances { get; set; } = [];
     }
 
-    public static class PlayerModelCreator
+    public static class PlayerModelConfigurator
     {
         public static void Configure(ModelBuilder mb)
         {

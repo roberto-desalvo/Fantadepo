@@ -24,7 +24,7 @@ namespace RDS.Fantadepo.WebApi.DataAccess.Entities
         
     }
 
-    public static class TeamModelCreator
+    public static class TeamModelConfigurator
     {
         public static void Configure(ModelBuilder mb)
         {

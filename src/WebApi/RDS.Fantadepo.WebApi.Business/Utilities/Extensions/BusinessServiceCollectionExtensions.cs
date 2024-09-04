@@ -4,6 +4,8 @@ using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess.Utilities;
 using RDS.Fantadepo.WebApi.DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using RDS.Fantadepo.WebApi.DataAccess.Options;
 
 namespace RDS.Fantadepo.WebApi.Business.Utilities.Extensions
 {
@@ -18,9 +20,10 @@ namespace RDS.Fantadepo.WebApi.Business.Utilities.Extensions
             services.AddTransient<ITeamService, TeamService>();
             services.AddTransient<ICoachService, CoachService>();
 
-            services.AddDbContext<FantadepoContext>(opt =>
+            services.AddDbContext<FantadepoContext>((serviceProvider,opt) =>
             {
-                opt.UseSqlServer(AzureHelper.GetAdminConnectionString());
+                var kvOptions = serviceProvider.GetRequiredService<IOptions<KeyVaultOptions>>().Value;
+                opt.UseSqlServer(AzureHelper.GetAdminConnectionString(kvOptions));
             });
 
             return services;

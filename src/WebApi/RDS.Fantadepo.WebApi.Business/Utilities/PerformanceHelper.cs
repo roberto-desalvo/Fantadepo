@@ -1,4 +1,6 @@
-﻿using RDS.Fantadepo.WebApi.DataAccess.Entities;
+﻿using Microsoft.Extensions.Options;
+using RDS.Fantadepo.WebApi.Business.Options;
+using RDS.Fantadepo.WebApi.DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,69 +11,44 @@ namespace RDS.Fantadepo.WebApi.Business.Utilities
 {
     public static class PerformanceHelper
     {
-        public static class Values
-        {
-            public const decimal GOAL = 2;
-            public const decimal OWN_GOAL = -1;
-            public const decimal ASSIST = 1;
-            public const decimal YELLOW_CARD = -0.5m;
-            public const decimal RED_CARD = -1.5m;
-            public const decimal SCORED_PENALTY = 1;
-            public const decimal SCORED_FREE_KICK = 2;
-            public const decimal FAILED_PENALTY = -1.5m;
-            public const decimal FAILED_FREE_KICK = -0.5m;
-            public const decimal SAVED_PENALTY = 2;
-            public const decimal SAVED_FREE_KICK = 1;
-            public const decimal CONCEDED_GOAL_0 = 10;
-            public const decimal CONCEDED_GOAL_1 = 8;
-            public const decimal CONCEDED_GOAL_2 = 6;
-            public const decimal CONCEDED_GOAL_3 = 4;
-            public const decimal CONCEDED_GOAL_4 = 2;
-            public const decimal CONCEDED_GOAL_5 = 1;
-            public const decimal CONCEDED_GOAL_6 = -1;
-            public const decimal CONCEDED_GOAL_7 = -2;
-            public const decimal CONCEDED_GOAL_8 = -3;
-            public const decimal CONCEDED_GOAL_9 = -4;
-            public const decimal CONCEDED_GOAL_10 = -5;
-            public const decimal MINIMUM = 0.5m;
-        }
-
-        public static decimal GetPerformanceSum(PlayerPerformance performance)
+        public static decimal GetPerformanceSum(PlayerPerformance performance, ScoreOptions options)
         {
             decimal final = performance.Vote;
-            final += performance.Goals * Values.GOAL;
-            final += performance.OwnGoals * Values.OWN_GOAL;
-            final += performance.Assists * Values.ASSIST;
-            final += performance.YellowCards * Values.YELLOW_CARD;
-            final += performance.RedCards * Values.RED_CARD;
-            final += performance.ScoredPenalties * Values.SCORED_PENALTY;
-            final += performance.ScoredFreeKicks * Values.SCORED_FREE_KICK;
-            final += performance.FailedPenalties * Values.FAILED_PENALTY;
-            final += performance.FailedFreeKicks * Values.FAILED_FREE_KICK;
+            final += performance.Goals * options.Goal;
+            final += performance.OwnGoals * options.OwnGoal;
+            final += performance.Assists * options.Assist;
+            final += performance.YellowCards * options.YellowCard;
+            final += performance.RedCards * options.RedCard;
+            final += performance.ScoredPenalties * options.ScoredPenalty;
+            final += performance.ScoredFreeKicks * options.ScoredFreeKick;
+            final += performance.FailedPenalties * options.FailedPenalty;
+            final += performance.FailedFreeKicks * options.FailedFreeKick;
 
             if (performance.IsGoalKeeper)
-            {         
+            {
                 final += performance.ConcededGoals switch
                 {
-                    0 => Values.CONCEDED_GOAL_0,
-                    1 => Values.CONCEDED_GOAL_1,
-                    2 => Values.CONCEDED_GOAL_2,
-                    3 => Values.CONCEDED_GOAL_3,
-                    4 => Values.CONCEDED_GOAL_4,
-                    5 => Values.CONCEDED_GOAL_5,
-                    6 => Values.CONCEDED_GOAL_6,
-                    7 => Values.CONCEDED_GOAL_7,
-                    8 => Values.CONCEDED_GOAL_8,
-                    9 => Values.CONCEDED_GOAL_9,
-                    10 => Values.CONCEDED_GOAL_10,
-                    _ => Values.CONCEDED_GOAL_10
+                    0 => options.ConcededGoals0,
+                    1 => options.ConcededGoals1,
+                    2 => options.ConcededGoals2,
+                    3 => options.ConcededGoals3,
+                    4 => options.ConcededGoals4,
+                    5 => options.ConcededGoals5,
+                    6 => options.ConcededGoals6,
+                    7 => options.ConcededGoals7,
+                    8 => options.ConcededGoals8,
+                    9 => options.ConcededGoals9,
+                    10 => options.ConcededGoals10,
+                    _ => options.ConcededGoals10
                 };
 
-                final += performance.SavedPenalties * Values.SAVED_PENALTY;
-                final += performance.SavedFreeKicks * Values.SAVED_FREE_KICK;
+                final += performance.SavedPenalties * options.SavedPenalty;
+                final += performance.SavedFreeKicks * options.SavedFreeKick;
             }
+            
+            performance.Sum = final >= options.Minimum ? final : options.Minimum;
 
-            return final >= Values.MINIMUM ? final : Values.MINIMUM;
+            return performance.Sum;
         }
     }
 }
