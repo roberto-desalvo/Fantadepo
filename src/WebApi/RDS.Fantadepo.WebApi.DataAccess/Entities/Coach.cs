@@ -16,7 +16,7 @@ namespace RDS.Fantadepo.WebApi.DataAccess.Entities
         public Team? Team { get; set; }
     }
 
-    public static class CoachModelCreator
+    public static class CoachModelConfigurator
     {
         public static void Configure(ModelBuilder mb)
         {
