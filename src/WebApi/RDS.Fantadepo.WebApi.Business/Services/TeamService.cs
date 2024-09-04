@@ -4,12 +4,16 @@ using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess;
 using RDS.Fantadepo.Models.Models;
 using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
+using RDS.Fantadepo.WebApi.Business.Services.Filters;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
-    public class TeamService(FantadepoContext context, IMapper mapper) : BaseService(context, mapper), ITeamService
+    public class TeamService : BaseService, ITeamService
     {
-        private Func<Team, bool> noFilter = x => true;
+        public TeamService(FantadepoContext context, IMapper mapper) : base(context, mapper)
+        {
+            
+        }
 
         public async Task<int> CreateTeam(Team team)
         {
@@ -40,28 +44,50 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             return _mapper.Map<Team>(team);
         }
 
-        public async Task<IEnumerable<Team>> GetTeams(Func<Team, bool>? predicate = null)
+        public async Task<IEnumerable<Team>> GetTeams(TeamFilter filter)
         {
-            var t = Task.Factory.StartNew(() =>
+            var query = _context.Teams.AsQueryable();
+
+            if(filter.SeasonId.HasValue)
             {
-                var entities = _context.Teams;
-                var teams = _mapper.Map<IEnumerable<Team>>(entities);
-                return teams.Where(predicate ?? noFilter);
-            });
+                query = query.Where(x => x.SeasonId == filter.SeasonId);
+            }
 
-            return await t;
-        }
-
-        public async Task<IEnumerable<Team>> GetTeamsWithCoaches(Func<Team, bool>? predicate = null)
-        {
-            var t = Task.Factory.StartNew(() => 
+            if(filter.CoachId.HasValue)
             {
-                var entities = _context.Teams.Include(x => x.Coach);
-                var teams = _mapper.Map<IEnumerable<Team>>(entities);
-                return teams.Where(predicate ?? noFilter);
-            });
+                query = query.Where(x => x.CoachId == filter.CoachId);
+            }
 
-            return await t;
+            if(!string.IsNullOrWhiteSpace(filter.NamePattern))
+            {
+                query = query.Where(x => x.Name.Contains(filter.NamePattern));
+            }
+
+            if(!string.IsNullOrWhiteSpace(filter.Include))
+            {
+                if(filter.Include.ToLower() == "coach")
+                {
+                    query = query.Include(x => x.Coach);
+                }
+
+                if(filter.Include.ToLower() == "season")
+                {
+                    query = query.Include(x => x.Season);
+                }
+
+                if(filter.Include.ToLower() == "homeMatches")
+                {
+                    query = query.Include(x => x.HomeMatches);
+                }
+
+                if(filter.Include.ToLower() == "awayMatches")
+                {
+                    query = query.Include(x => x.AwayMatches);
+                }
+            }
+
+            var results = await query.ToListAsync();
+            return _mapper.Map<IEnumerable<Team>>(results);
         }
 
         public async Task<Team?> GetTeamWithCoach(int id)

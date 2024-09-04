@@ -2,6 +2,7 @@
 using RDS.Fantadepo.Models.Models;
 using RDS.Fantadepo.WebApi.Business.Services;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
+using RDS.Fantadepo.WebApi.Business.Services.Filters;
 using RDS.Fantadepo.WebApi.Business.Utilities.Extensions;
 
 namespace RDS.Fantadepo.WebApi.Controllers
@@ -18,12 +19,23 @@ namespace RDS.Fantadepo.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Team>>> GetTeams([FromQuery] int? seasonId, [FromQuery] bool? includeCoach)
+        public async Task<ActionResult<IEnumerable<Team>>> GetTeams(
+            [FromQuery] string? include,
+            [FromQuery] int? seasonId,
+            [FromQuery] int? coachId,
+            [FromQuery] string? namePattern
+            )
         {
             try
             {
-                var filter = seasonId.IsNullOrZero() ? null : TeamFilters.TeamBySeason(seasonId!.Value);
-                var teams = await (includeCoach.IsTrue() ? _teamService.GetTeamsWithCoaches(filter) : _teamService.GetTeams(filter));
+                var filter = new TeamFilter
+                {
+                    SeasonId = seasonId,
+                    CoachId = coachId,
+                    NamePattern = namePattern,
+                    Include = include
+                };
+                var teams =  _teamService.GetTeams(filter);
                 return Ok(teams);
             }
             catch (Exception ex)

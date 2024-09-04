@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.WebApi.Business.Services.Filters
 {
-    public static class TeamFilters
+    public class TeamFilter
     {
-        public static Func<Team, bool> TeamBySeason(int seasonId) => (t) => t.SeasonId == seasonId;
+        public int? SeasonId { get; set; }
+        public int? CoachId { get; set; }
+        public string? NamePattern { get; set; } 
+        public string? Include { get; set; } 
     }
 }

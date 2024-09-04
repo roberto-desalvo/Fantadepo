@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RDS.Fantadepo.Models.Models;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
+using RDS.Fantadepo.WebApi.Business.Services.Filters;
 
 namespace RDS.Fantadepo.WebApi.Controllers
 {
@@ -17,11 +18,24 @@ namespace RDS.Fantadepo.WebApi.Controllers
 
         // GET: api/Coach
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Coach>>> GetCoaches()
+        public async Task<ActionResult<IEnumerable<Coach>>> GetCoaches(
+            [FromQuery] int? teamId,
+            [FromQuery] string? firstNamePattern,
+            [FromQuery] string? lastNamePattern,
+            [FromQuery] string? include
+            )
         {
             try
             {
-                return Ok(await _coachService.GetCoaches());
+                var filter = new CoachFilter
+                {
+                    TeamId = teamId,
+                    FirstNamePattern = firstNamePattern,
+                    LastNamePattern = lastNamePattern,
+                    Include = include
+                };
+
+                return Ok(await _coachService.GetCoaches(filter));
             }
             catch (Exception ex)
             {
