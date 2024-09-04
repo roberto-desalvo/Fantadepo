@@ -2,61 +2,29 @@
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess;
 using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.WebApi.Business.Utilities;
+using Microsoft.EntityFrameworkCore;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
-    public class PerformanceService(FantadepoContext context, IMapper mapper) : BaseService(context, mapper), IPerformanceService
+    public class PerformanceService : BaseService, IPerformanceService
     {
-        public static decimal CalculatePerformance(PlayerPerformance performance)
+        public PerformanceService(FantadepoContext context, IMapper mapper) : base(context, mapper)
         {
-            decimal final = performance.Vote;
-            final += performance.Goals * 2;
-            final += performance.OwnGoals * -1;
-            final += performance.Assists * 1;
-            final += (decimal)(performance.YellowCards * -0.5);
-            final += (decimal)(performance.RedCards * -1.5);
-            final += performance.ScoredPenalties * 1;
-            final += performance.ScoredFreeKicks * 2;
-            final += (decimal)(performance.FailedPenalties * -1.5);
-            final += (decimal)(performance.FailedFreeKicks * -0.5);
+        }
 
-            if (performance.IsGoalKeeper)
+        public async Task<bool> CalculatePerformanceSum(int performanceId)
+        {
+            var performance = await _context.PlayerPerformances.FirstOrDefaultAsync(p => p.Id == performanceId);
+
+            if(performance == null)
             {
-                final += performance.SavedPenalties * 2;
-                final += performance.SavedFreeKicks * 1;
-
-                var concededGoalsScore = performance.ConcededGoals switch
-                {
-                    0 => 10,
-                    1 => 8,
-                    2 => 6,
-                    3 => 4,
-                    4 => 2,
-                    5 => 1,
-                    6 => -1,
-                    7 => -2,
-                    8 => -3,
-                    9 => -4,
-                    10 => -5,
-                    _ => 0
-                };
-
-                if (performance.ConcededGoals > 10)
-                {
-                    concededGoalsScore = -5;
-                }
-
-                final += concededGoalsScore;
+                return false;
             }
 
-            if(final < (decimal)0.5)
-            {
-                final = (decimal)0.5;
-            }
-
-            performance.Sum = final;
-
-            return final;
+            performance.Sum = PerformanceHelper.GetPerformanceSum(performance);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

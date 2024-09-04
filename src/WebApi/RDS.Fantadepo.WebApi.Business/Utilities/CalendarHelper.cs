@@ -1,28 +1,36 @@
-﻿using RDS.Fantadepo.Models.Models;
+﻿using RDS.Fantadepo.WebApi.DataAccess.Entities;
 using RDS.Fantadepo.WebApi.Business.Algorithms;
-using RDS.Fantadepo.WebApi.Business.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.WebApi.Business.Services
+namespace RDS.Fantadepo.WebApi.Business.Helpers
 {
-    public class CalendarService
+    public class CalendarHelper
     {
-        public static CalendarService Instance => new();
+        public static Season ScheduleTurns(Season season)
+        {
+            if(season.Teams != null)
+            {
+                var turns = CreateTurnsWithRoundRobin([.. season.Teams]);
+                season.Turns = turns.ToList();
+            }
+            
+            return season;
+        }
 
-        public IEnumerable<Turn> CreateTurnsWithRoundRobin(IList<Team> teams)
+        public static IEnumerable<Turn> CreateTurnsWithRoundRobin(IList<Team> teams)
         {
             var turns = new List<Turn>();
-            var results = RoundRobin<Team>.Instance.DoubleRoundRobin(teams.ToList());
+            var results = RoundRobin<Team>.Instance.DoubleRoundRobin([.. teams]);
 
-            foreach(var list in results)
+            foreach (var list in results)
             {
                 var turn = new Turn { Matches = [] };
 
-                foreach(var item in list)
+                foreach (var item in list)
                 {
                     var match = new Match
                     {
@@ -34,7 +42,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services
                     turn.Matches.Add(match);
                 }
                 turns.Add(turn);
-            }            
+            }
 
             return turns;
         }

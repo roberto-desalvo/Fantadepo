@@ -4,6 +4,6 @@ namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
 {
     public interface ITurnService
     {
-        public void CalculatePerformancesForTurn(Turn turn);
+        public Task<bool> CalculateTurn(int turnId, IList<PlayerPerformance> performances);
     }
 }
