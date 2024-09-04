@@ -10,9 +10,6 @@ on:
       - RDS/deployment-pipeline
   workflow_dispatch:
 
-env:
-  WEB_API_PROJ_PATH: "./src/WebApi/RDS.Fantadepo.WebApi/RDS.Fantadepo.WebApi.csproj"
-
 jobs:
   build:
     runs-on: windows-latest
@@ -26,13 +23,13 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Restore dependencies
-        run: dotnet restore "$WEB_API_PROJ_PATH"
+        run: dotnet restore "./src/WebApi/RDS.Fantadepo.WebApi/RDS.Fantadepo.WebApi.csproj"
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release "$WEB_API_PROJ_PATH"
+        run: dotnet build --configuration Release "./src/WebApi/RDS.Fantadepo.WebApi/RDS.Fantadepo.WebApi.csproj"
 
       - name: dotnet publish
-        run: dotnet publish "$WEB_API_PROJ_PATH" -c Release -o "${{env.DOTNET_ROOT}}/myapp" 
+        run: dotnet publish "./src/WebApi/RDS.Fantadepo.WebApi/RDS.Fantadepo.WebApi.csproj" -c Release -o "${{env.DOTNET_ROOT}}/myapp" 
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4

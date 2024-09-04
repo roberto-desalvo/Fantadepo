@@ -5,6 +5,7 @@ using RDS.Fantadepo.Models.Models;
 using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using RDS.Fantadepo.WebApi.Business.Services.Filters;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
@@ -38,16 +39,35 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             return _mapper.Map<Coach>(await _context.Coaches.FindAsync(id));
         }
 
-        public async Task<IEnumerable<Coach>> GetCoaches()
+        public async Task<IEnumerable<Coach>> GetCoaches(CoachFilter filter)
         {
-            var t = Task.Factory.StartNew(() =>
-            {
-                var entities = _context.Coaches;
-                var coaches = _mapper.Map<IEnumerable<Coach>>(entities);
-                return coaches;
-            });
+            var query = _context.Coaches.AsQueryable();
 
-            return await t;
+            if(filter.TeamId.HasValue)
+            {
+                query = query.Where(x => x.Team == _context.Teams.Where(t => t.Id == filter.TeamId));
+            }
+
+            if(!string.IsNullOrEmpty(filter.FirstNamePattern))
+            {
+                query = query.Where(x => x.FirstName.Contains(filter.FirstNamePattern));
+            }
+
+            if(!string.IsNullOrEmpty(filter.LastNamePattern))
+            {
+                query = query.Where(x => x.LastName.Contains(filter.LastNamePattern));
+            }
+
+            if(!string.IsNullOrEmpty(filter.Include))
+            {
+                if(filter.Include.Contains("team"))
+                {
+                    query = query.Include(x => x.Team);
+                }
+            }
+
+            var results = await query.ToListAsync();
+            return _mapper.Map<IEnumerable<Coach>>(results);
         }
 
         public async Task<bool> UpdateCoach(int id, Coach coach)

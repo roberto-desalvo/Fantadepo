@@ -1,4 +1,5 @@
 ﻿using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.WebApi.Business.Services.Filters;
 
 namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
 {
@@ -8,8 +9,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
         Task<bool> DeleteTeam(int id);
         Task<Team?> GetTeam(int id);
         Task<Team?> GetTeamWithCoach(int id);
-        Task<IEnumerable<Team>> GetTeams(Func<Team, bool>? predicate = null);
-        Task<IEnumerable<Team>> GetTeamsWithCoaches(Func<Team, bool>? predicate = null);
+        Task<IEnumerable<Team>> GetTeams(TeamFilter filter);
         Task<bool> UpdateTeam(int id, Team team);
     }
 }
