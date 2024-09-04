@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.WebApi.Business.Services
+namespace RDS.Fantadepo.WebApi.Business.Services.Filters
 {
     public static class TeamFilters
     {
-        public static Func<Team, bool> TeamBySeason(int seasonId) =>
-            (t) => t.SeasonId == seasonId;
+        public static Func<Team, bool> TeamBySeason(int seasonId) => (t) => t.SeasonId == seasonId;
     }
 }

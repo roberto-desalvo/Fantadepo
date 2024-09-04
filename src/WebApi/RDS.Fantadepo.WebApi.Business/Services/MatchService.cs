@@ -1,40 +1,59 @@
 ﻿
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess;
-using RDS.Fantadepo.Models.Models;
 using AutoMapper;
+using RDS.Fantadepo.WebApi.DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
-    public class MatchService(FantadepoContext context, IMapper mapper) : BaseService(context, mapper), IMatchService
+    public class MatchService : BaseService, IMatchService
     {
-        public bool IsDraw(Match match, IList<PlayerPerformance> performances)
+        public MatchService(FantadepoContext context, IMapper mapper) : base(context, mapper)
         {
-            return CalculateMatch(match, performances) == null;
+            
         }
 
-        public Match CalculateMatch(Match match, IList<PlayerPerformance> performances)
+        public async Task<bool> CalculateMatch(Match match)
         {
-            //match.HomeTeamScore = GetTeamScore(match.HomeTeamSeasonId, performances);
-            //match.AwayTeamScore = GetTeamScore(match.AwayTeamSeasonId, performances);
+            var fieldedPlayers = _context.FieldedTeamPlayers.Where(x => x.MatchId == match.Id).ToList();
 
-            return match;
+            foreach(var fieldedPlayer in fieldedPlayers)
+            {
+                var teamPlayer = await _context.TeamPlayers.FirstOrDefaultAsync(x => x.Id == fieldedPlayer.TeamPlayerId);
+
+                if(teamPlayer == null)
+                {
+                    continue;
+                }
+
+                var player = await _context.Players.FirstOrDefaultAsync(x => x.Id == teamPlayer.PlayerId);
+
+                if(player == null)
+                {
+                    continue;
+                }
+
+                var playerPerformance = await _context.PlayerPerformances.FirstOrDefaultAsync(x => x.PlayerId == player.Id && x.TurnId == match.TurnId);
+
+                if(playerPerformance == null)
+                {
+                    continue;
+                }
+
+                if(match.HomeTeam.TeamPlayers.Contains(teamPlayer))
+                {
+                    match.HomeTeamScore += playerPerformance.Sum;
+                }
+
+                if(match.AwayTeam.TeamPlayers.Contains(teamPlayer))
+                {
+                    match.AwayTeamScore += playerPerformance.Sum;
+                }
+            }
+            
+            await _context.SaveChangesAsync();
+            return true;
         }
-
-        public decimal GetTeamScore(int teamSeasonId, IEnumerable<PlayerPerformance> performances)
-        {            
-            //var team = _context.TeamSeasons.Find(teamSeasonId);
-
-            //if(team == null)
-            //{
-            //    return 0; 
-            //}
-
-            return 0;
-            //return performances
-            //    .Where(x => team.TeamPlayers.Where(x => x.IsActive).Select(x => x.SeasonPlayerId).Contains(x.SeasonPlayerId))
-            //    .Sum(PerformanceService.CalculatePerformance);
-        }
-
     }
 }
