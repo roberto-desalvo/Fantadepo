@@ -44,43 +44,43 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             return _mapper.Map<Team>(team);
         }
 
-        public async Task<IEnumerable<Team>> GetTeams(TeamFilter filter)
+        public async Task<IEnumerable<Team>> GetTeams(TeamSearchCriteria searchCriteria)
         {
             var query = _context.Teams.AsQueryable();
 
-            if(filter.SeasonId.HasValue)
+            if(searchCriteria.SeasonId.HasValue)
             {
-                query = query.Where(x => x.SeasonId == filter.SeasonId);
+                query = query.Where(x => x.SeasonId == searchCriteria.SeasonId);
             }
 
-            if(filter.CoachId.HasValue)
+            if(searchCriteria.CoachId.HasValue)
             {
-                query = query.Where(x => x.CoachId == filter.CoachId);
+                query = query.Where(x => x.CoachId == searchCriteria.CoachId);
             }
 
-            if(!string.IsNullOrWhiteSpace(filter.NamePattern))
+            if(!string.IsNullOrWhiteSpace(searchCriteria.NamePattern))
             {
-                query = query.Where(x => x.Name.Contains(filter.NamePattern));
+                query = query.Where(x => x.Name.Contains(searchCriteria.NamePattern, StringComparison.CurrentCultureIgnoreCase));
             }
 
-            if(!string.IsNullOrWhiteSpace(filter.Include))
+            if(!string.IsNullOrWhiteSpace(searchCriteria.Include))
             {
-                if(filter.Include.ToLower() == "coach")
+                if(searchCriteria.Include.Contains("coach", StringComparison.CurrentCultureIgnoreCase))
                 {
                     query = query.Include(x => x.Coach);
                 }
 
-                if(filter.Include.ToLower() == "season")
+                if(searchCriteria.Include.Contains("season", StringComparison.CurrentCultureIgnoreCase))
                 {
                     query = query.Include(x => x.Season);
                 }
 
-                if(filter.Include.ToLower() == "homeMatches")
+                if(searchCriteria.Include.Contains("homematches", StringComparison.CurrentCultureIgnoreCase))
                 {
                     query = query.Include(x => x.HomeMatches);
                 }
 
-                if(filter.Include.ToLower() == "awayMatches")
+                if(searchCriteria.Include.Contains("awaymatches", StringComparison.CurrentCultureIgnoreCase))
                 {
                     query = query.Include(x => x.AwayMatches);
                 }

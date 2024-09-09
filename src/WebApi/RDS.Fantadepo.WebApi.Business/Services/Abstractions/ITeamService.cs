@@ -9,7 +9,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
         Task<bool> DeleteTeam(int id);
         Task<Team?> GetTeam(int id);
         Task<Team?> GetTeamWithCoach(int id);
-        Task<IEnumerable<Team>> GetTeams(TeamFilter filter);
+        Task<IEnumerable<Team>> GetTeams(TeamSearchCriteria filter);
         Task<bool> UpdateTeam(int id, Team team);
     }
 }

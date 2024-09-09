@@ -39,28 +39,28 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             return _mapper.Map<Coach>(await _context.Coaches.FindAsync(id));
         }
 
-        public async Task<IEnumerable<Coach>> GetCoaches(CoachFilter filter)
+        public async Task<IEnumerable<Coach>> GetCoaches(CoachSearchCriteria searchCriteria)
         {
             var query = _context.Coaches.AsQueryable();
 
-            if(filter.TeamId.HasValue)
+            if(searchCriteria.TeamId.HasValue)
             {
-                query = query.Where(x => x.Team == _context.Teams.Where(t => t.Id == filter.TeamId));
+                query = query.Where(x => x.Team == _context.Teams.Where(t => t.Id == searchCriteria.TeamId));
             }
 
-            if(!string.IsNullOrEmpty(filter.FirstNamePattern))
+            if(!string.IsNullOrEmpty(searchCriteria.FirstNamePattern))
             {
-                query = query.Where(x => x.FirstName.Contains(filter.FirstNamePattern));
+                query = query.Where(x => x.FirstName.Contains(searchCriteria.FirstNamePattern, StringComparison.CurrentCultureIgnoreCase));
             }
 
-            if(!string.IsNullOrEmpty(filter.LastNamePattern))
+            if(!string.IsNullOrEmpty(searchCriteria.LastNamePattern))
             {
-                query = query.Where(x => x.LastName.Contains(filter.LastNamePattern));
+                query = query.Where(x => x.LastName.Contains(searchCriteria.LastNamePattern, StringComparison.CurrentCultureIgnoreCase));
             }
 
-            if(!string.IsNullOrEmpty(filter.Include))
+            if(!string.IsNullOrEmpty(searchCriteria.Include))
             {
-                if(filter.Include.Contains("team"))
+                if(searchCriteria.Include.Contains("team", StringComparison.CurrentCultureIgnoreCase))
                 {
                     query = query.Include(x => x.Team);
                 }

@@ -11,7 +11,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
     public interface ICoachService
     {
         Task<Coach?> GetCoach(int id);
-        Task<IEnumerable<Coach>> GetCoaches(CoachFilter filter);
+        Task<IEnumerable<Coach>> GetCoaches(CoachSearchCriteria filter);
         Task<bool> UpdateCoach(int id, Coach coach);
         Task<int> CreateCoach(Coach coach);
         Task<bool> DeleteCoach(int id);
