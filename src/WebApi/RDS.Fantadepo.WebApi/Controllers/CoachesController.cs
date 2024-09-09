@@ -27,7 +27,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
         {
             try
             {
-                var filter = new CoachFilter
+                var filter = new CoachSearchCriteria
                 {
                     TeamId = teamId,
                     FirstNamePattern = firstNamePattern,

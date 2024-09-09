@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RDS.Fantadepo.WebApi.Business.Services.Filters
 {
-    public class TeamFilter
+    public class TeamSearchCriteria
     {
         public int? SeasonId { get; set; }
         public int? CoachId { get; set; }
