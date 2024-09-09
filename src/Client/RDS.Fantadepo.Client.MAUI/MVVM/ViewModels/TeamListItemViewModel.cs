@@ -10,7 +10,6 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
     {
         [ObservableProperty]
         private Team? model;
-        public int Id { get => Model?.Id ?? 0; private set => Model = new Team { Id = value }; }
 
         public TeamListItemViewModel(Team? team)
         {

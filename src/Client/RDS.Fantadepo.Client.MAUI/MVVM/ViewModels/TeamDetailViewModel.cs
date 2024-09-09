@@ -12,9 +12,7 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
     public partial class TeamDetailViewModel : ObservableObject, IQueryAttributable
     {
         [ObservableProperty]
-        private Team model = new();
-        
-        public int Id { get => Model?.Id ?? 0; private set => Model = new Team { Id = value }; }
+        private Team? model;
 
         [ObservableProperty]
         private bool isReadonly = true;
@@ -25,14 +23,13 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
         [ObservableProperty]
         private CoachListItemViewModel? selectedCoach;
 
-
         private readonly ITeamService _teamsService;
         private readonly ICoachService _coachesService;
 
         public TeamDetailViewModel(ITeamService teamService, ICoachService coachService)
         {
             _teamsService = teamService ?? throw new ArgumentNullException(nameof(teamService));
-            _coachesService = coachService ?? throw new ArgumentNullException(nameof(coachService));            
+            _coachesService = coachService ?? throw new ArgumentNullException(nameof(coachService));
         }
 
         [RelayCommand]
@@ -42,24 +39,27 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
             WeakReferenceMessenger.Default.Send(new TeamAddedMessage { Id = id });
         }
 
-        private async void LoadData()
+        private async Task LoadData(int? id)
         {
-            Model = Id == 0 ? new() : await _teamsService.GetTeam(this.Id, true) ?? new();                           
-            Coaches = new ((await _coachesService.GetCoaches()).Select(c => new CoachListItemViewModel(c)));
+            Model = (id != null) 
+                ? await _teamsService.GetTeam(id.Value) ?? new()
+                : new();
 
-            if(Model != null)
-            {
-                Model.Season = Model.Season ?? AppBusinessContext.CurrentSeason;
-                SelectedCoach = Coaches.FirstOrDefault(c => c.Id == Model.CoachId);
-                Model.Coach = SelectedCoach?.Model;
-            }            
+            Coaches = new((await _coachesService.GetCoaches()).Select(c => new CoachListItemViewModel(c)));
+            Model.Season = Model.Season ?? AppBusinessContext.CurrentSeason;
+            SelectedCoach = Coaches.FirstOrDefault(c => c.Model?.Id == Model.CoachId);
+            Model.Coach = SelectedCoach?.Model;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            Id = query.ContainsKey(QueryAttributes.TEAMID) ? (int)query[QueryAttributes.TEAMID] : 0;
-            IsReadonly = query.ContainsKey(QueryAttributes.ISREADONLY) ? (bool)query[QueryAttributes.ISREADONLY] : true;
-            LoadData();
+            query.TryGetValue(QueryAttributes.TEAMID, out object? id);
+
+            IsReadonly = query.TryGetValue(QueryAttributes.ISREADONLY, out object? isReadonly) ? (bool)isReadonly : true;
+            Task.Factory.StartNew(async () =>
+            {
+                await LoadData((int?)id);
+            });
         }
     }
 }

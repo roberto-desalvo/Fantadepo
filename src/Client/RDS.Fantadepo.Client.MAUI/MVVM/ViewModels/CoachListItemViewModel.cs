@@ -8,21 +8,11 @@ namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
         [ObservableProperty]
         private Coach? model;
 
-        public int Id { get => Model?.Id ?? 0; }
-
-        [ObservableProperty]
-        private string coachFirstName = string.Empty;
-
-        [ObservableProperty]
-        private string coachLastName = string.Empty;
-
-        public string Name => $"{CoachFirstName} {CoachLastName}";
+        public string Name => $"{Model?.FirstName} {Model?.LastName}";
 
         public CoachListItemViewModel(Coach? coach)
         {
             this.Model = coach;
-            this.CoachFirstName = coach?.FirstName ?? string.Empty;
-            this.CoachLastName = coach?.LastName ?? string.Empty;
         }
     }
 }

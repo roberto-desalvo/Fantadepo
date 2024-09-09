@@ -1,25 +1,41 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using RDS.Fantadepo.Client.Business.Services.Abstractions;
 using RDS.Fantadepo.Client.MAUI.Utilities;
 using RDS.Fantadepo.Shared.Models;
 
 namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 {
-    [QueryProperty(nameof(Id), QueryAttributes.PLAYERID)]
-    [QueryProperty(nameof(IsReadonly), QueryAttributes.ISREADONLY)]
-    public partial class PlayerDetailViewModel : ObservableObject
+    public partial class PlayerDetailViewModel : ObservableObject, IQueryAttributable
     {
         [ObservableProperty]
         private Player? model;
-        public int Id { get => model?.Id ?? 0; private set => model = new Player { Id = value }; }
 
         [ObservableProperty]
         private bool _isReadonly = true;
-      
 
-        public PlayerDetailViewModel(Player? player)
+        private readonly IPlayerService _playerService;
+
+        public PlayerDetailViewModel(IPlayerService playerService)
         {
-            model = player;
+            _playerService = playerService ?? throw new ArgumentNullException(nameof(playerService));
         }
 
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            query.TryGetValue(QueryAttributes.PLAYERID, out object? id);
+
+            IsReadonly = query.TryGetValue(QueryAttributes.ISREADONLY, out object? isReadonly) ? (bool)isReadonly : true;
+            Task.Factory.StartNew(async () =>
+            {
+                await LoadData((int?)id);
+            });
+        }
+
+        private async Task LoadData(int? id)
+        {
+            Model = id != null 
+                ? await _playerService.GetPlayer(id.Value) ?? new()
+                : new();
+        }
     }
 }
