@@ -14,10 +14,10 @@ namespace RDS.Fantadepo.Models.Models
         public int BenchPosition { get; set; }
 
         public int TeamId { get; set; }
-        public Team Team { get; set; } = new();
+        public Team? Team { get; set; } 
 
         public int PlayerId { get; set; }
-        public Player Player { get; set; } = new();
+        public Player? Player { get; set; } 
 
         public PlayerAcquisition? PlayerAcquisition { get; set; }
         public PlayerRelease? PlayerRelease { get; set; }
