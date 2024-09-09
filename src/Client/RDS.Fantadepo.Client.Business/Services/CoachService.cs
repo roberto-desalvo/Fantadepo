@@ -1,5 +1,5 @@
 ﻿using RDS.Fantadepo.Client.Business.Services.Abstractions;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 using RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions;
 using System;
 using System.Collections.Generic;

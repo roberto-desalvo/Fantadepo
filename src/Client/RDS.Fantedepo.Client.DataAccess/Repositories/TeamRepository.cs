@@ -1,11 +1,7 @@
-﻿using Newtonsoft.Json;
-using RDS.Fantadepo.Models.Models;
-using RDS.Fantedepo.Client.DataAccess.Helpers;
+﻿using RDS.Fantadepo.Shared.Models;
+using RDS.Fantadepo.Shared.Models.SearchCriteria;
 using RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions;
 using RDS.Fantedepo.Client.DataAccess.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace RDS.Fantedepo.Client.DataAccess.Repositories
@@ -16,16 +12,42 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories
         {
         }
 
-        public Task<Team?> GetTeam(int id, bool withCoach)
+        public Task<Team?> GetTeam(int id, bool withCoach, bool withSeason, bool withMatches)
         {
-            var parameters = new TeamQueryParameters { IncludeCoach = withCoach };
+            var include = GetIncludeString(withCoach, withSeason, withMatches);
+            var parameters = new TeamSearchCriteria { Include = include };
             return base.Get(id, parameters);
+        }        
+
+        public Task<IEnumerable<Team>> GetTeams(int? seasonId, bool withCoach, bool withSeason, bool withMatches)
+        {
+            var include = GetIncludeString(withCoach, withSeason, withMatches);
+            var parameters = new TeamSearchCriteria { Include = include, SeasonId = seasonId };
+            return base.Get(parameters);
         }
 
-        public Task<IEnumerable<Team>> GetTeams(int? seasonId, bool withCoaches)
+        private static string GetIncludeString(bool withCoach, bool withSeason, bool withMatches)
         {
-            var parameters = new TeamQueryParameters { IncludeCoach = withCoaches, SeasonId = seasonId };
-            return base.Get(parameters);
+            var sb = new StringBuilder();
+            if (withCoach)
+            {
+                sb.Append(TeamSearchCriteria.QueryParamName.IncludeCoach);
+                sb.Append(';');
+            }
+            if (withSeason)
+            {
+                sb.Append(TeamSearchCriteria.QueryParamName.IncludeSeason);
+                sb.Append(';');
+            }
+            if (withMatches)
+            {
+                sb.Append(TeamSearchCriteria.QueryParamName.IncludeHomeMatches);
+                sb.Append(';');
+                sb.Append(TeamSearchCriteria.QueryParamName.IncludeAwayMatches);
+                sb.Append(';');
+            }
+
+            return sb.ToString();
         }
     }
 }

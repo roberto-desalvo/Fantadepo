@@ -1,5 +1,5 @@
 ﻿using ExcelDataReader;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 using System.Data;
 using System.Text;
 

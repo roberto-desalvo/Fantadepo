@@ -1,4 +1,4 @@
-﻿using RDS.Fantadepo.Models.Models;
+﻿using RDS.Fantadepo.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using RDS.Fantadepo.WebApi.Business.Services.Filters;
+using RDS.Fantadepo.Shared.SearchCriteria;
+using RDS.Fantadepo.Shared.SearchCriteria.Abstractions;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
@@ -34,9 +35,26 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             return true;
         }
 
-        public async Task<Coach?> GetCoach(int id)
+        public async Task<Coach?> GetCoach(int id, string? include = null)
         {
-            return _mapper.Map<Coach>(await _context.Coaches.FindAsync(id));
+            Entities.Coach? coach;
+
+            if(string.IsNullOrWhiteSpace(include))
+            {
+                coach = await _context.Coaches.FindAsync(id);
+            }
+            else
+            {
+                var query = _context.Coaches.AsQueryable();
+                if (include.Contains(CoachSearchCriteria.QueryParamName.IncludeTeam,
+                    StringComparison.CurrentCultureIgnoreCase))
+                {
+                    query = query.Include(x => x.Team);
+                }
+                coach = await query.FirstOrDefaultAsync();
+            }
+
+            return _mapper.Map<Coach>(coach);
         }
 
         public async Task<IEnumerable<Coach>> GetCoaches(CoachSearchCriteria searchCriteria)
@@ -60,7 +78,8 @@ namespace RDS.Fantadepo.WebApi.Business.Services
 
             if(!string.IsNullOrEmpty(searchCriteria.Include))
             {
-                if(searchCriteria.Include.Contains("team", StringComparison.CurrentCultureIgnoreCase))
+                if(searchCriteria.Include.Contains(CoachSearchCriteria.QueryParamName.IncludeTeam, 
+                    StringComparison.CurrentCultureIgnoreCase))
                 {
                     query = query.Include(x => x.Team);
                 }

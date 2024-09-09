@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using RDS.Fantadepo.Client.Business.Services.Abstractions;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 
 namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels
 {

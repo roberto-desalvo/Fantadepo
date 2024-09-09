@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\RDS.Fantadepo.Models\RDS.Fantadepo.Models.csproj" />
+    <ProjectReference Include="..\..\Shared\RDS.Fantadepo.Shared\RDS.Fantadepo.Shared.csproj" />
     <ProjectReference Include="..\RDS.Fantadepo.WebApi.Business\RDS.Fantadepo.WebApi.Business.csproj" />
   </ItemGroup>
 

@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\RDS.Fantadepo.Models\RDS.Fantadepo.Models.csproj" />
+    <ProjectReference Include="..\..\Shared\RDS.Fantadepo.Shared\RDS.Fantadepo.Shared.csproj" />
   </ItemGroup>
 
 </Project>

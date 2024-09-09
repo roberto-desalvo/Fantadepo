@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using RDS.Fantadepo.Client.MAUI.Utilities;
 using RDS.Fantadepo.Client.MAUI.MVVM.Views;
 using System.Collections.ObjectModel;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 using RDS.Fantadepo.Client.Business.Services.Abstractions;
 
 namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels

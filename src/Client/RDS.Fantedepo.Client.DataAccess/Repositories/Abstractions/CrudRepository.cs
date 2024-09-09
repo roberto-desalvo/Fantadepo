@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json;
-using RDS.Fantadepo.Models.Models;
-using RDS.Fantedepo.Client.DataAccess.Helpers;
+using RDS.Fantadepo.Shared.Models;
+using RDS.Fantadepo.Shared.SearchCriteria.Abstractions;
 using RDS.Fantedepo.Client.DataAccess.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
 {
@@ -106,12 +102,12 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
             return await DoDelete(id);
         }
 
-        public async Task<T?> Get(int id, IQueryParameters parameters = null!)
+        public async Task<T?> Get(int id, ISearchCriteria parameters = null!)
         {
             return await DoGetItem(id, parameters.GetParameters() ?? []);
         }
 
-        public async Task<IEnumerable<T>> Get(IQueryParameters parameters = null!)
+        public async Task<IEnumerable<T>> Get(ISearchCriteria parameters = null!)
         {
             return await DoGetItemList(parameters.GetParameters() ?? []);
         }

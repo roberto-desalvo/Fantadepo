@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
+using RDS.Fantadepo.Shared.SearchCriteria;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
-using RDS.Fantadepo.WebApi.Business.Services.Filters;
 
 namespace RDS.Fantadepo.WebApi.Controllers
 {

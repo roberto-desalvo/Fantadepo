@@ -1,7 +1,7 @@
 ﻿using ExcelDataReader;
 using RDS.Fantadepo.ClassLibraries.DataIngestion.Abstractions;
 using RDS.Fantadepo.ClassLibraries.DataIngestion.Utils;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 using System.Data;
 using System.Text;
 

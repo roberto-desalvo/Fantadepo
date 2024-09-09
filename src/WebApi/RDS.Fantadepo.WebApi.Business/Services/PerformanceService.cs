@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 using RDS.Fantadepo.WebApi.Business.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;

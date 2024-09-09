@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RDS.Fantadepo.Models.Models
+namespace RDS.Fantadepo.Shared.Models
 {
     public class Match
     {

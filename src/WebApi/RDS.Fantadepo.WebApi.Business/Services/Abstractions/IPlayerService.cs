@@ -1,5 +1,5 @@
-﻿using RDS.Fantadepo.Models.Models;
-using RDS.Fantadepo.WebApi.Business.Services.SearchCriteria;
+﻿using RDS.Fantadepo.Shared.Models;
+using RDS.Fantadepo.Shared.Models.SearchCriteria;
 
 namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
 {
