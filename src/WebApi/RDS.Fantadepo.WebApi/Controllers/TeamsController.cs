@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
+using RDS.Fantadepo.Shared.Models.SearchCriteria;
 using RDS.Fantadepo.WebApi.Business.Services;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
-using RDS.Fantadepo.WebApi.Business.Services.Filters;
 using RDS.Fantadepo.WebApi.Business.Utilities.Extensions;
 
 namespace RDS.Fantadepo.WebApi.Controllers
@@ -20,10 +20,10 @@ namespace RDS.Fantadepo.WebApi.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeams(
-            [FromQuery] string? include,
-            [FromQuery] int? seasonId,
-            [FromQuery] int? coachId,
-            [FromQuery] string? namePattern
+            [FromQuery(Name = TeamSearchCriteria.QueryParamName.Include)] string? include,
+            [FromQuery(Name = TeamSearchCriteria.QueryParamName.SeasonId)] int? seasonId,
+            [FromQuery(Name = TeamSearchCriteria.QueryParamName.CoachId)] int? coachId,
+            [FromQuery(Name = TeamSearchCriteria.QueryParamName.NamePattern)] string? namePattern
             )
         {
             try
@@ -35,7 +35,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
                     NamePattern = namePattern,
                     Include = include
                 };
-                var teams =  _teamService.GetTeams(filter);
+                var teams =  await _teamService.GetTeams(filter);
                 return Ok(teams);
             }
             catch (Exception ex)
@@ -45,11 +45,12 @@ namespace RDS.Fantadepo.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Team>> GetTeam(int id, [FromQuery] bool? includeCoach)
+        public async Task<ActionResult<Team>> GetTeam(int id,
+            [FromQuery(Name = TeamSearchCriteria.QueryParamName.Include)] string? include)
         {
             try
             {
-                var team = await (includeCoach.IsTrue() ? _teamService.GetTeam(id) : _teamService.GetTeamWithCoach(id));
+                var team = await _teamService.GetTeam(id, include);
                 return team != null ? Ok(team) : NotFound();
             }
             catch (Exception ex)

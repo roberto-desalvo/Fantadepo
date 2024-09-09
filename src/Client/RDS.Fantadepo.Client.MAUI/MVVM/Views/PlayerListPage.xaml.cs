@@ -1,13 +1,15 @@
 using RDS.Fantadepo.Client.MAUI.MVVM.ViewModels;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 
-namespace RDS.Fantadepo.Client.MAUI.MVVM.Views;
-
-public partial class PlayerListPage : ContentPage
+namespace RDS.Fantadepo.Client.MAUI.MVVM.Views
 {
-    public PlayerListPage(PlayerListViewModel viewModel)
+    public partial class PlayerListPage : ContentPage
     {
-        InitializeComponent();
-        BindingContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+        public PlayerListPage(PlayerListViewModel viewModel)
+        {
+            InitializeComponent();
+            BindingContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+        }
     }
 }
+

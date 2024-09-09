@@ -1,4 +1,4 @@
-﻿using RDS.Fantedepo.Client.DataAccess.Helpers;
+﻿using RDS.Fantadepo.Shared.SearchCriteria.Abstractions;
 
 namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
 {
@@ -6,8 +6,8 @@ namespace RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions
     {
         Task<int> Create(T obj);
         Task<bool> Delete(int id);
-        Task<T?> Get(int id, IQueryParameters parameters = null!);
-        Task<IEnumerable<T>> Get(IQueryParameters parameters = null!);
+        Task<T?> Get(int id, ISearchCriteria parameters = null!);
+        Task<IEnumerable<T>> Get(ISearchCriteria parameters = null!);
         Task<int> Update(int id, T obj);
     }
 }

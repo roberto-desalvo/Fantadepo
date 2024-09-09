@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using RDS.Fantadepo.WebApi.DataAccess.Entities;
-using BusinessModels = RDS.Fantadepo.Models.Models;
+using BusinessModels = RDS.Fantadepo.Shared.Models;
 
 namespace RDS.Fantadepo.WebApi.Business.Mappings
 {

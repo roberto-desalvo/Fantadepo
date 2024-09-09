@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
-using RDS.Fantadepo.WebApi.Business.Services.Filters;
+using RDS.Fantadepo.Shared.Models.SearchCriteria;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
@@ -12,7 +12,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services
     {
         public TeamService(FantadepoContext context, IMapper mapper) : base(context, mapper)
         {
-            
+
         }
 
         public async Task<int> CreateTeam(Team team)
@@ -38,9 +38,21 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             return true;
         }
 
-        public async Task<Team?> GetTeam(int id)
+        public async Task<Team?> GetTeam(int id, string? include = null)
         {
-            var team = await _context.Teams.FindAsync(id);
+            Entities.Team? team;
+
+            if (string.IsNullOrWhiteSpace(include))
+            {
+                team = await _context.Teams.FindAsync(id);
+            }
+            else
+            {
+                var query = _context.Teams.AsQueryable();
+                query = IncludeRelatedEntities(include, query);
+                team = await query.FirstOrDefaultAsync();
+            }
+
             return _mapper.Map<Team>(team);
         }
 
@@ -48,51 +60,62 @@ namespace RDS.Fantadepo.WebApi.Business.Services
         {
             var query = _context.Teams.AsQueryable();
 
-            if(searchCriteria.SeasonId.HasValue)
+            if (searchCriteria.SeasonId.HasValue)
             {
                 query = query.Where(x => x.SeasonId == searchCriteria.SeasonId);
             }
 
-            if(searchCriteria.CoachId.HasValue)
+            if (searchCriteria.CoachId.HasValue)
             {
                 query = query.Where(x => x.CoachId == searchCriteria.CoachId);
             }
 
-            if(!string.IsNullOrWhiteSpace(searchCriteria.NamePattern))
+            if (!string.IsNullOrWhiteSpace(searchCriteria.NamePattern))
             {
                 query = query.Where(x => x.Name.Contains(searchCriteria.NamePattern, StringComparison.CurrentCultureIgnoreCase));
             }
 
-            if(!string.IsNullOrWhiteSpace(searchCriteria.Include))
+            if (!string.IsNullOrWhiteSpace(searchCriteria.Include))
             {
-                if(searchCriteria.Include.Contains("coach", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    query = query.Include(x => x.Coach);
-                }
-
-                if(searchCriteria.Include.Contains("season", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    query = query.Include(x => x.Season);
-                }
-
-                if(searchCriteria.Include.Contains("homematches", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    query = query.Include(x => x.HomeMatches);
-                }
-
-                if(searchCriteria.Include.Contains("awaymatches", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    query = query.Include(x => x.AwayMatches);
-                }
+                query = IncludeRelatedEntities(searchCriteria.Include, query);
             }
 
             var results = await query.ToListAsync();
             return _mapper.Map<IEnumerable<Team>>(results);
         }
 
-        public async Task<Team?> GetTeamWithCoach(int id)
+        private static IQueryable<Entities.Team> IncludeRelatedEntities(string include, IQueryable<Entities.Team> query)
         {
-            return _mapper.Map<Team>(await _context.Teams.Include(x => x.Coach).FirstOrDefaultAsync(x => x.Id == id));
+            if (string.IsNullOrWhiteSpace(include))
+            {
+                return query;
+            }
+
+            if (include.Contains(TeamSearchCriteria.QueryParamName.IncludeCoach,
+                StringComparison.CurrentCultureIgnoreCase))
+            {
+                query = query.Include(x => x.Coach);
+            }
+
+            if (include.Contains(TeamSearchCriteria.QueryParamName.IncludeSeason, 
+                StringComparison.CurrentCultureIgnoreCase))
+            {
+                query = query.Include(x => x.Season);
+            }
+
+            if (include.Contains(TeamSearchCriteria.QueryParamName.IncludeHomeMatches, 
+                StringComparison.CurrentCultureIgnoreCase))
+            {
+                query = query.Include(x => x.HomeMatches);
+            }
+
+            if (include.Contains(TeamSearchCriteria.QueryParamName.IncludeAwayMatches, 
+                StringComparison.CurrentCultureIgnoreCase))
+            {
+                query = query.Include(x => x.AwayMatches);
+            }
+
+            return query;
         }
 
         public async Task<bool> UpdateTeam(int id, Team team)

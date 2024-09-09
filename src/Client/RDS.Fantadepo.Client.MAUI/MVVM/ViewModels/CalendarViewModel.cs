@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 using System.Collections.ObjectModel;
 
 namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels

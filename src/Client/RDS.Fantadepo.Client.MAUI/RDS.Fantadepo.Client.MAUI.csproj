@@ -77,7 +77,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\RDS.Fantadepo.Client.Business\RDS.Fantadepo.Client.Business.csproj" />
-	  <ProjectReference Include="..\..\Shared\RDS.Fantadepo.Models\RDS.Fantadepo.Models.csproj" />
+	  <ProjectReference Include="..\..\Shared\RDS.Fantadepo.Shared\RDS.Fantadepo.Shared.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

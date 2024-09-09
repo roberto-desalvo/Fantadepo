@@ -1,4 +1,4 @@
-﻿using RDS.Fantadepo.Models.Models;
+﻿using RDS.Fantadepo.Shared.Models;
 
 namespace RDS.Fantadepo.Client.MAUI.Utilities
 {

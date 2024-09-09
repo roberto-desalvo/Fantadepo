@@ -1,5 +1,5 @@
-﻿using RDS.Fantadepo.Models.Models;
-using RDS.Fantadepo.WebApi.Business.Services.Filters;
+﻿using RDS.Fantadepo.Shared.Models;
+using RDS.Fantadepo.Shared.Models.SearchCriteria;
 
 namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
 {
@@ -7,9 +7,8 @@ namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
     {
         Task<int> CreateTeam(Team team);
         Task<bool> DeleteTeam(int id);
-        Task<Team?> GetTeam(int id);
-        Task<Team?> GetTeamWithCoach(int id);
-        Task<IEnumerable<Team>> GetTeams(TeamSearchCriteria filter);
+        Task<Team?> GetTeam(int id, string? include = null);
+        Task<IEnumerable<Team>> GetTeams(TeamSearchCriteria searchCriteria);
         Task<bool> UpdateTeam(int id, Team team);
     }
 }

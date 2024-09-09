@@ -2,7 +2,7 @@
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess;
 using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace RDS.Fantadepo.WebApi.Business.Services

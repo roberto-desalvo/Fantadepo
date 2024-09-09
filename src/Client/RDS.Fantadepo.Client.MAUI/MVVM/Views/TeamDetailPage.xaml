@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RDS.Fantadepo.Client.MAUI.MVVM.Views.TeamDetailPage"
              Title="TeamPage"
-             xmlns:models="clr-namespace:RDS.Fantadepo.Models.Models;assembly=RDS.Fantadepo.Models"
+             xmlns:models="clr-namespace:RDS.Fantadepo.Shared.Models;assembly=RDS.Fantadepo.Shared"
              xmlns:viewmodel="clr-namespace:RDS.Fantadepo.Client.MAUI.MVVM.ViewModels"
              xmlns:converters="clr-namespace:RDS.Fantadepo.Client.MAUI.MVVM.Converters"
              x:DataType="viewmodel:TeamDetailViewModel">

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.WebApi.DataAc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.WebApi", "src\WebApi\RDS.Fantadepo.WebApi\RDS.Fantadepo.WebApi.csproj", "{98B3A10F-81E1-4B4A-8792-25BB96933E4E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.Models", "src\Shared\RDS.Fantadepo.Models\RDS.Fantadepo.Models.csproj", "{71AD1A89-2D79-448F-9B4B-5CCD53569129}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantadepo.Shared", "src\Shared\RDS.Fantadepo.Shared\RDS.Fantadepo.Shared.csproj", "{71AD1A89-2D79-448F-9B4B-5CCD53569129}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDS.Fantedepo.Client.DataAccess", "src\Client\RDS.Fantedepo.Client.DataAccess\RDS.Fantedepo.Client.DataAccess.csproj", "{6FB98E58-7799-4829-905F-7A6A50A9B8C3}"
 EndProject

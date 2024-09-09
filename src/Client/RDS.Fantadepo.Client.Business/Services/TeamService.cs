@@ -1,5 +1,5 @@
 ﻿using RDS.Fantadepo.Client.Business.Services.Abstractions;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 using RDS.Fantedepo.Client.DataAccess.Repositories.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -20,12 +20,12 @@ namespace RDS.Fantadepo.Client.Business.Services
 
         public async Task<Team?> GetTeam(int id, bool includeCoach = false)
         {
-            return await _repo.GetTeam(id, includeCoach);
+            return await _repo.GetTeam(id, includeCoach, false, false);
         }
 
         public async Task<IEnumerable<Team>> GetTeams(int? seasonId = 0, bool includeCoach = false)
         {
-            return await _repo.GetTeams(seasonId, includeCoach);
+            return await _repo.GetTeams(seasonId, includeCoach, false, false);
         }
 
         public async Task<int> Save(Team team)

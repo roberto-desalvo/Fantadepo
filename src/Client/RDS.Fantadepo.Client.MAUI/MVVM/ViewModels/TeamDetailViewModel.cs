@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using RDS.Fantadepo.Client.MAUI.Utilities;
 using RDS.Fantadepo.Client.Business.Services.Abstractions;
 using RDS.Fantadepo.MAUI.Messages;
-using RDS.Fantadepo.Models.Models;
+using RDS.Fantadepo.Shared.Models;
 using System.Collections.ObjectModel;
 
 namespace RDS.Fantadepo.Client.MAUI.MVVM.ViewModels

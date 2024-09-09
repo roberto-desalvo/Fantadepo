@@ -4,7 +4,7 @@
              x:Class="RDS.Fantadepo.Client.MAUI.MVVM.Views.CalendarPage"
              xmlns:viewmodel="clr-namespace:RDS.Fantadepo.Client.MAUI.MVVM.ViewModels"
              x:DataType="viewmodel:CalendarViewModel"
-             xmlns:models="clr-namespace:RDS.Fantadepo.Models.Models;assembly=RDS.Fantadepo.Models"
+             xmlns:models="clr-namespace:RDS.Fantadepo.Shared.Models;assembly=RDS.Fantadepo.Shared"
              x:Name="Page"
              BackgroundColor="#9EA93F">
 
