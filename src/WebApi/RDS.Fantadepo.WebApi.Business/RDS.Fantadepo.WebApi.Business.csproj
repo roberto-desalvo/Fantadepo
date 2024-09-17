@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ClassLibraries\RDS.Fantadepo.ClassLibraries.DataIngestion\RDS.Fantadepo.ClassLibraries.DataIngestion.csproj" />
     <ProjectReference Include="..\..\Shared\RDS.Fantadepo.Shared\RDS.Fantadepo.Shared.csproj" />
     <ProjectReference Include="..\RDS.Fantadepo.WebApi.DataAccess\RDS.Fantadepo.WebApi.DataAccess.csproj" />
   </ItemGroup>

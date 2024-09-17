@@ -30,11 +30,18 @@ namespace RDS.Fantadepo.ClassLibraries.DataIngestion.Utils
 
             for (var i = CellIndex.TeamSheetPlayerNameStartCellIndex; i < CellIndex.TeamSheetPlayerNameEndCellIndex; i++)
             {
-                var playerName = r[i].ToString()!.Trim();
-
-                if (!string.IsNullOrWhiteSpace(playerName))
+                try
                 {
-                    team.TeamPlayers.Add(new TeamPlayer { Player = new Player { Lastname = playerName } });
+                    var playerName = r[i].ToString()!.Trim();
+
+                    if (!string.IsNullOrWhiteSpace(playerName))
+                    {
+                        team.TeamPlayers.Add(new TeamPlayer { Player = new Player { Lastname = playerName } });
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    break;
                 }
             }
         }
@@ -48,7 +55,7 @@ namespace RDS.Fantadepo.ClassLibraries.DataIngestion.Utils
                 team.Coach = new Coach
                 {
                     FirstName = coachName[0],
-                    LastName = coachName[1]
+                    LastName = coachName[1..].Aggregate((x1, x2) => x1 + " " + x2)
                 };
             }
         }
@@ -61,7 +68,7 @@ namespace RDS.Fantadepo.ClassLibraries.DataIngestion.Utils
                 yield return new Player
                 {
                     Firstname = playerName[0],
-                    Lastname = playerName[1]
+                    Lastname = playerName[1..].Aggregate((x1, x2) => x1 + " " + x2)
                 };
             }
         }

@@ -1,21 +1,14 @@
 ﻿using ExcelDataReader;
-using RDS.Fantadepo.ClassLibraries.DataIngestion.Abstractions;
 using RDS.Fantadepo.ClassLibraries.DataIngestion.Utils;
 using RDS.Fantadepo.Shared.Models;
 using System.Data;
+using System.IO;
 using System.Text;
 
 namespace RDS.Fantadepo.DataIngestion
 {
-    public class FantadepoExcelFileReader : IFantadepoExcelFileReader
-    {
-        private readonly IEnumerable<DataTable> dataTables;
-
-        public FantadepoExcelFileReader(string path)
-        {
-            dataTables = GetDataTablesFromFile(path) ?? throw new ArgumentException("Unable to retrieve data tables from the excel file specified");
-        }
-
+    public static class FantadepoExcelFileReader 
+    {        
         private static IEnumerable<DataTable>? GetDataTablesFromFile(string path)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -26,16 +19,22 @@ namespace RDS.Fantadepo.DataIngestion
             return dataTables;
         }
 
-        public IEnumerable<Player> GetPlayersFromRosterFile()
+        public static IEnumerable<Player> GetPlayersFromRosterFile(string path)
         {
+            var dataTables = GetDataTablesFromFile(path) ?? throw new ArgumentException("Unable to retrieve data tables from the excel file specified");
+
             var dt = dataTables.ElementAt(SheetIndex.RosterFilePlayerSheetIndex);
-            return RosterExcelFileReader.GetPlayersFromDataTable(dt);
+            var players = RosterExcelFileReader.GetPlayersFromDataTable(dt);
+            return players;
         }
 
-        public IEnumerable<Team> GetTeamsWithCoachesFromRosterFile()
+        public static IEnumerable<Team> GetTeamsWithCoachesFromRosterFile(string path)
         {
+            var dataTables = GetDataTablesFromFile(path) ?? throw new ArgumentException("Unable to retrieve data tables from the excel file specified");
+
             var dt = dataTables.ElementAt(SheetIndex.RosterFileTeamSheetIndex);
-            return RosterExcelFileReader.GetTeamsWithCoachesFromDataTable(dt);
+            var teams = RosterExcelFileReader.GetTeamsWithCoachesFromDataTable(dt).ToList();
+            return teams;
         }
     }
 }
