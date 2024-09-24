@@ -27,19 +27,7 @@ namespace RDS.Fantadepo.WebApi.Business.Utilities.Extensions
                 opt.UseSqlServer(AzureHelper.GetAdminConnectionString(kvOptions));
             });
 
-            ImportSeedData();
-
             return services;
-        }
-
-        private static void ImportSeedData()
-        {
-            var path = "C:\\github\\Fantadepo\\resources\\seasons\\2023-24\\Rose iniziali.xlsx";
-
-            var teams = FantadepoExcelFileReader.GetTeamsWithCoachesFromRosterFile(path);
-            var players = FantadepoExcelFileReader.GetPlayersFromRosterFile(path);
-
-            return;
         }
     }
 }

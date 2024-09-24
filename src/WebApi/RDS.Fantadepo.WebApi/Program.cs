@@ -34,8 +34,6 @@ namespace RDS.Fantadepo.WebApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-
-
             var app = builder.Build();
 
             

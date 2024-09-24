@@ -5,11 +5,17 @@ using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
 using RDS.Fantadepo.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 using RDS.Fantadepo.Shared.Models.SearchCriteria;
+using RDS.Fantadepo.DataIngestion;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
     public class PlayerService(FantadepoContext context, IMapper mapper) : BaseService(context, mapper), IPlayerService
     {
+        private bool PlayerExists(int id)
+        {
+            return _context.Players.Any(e => e.Id == id);
+        }
+
         public async Task<Player?> GetPlayer(int id)
         {
             var player = await _context.Players.FindAsync(id);
@@ -93,9 +99,26 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             return true;
         }
 
-        private bool PlayerExists(int id)
+        public async Task ImportPlayersFromRosterFile(string path)
         {
-            return _context.Players.Any(e => e.Id == id);
+            var players = FantadepoExcelFileReader.GetPlayersFromRosterFile(path);
+
+            foreach (var player in players)
+            {
+                var entityExists = (await _context.Players.FirstOrDefaultAsync(p => p.Firstname == player.Firstname && p.Lastname == player.Lastname))
+                    is not null;
+
+                if (!entityExists)
+                {
+                    var toInsert = _mapper.Map<Entities.Player>(player);
+                    await _context.Players.AddAsync(toInsert);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            return;
         }
+        
     }
 }

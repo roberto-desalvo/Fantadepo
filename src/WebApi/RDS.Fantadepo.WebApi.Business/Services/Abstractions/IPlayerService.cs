@@ -9,6 +9,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
         Task<bool> DeletePlayer(int id);
         Task<Player?> GetPlayer(int id);
         Task<IEnumerable<Player>> GetPlayers(PlayerSearchCriteria searchCriteria);
+        Task ImportPlayersFromRosterFile(string path);
         Task<bool> UpdatePlayer(int id, Player Player);
     }
 }

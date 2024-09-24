@@ -5,6 +5,7 @@ using RDS.Fantadepo.WebApi.DataAccess;
 using RDS.Fantadepo.Shared.Models;
 using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
 using RDS.Fantadepo.Shared.Models.SearchCriteria;
+using RDS.Fantadepo.DataIngestion;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
@@ -134,6 +135,33 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task ImportTeamsWithCoachesFromRosterFile(string path)
+        {
+            var teams = FantadepoExcelFileReader.GetTeamsWithCoachesFromRosterFile(path);
+
+            foreach (var team in teams)
+            {
+                var entityExists = (await _context.Teams.FirstOrDefaultAsync(t => t.Name == team.Name)) is not null;
+
+                if (!entityExists)
+                {
+                    var toInsert = _mapper.Map<Entities.Team>(team);
+                    if (toInsert.Coach != null)
+                    {
+                        var coachEntity = await _context.Coaches.FirstOrDefaultAsync(c => c.FirstName == toInsert.Coach.FirstName && c.LastName == toInsert.Coach.LastName);
+
+                        if (coachEntity != null)
+                        {
+                            toInsert.Coach = coachEntity;
+                        }
+                    }
+                    await _context.Teams.AddAsync(toInsert);
+                }
+            }
+
+            await _context.SaveChangesAsync();
         }
 
         private bool TeamExists(int id)
