@@ -25,11 +25,16 @@ namespace RDS.Fantadepo.Shared.Models.SearchCriteria
             public const string SeasonId = "SeasonId";
             public const string CoachId = "CoachId";
             public const string NamePattern = "NamePattern";
-            public const string Include = "Include";
+            public const string Include = "Include";            
+        }
+
+        public class IncludeOptions
+        {
             public const string IncludeCoach = "Coach";
             public const string IncludeSeason = "Season";
             public const string IncludeHomeMatches = "HomeMatches";
             public const string IncludeAwayMatches = "AwayMatches";
+            public const string IncludeTeamPlayers = "TeamPlayers";
         }
     }
 }

@@ -7,16 +7,15 @@ namespace RDS.Fantadepo.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CoachesController : ControllerBase
+    public class CoachController : ControllerBase
     {
         private readonly ICoachService _coachService;
 
-        public CoachesController(ICoachService coachService)
+        public CoachController(ICoachService coachService)
         {
             _coachService = coachService ?? throw new ArgumentNullException(nameof(coachService));
         }
 
-        // GET: api/Coach
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Coach>>> GetCoaches(
             [FromQuery] int? teamId,
@@ -43,7 +42,6 @@ namespace RDS.Fantadepo.WebApi.Controllers
             }
         }
 
-        // GET: api/Coach/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Coach>> GetCoach(int id)
         {            
@@ -58,8 +56,6 @@ namespace RDS.Fantadepo.WebApi.Controllers
             }
         }
 
-        // PUT: api/Coach/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCoach(int id, Coach coach)
         {
@@ -73,8 +69,6 @@ namespace RDS.Fantadepo.WebApi.Controllers
             }
         }
 
-        // POST: api/Coach
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Coach>> PostCoach(Coach coach)
         {
@@ -89,7 +83,6 @@ namespace RDS.Fantadepo.WebApi.Controllers
             }            
         }
 
-        // DELETE: api/Coach/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCoach(int id)
         {

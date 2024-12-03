@@ -30,7 +30,11 @@ namespace RDS.Fantadepo.Shared.SearchCriteria
             public const string TeamId = "TeamId";
             public const string FirstNamePattern = "FirstNamePattern";
             public const string LastNamePattern = "LastNamePattern";
-            public const string Include = "Include";
+            public const string Include = "Include";            
+        }
+
+        public class IncludeOptions
+        {
             public const string IncludeTeam = "Team";
         }
     }

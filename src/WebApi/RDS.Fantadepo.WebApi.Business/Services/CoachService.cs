@@ -4,9 +4,7 @@ using RDS.Fantadepo.WebApi.DataAccess;
 using RDS.Fantadepo.Shared.Models;
 using Entities = RDS.Fantadepo.WebApi.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
 using RDS.Fantadepo.Shared.SearchCriteria;
-using RDS.Fantadepo.Shared.SearchCriteria.Abstractions;
 
 namespace RDS.Fantadepo.WebApi.Business.Services
 {
@@ -46,7 +44,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             else
             {
                 var query = _context.Coaches.AsQueryable();
-                if (include.Contains(CoachSearchCriteria.QueryParamName.IncludeTeam,
+                if (include.Contains(CoachSearchCriteria.IncludeOptions.IncludeTeam,
                     StringComparison.CurrentCultureIgnoreCase))
                 {
                     query = query.Include(x => x.Team);
@@ -78,7 +76,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services
 
             if(!string.IsNullOrEmpty(searchCriteria.Include))
             {
-                if(searchCriteria.Include.Contains(CoachSearchCriteria.QueryParamName.IncludeTeam, 
+                if(searchCriteria.Include.Contains(CoachSearchCriteria.IncludeOptions.IncludeTeam, 
                     StringComparison.CurrentCultureIgnoreCase))
                 {
                     query = query.Include(x => x.Team);

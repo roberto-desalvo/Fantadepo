@@ -37,12 +37,12 @@ namespace RDS.Fantadepo.WebApi.Business.Services
 
             if (!string.IsNullOrWhiteSpace(searchCriteria.Include))
             {
-                if (searchCriteria.Include.Contains("performances", StringComparison.CurrentCultureIgnoreCase))
+                if (searchCriteria.Include.Contains(PlayerSearchCriteria.IncludeOptions.IncludePerformances, StringComparison.CurrentCultureIgnoreCase))
                 {
                     query = query.Include(x => x.PlayerPerformances);
                 }
 
-                if (searchCriteria.Include.Contains("teamplayers", StringComparison.CurrentCultureIgnoreCase))
+                if (searchCriteria.Include.Contains(PlayerSearchCriteria.IncludeOptions.IncludeTeamPlayers, StringComparison.CurrentCultureIgnoreCase))
                 {
                     query = query.Include(x => x.TeamPlayers);
                 }
