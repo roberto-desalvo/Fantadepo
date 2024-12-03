@@ -13,7 +13,18 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             
         }
 
-        public async Task<bool> CalculateMatch(Match match)
+        public async Task<Match?> CalculateMatch(int id)
+        {
+            var match = await _context.Matches.FindAsync(id);
+
+            if (match is null)
+            {
+                return null;
+            }
+            return await CalculateMatch(match);
+        }
+
+        private async Task<Match?> CalculateMatch(Match match)
         {
             var fieldedPlayers = _context.FieldedTeamPlayers.Where(x => x.MatchId == match.Id).ToList();
 
@@ -52,7 +63,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services
             }
             
             await _context.SaveChangesAsync();
-            return true;
+            return match;
         }
     }
 }

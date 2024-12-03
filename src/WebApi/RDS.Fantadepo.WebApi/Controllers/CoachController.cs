@@ -18,10 +18,10 @@ namespace RDS.Fantadepo.WebApi.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Coach>>> GetCoaches(
-            [FromQuery] int? teamId,
-            [FromQuery] string? firstNamePattern,
-            [FromQuery] string? lastNamePattern,
-            [FromQuery] string? include
+            [FromQuery(Name = CoachSearchCriteria.QueryParamName.TeamId)] int? teamId,
+            [FromQuery(Name = CoachSearchCriteria.QueryParamName.FirstNamePattern)] string? firstNamePattern,
+            [FromQuery(Name = CoachSearchCriteria.QueryParamName.LastNamePattern)] string? lastNamePattern,
+            [FromQuery(Name = CoachSearchCriteria.QueryParamName.Include)] string? include
             )
         {
             try
@@ -43,8 +43,9 @@ namespace RDS.Fantadepo.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<Coach>> GetCoach(int id)
-        {            
+        {
             try
             {
                 var coach = await _coachService.GetCoach(id);
@@ -80,7 +81,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }            
+            }
         }
 
         [HttpDelete("{id}")]
@@ -93,7 +94,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }   
+            }
         }
     }
 }

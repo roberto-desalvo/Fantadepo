@@ -4,6 +4,6 @@ namespace RDS.Fantadepo.WebApi.Business.Services.Abstractions
 {
     public interface IMatchService
     {
-        Task<bool> CalculateMatch(Match match);
+        Task<Match?> CalculateMatch(int id);
     }
 }

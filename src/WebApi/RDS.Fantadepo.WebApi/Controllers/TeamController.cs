@@ -45,6 +45,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<Team>> GetTeam(int id,
             [FromQuery(Name = TeamSearchCriteria.QueryParamName.Include)] string? include)
         {

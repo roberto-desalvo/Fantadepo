@@ -38,7 +38,7 @@ namespace RDS.Fantadepo.WebApi.Business.Services
 
             foreach(var match in turn.Matches)
             {
-                await _matchService.CalculateMatch(match);
+                await _matchService.CalculateMatch(match.Id);
             }
             return true;
         }

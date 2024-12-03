@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RDS.Fantadepo.Shared.Models;
 using RDS.Fantadepo.Shared.Models.SearchCriteria;
+using RDS.Fantadepo.Shared.SearchCriteria;
 using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 
 namespace RDS.Fantadepo.WebApi.Controllers
@@ -16,12 +17,12 @@ namespace RDS.Fantadepo.WebApi.Controllers
             _playerService = playerService ?? throw new ArgumentNullException(nameof(playerService));
         }
 
-        [HttpGet]
+        [HttpGet]        
         public async Task<ActionResult<IEnumerable<Player>>> GetPlayer(
-            [FromQuery] string? firstNamePattern,
-            [FromQuery] string? lastNamePattern,
-            [FromQuery] string? nickNamePattern,
-            [FromQuery] string? include
+            [FromQuery(Name = PlayerSearchCriteria.QueryParamName.FirstNamePattern)] string? firstNamePattern,
+            [FromQuery(Name = PlayerSearchCriteria.QueryParamName.LastNamePattern)] string? lastNamePattern,
+            [FromQuery(Name = PlayerSearchCriteria.QueryParamName.NicknamePattern)] string? nickNamePattern,
+            [FromQuery(Name = PlayerSearchCriteria.QueryParamName.Include)] string? include
             )
         {
             try
@@ -43,6 +44,7 @@ namespace RDS.Fantadepo.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<Player>> GetPlayer(int id)
         {
             try

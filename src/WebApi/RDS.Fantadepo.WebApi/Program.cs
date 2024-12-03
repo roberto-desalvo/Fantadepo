@@ -30,6 +30,8 @@ namespace RDS.Fantadepo.WebApi
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 }); ;
 
+            builder.Services.AddResponseCaching();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -48,6 +50,7 @@ namespace RDS.Fantadepo.WebApi
 
             app.UseAuthorization();
 
+            app.UseResponseCaching();
 
             app.MapControllers();
 
