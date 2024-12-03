@@ -1,5 +1,4 @@
-﻿
-using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
+﻿using RDS.Fantadepo.WebApi.Business.Services.Abstractions;
 using RDS.Fantadepo.WebApi.DataAccess;
 using AutoMapper;
 using RDS.Fantadepo.WebApi.DataAccess.Entities;

@@ -26,6 +26,10 @@ namespace RDS.Fantadepo.Shared.Models.SearchCriteria
             public const string LastNamePattern = "LastNamePattern";
             public const string NicknamePattern = "NicknamePattern";
             public const string Include = "Include";
+        }
+
+        public class IncludeOptions
+        {
             public const string IncludeTeamPlayers = "TeamPlayers";
             public const string IncludePerformances = "Performances";
         }

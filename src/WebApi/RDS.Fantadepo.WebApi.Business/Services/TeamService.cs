@@ -91,28 +91,34 @@ namespace RDS.Fantadepo.WebApi.Business.Services
                 return query;
             }
 
-            if (include.Contains(TeamSearchCriteria.QueryParamName.IncludeCoach,
+            if (include.Contains(TeamSearchCriteria.IncludeOptions.IncludeCoach,
                 StringComparison.CurrentCultureIgnoreCase))
             {
                 query = query.Include(x => x.Coach);
             }
 
-            if (include.Contains(TeamSearchCriteria.QueryParamName.IncludeSeason, 
+            if (include.Contains(TeamSearchCriteria.IncludeOptions.IncludeSeason, 
                 StringComparison.CurrentCultureIgnoreCase))
             {
                 query = query.Include(x => x.Season);
             }
 
-            if (include.Contains(TeamSearchCriteria.QueryParamName.IncludeHomeMatches, 
+            if (include.Contains(TeamSearchCriteria.IncludeOptions.IncludeHomeMatches, 
                 StringComparison.CurrentCultureIgnoreCase))
             {
                 query = query.Include(x => x.HomeMatches);
             }
 
-            if (include.Contains(TeamSearchCriteria.QueryParamName.IncludeAwayMatches, 
+            if (include.Contains(TeamSearchCriteria.IncludeOptions.IncludeAwayMatches, 
                 StringComparison.CurrentCultureIgnoreCase))
             {
                 query = query.Include(x => x.AwayMatches);
+            }
+
+            if (include.Contains(TeamSearchCriteria.IncludeOptions.IncludeTeamPlayers,
+                StringComparison.CurrentCultureIgnoreCase))
+            {
+                query = query.Include(x => x.TeamPlayers);
             }
 
             return query;
